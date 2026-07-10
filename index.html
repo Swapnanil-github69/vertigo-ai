@@ -16,6 +16,18 @@
 
     <!-- Custom Tailwind Configuration -->
     <script id="tailwind-config">
+        const withOpacity = (variableName) => {
+            return ({ opacityVariable, opacityValue }) => {
+                if (opacityValue !== undefined) {
+                    return `color-mix(in srgb, var(${variableName}) calc(${opacityValue} * 100%), transparent)`;
+                }
+                if (opacityVariable !== undefined) {
+                    return `color-mix(in srgb, var(${variableName}) calc(var(${opacityVariable}, 1) * 100%), transparent)`;
+                }
+                return `var(${variableName})`;
+            };
+        };
+
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -24,22 +36,22 @@
                         "primary": "#1415A8",
                         "primary-hover": "#2628d0",
                         "primary-pressed": "#0c0d75",
-                        "primary-container": "var(--color-primary-container)",
-                        "surface": "var(--color-surface)",
-                        "surface-dim": "var(--color-surface)",
-                        "background": "var(--color-background)",
-                        "surface-container-lowest": "var(--color-background)",
-                        "surface-container-low": "var(--color-surface-container-low)",
-                        "surface-container": "var(--color-surface-container)",
-                        "surface-container-high": "var(--color-surface-container-high)",
-                        "surface-container-highest": "var(--color-surface-container-highest)",
-                        "surface-variant": "var(--color-surface-container)",
-                        "surface-bright": "var(--color-surface-container-high)",
-                        "on-surface": "var(--color-on-surface)",
-                        "on-background": "var(--color-on-background)",
-                        "on-surface-variant": "var(--color-on-surface-variant)",
+                        "primary-container": withOpacity("--color-primary-container"),
+                        "surface": withOpacity("--color-surface"),
+                        "surface-dim": withOpacity("--color-surface"),
+                        "background": withOpacity("--color-background"),
+                        "surface-container-lowest": withOpacity("--color-background"),
+                        "surface-container-low": withOpacity("--color-surface-container-low"),
+                        "surface-container": withOpacity("--color-surface-container"),
+                        "surface-container-high": withOpacity("--color-surface-container-high"),
+                        "surface-container-highest": withOpacity("--color-surface-container-highest"),
+                        "surface-variant": withOpacity("--color-surface-container"),
+                        "surface-bright": withOpacity("--color-surface-container-high"),
+                        "on-surface": withOpacity("--color-on-surface"),
+                        "on-background": withOpacity("--color-on-background"),
+                        "on-surface-variant": withOpacity("--color-on-surface-variant"),
                         "on-primary": "#ffffff",
-                        "on-primary-container": "var(--color-on-surface-variant)",
+                        "on-primary-container": withOpacity("--color-on-surface-variant"),
                         "secondary": "#1415A8",
                         "secondary-container": "#1415A8",
                         "on-secondary": "#ffffff",
@@ -54,8 +66,8 @@
                         "error-container": "#450a0a",
                         "on-error": "#ffffff",
                         "on-error-container": "#ffdad6",
-                        "outline": "var(--color-on-surface-variant)",
-                        "outline-variant": "var(--color-outline-variant)",
+                        "outline": withOpacity("--color-on-surface-variant"),
+                        "outline-variant": withOpacity("--color-outline-variant"),
                         "neutral": "#94A3B8"
                     },
                     borderRadius: {
@@ -455,8 +467,15 @@
                                         <button type="button" onclick="showAuthTab('forgot')"
                                             class="text-xs text-secondary hover:text-primary transition-colors">Forgot?</button>
                                     </div>
-                                    <input type="password" required id="login-password" value="••••••••"
-                                        class="w-full bg-primary-container/60 border border-white/10 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary text-white" />
+                                    <div class="relative">
+                                        <input type="password" required id="login-password" placeholder="••••••••"
+                                            class="w-full bg-primary-container/60 border border-white/10 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary text-white pr-10" />
+                                        <button type="button" onclick="togglePasswordVisibility('login-password', this)"
+                                            class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-white transition-colors"
+                                            style="display: flex; align-items: center; justify-content: center; background: none; border: none; padding: 0;">
+                                            <span class="material-symbols-outlined text-sm">visibility</span>
+                                        </button>
+                                    </div>
                                 </div>
                                 <button type="submit"
                                     class="w-full bg-secondary-container hover:brightness-110 text-white font-bold py-3.5 rounded-lg transition-all active:scale-95 shadow-lg shadow-secondary/10">
@@ -506,9 +525,16 @@
                                 <div>
                                     <label
                                         class="block text-xs font-label-md text-on-surface-variant mb-2">PASSWORD</label>
-                                    <input type="password" required id="signup-password"
-                                        placeholder="Minimum 8 characters"
-                                        class="w-full bg-primary-container/60 border border-white/10 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary text-white" />
+                                    <div class="relative">
+                                        <input type="password" required id="signup-password"
+                                            placeholder="Minimum 8 characters"
+                                            class="w-full bg-primary-container/60 border border-white/10 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary text-white pr-10" />
+                                        <button type="button" onclick="togglePasswordVisibility('signup-password', this)"
+                                            class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-white transition-colors"
+                                            style="display: flex; align-items: center; justify-content: center; background: none; border: none; padding: 0;">
+                                            <span class="material-symbols-outlined text-sm">visibility</span>
+                                        </button>
+                                    </div>
                                 </div>
                                 <button type="submit"
                                     class="w-full bg-secondary-container hover:brightness-110 text-white font-bold py-3.5 rounded-lg transition-all active:scale-95 shadow-lg shadow-secondary/10">
@@ -539,7 +565,8 @@
                         <div id="auth-otp-pane" class="hidden">
                             <header class="mb-6">
                                 <h3 class="text-2xl font-bold text-on-surface mb-2 font-headline-md">Identity Verification</h3>
-                                <p class="text-sm text-on-surface-variant">A 6-digit verification code has been dispatched to your email.</p>
+                                <p class="text-sm text-on-surface-variant font-sans">A 6-digit verification code has been dispatched to <span id="otp-masked-email" class="font-semibold text-white">your email</span>.</p>
+                                <p class="text-xs text-on-surface-variant mt-2 font-sans">Code expires in: <span id="otp-timer" class="font-semibold text-secondary">05:00</span></p>
                             </header>
                             <form onsubmit="handleOtpSubmit(event)" class="space-y-4">
                                 <div>
@@ -554,7 +581,7 @@
                             </form>
                             <div class="mt-6 text-center text-sm text-on-surface-variant flex justify-between">
                                 <button onclick="resendOtpCode()" class="text-secondary hover:underline">Resend code</button>
-                                <button onclick="showAuthTab('login')" class="text-on-surface-variant hover:underline">Cancel</button>
+                                <button onclick="showAuthTab('login')" class="text-on-surface-variant hover:underline">Back to Login</button>
                             </div>
                         </div>
 

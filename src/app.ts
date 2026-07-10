@@ -15,13 +15,55 @@ import userRouter from './routes/user.routes';
 import stockRouter from './routes/stock.routes';
 import aiRouter from './routes/ai.routes';
 
+import path from 'path';
+
 const app = express();
 
 // Standard Security and Compression Layers
-app.use(helmet());
+// Configure Helmet with Content Security Policy to allow frontend CDN dependencies
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: [
+          "'self'",
+          "'unsafe-inline'",
+          "'unsafe-eval'",
+          "https://cdn.tailwindcss.com",
+          "https://unpkg.com",
+        ],
+        styleSrc: [
+          "'self'",
+          "'unsafe-inline'",
+          "https://fonts.googleapis.com",
+        ],
+        fontSrc: [
+          "'self'",
+          "https://fonts.gstatic.com",
+        ],
+        imgSrc: [
+          "'self'",
+          "data:",
+          "https://images.unsplash.com",
+          "https://lh3.googleusercontent.com",
+          "*",
+        ],
+        connectSrc: [
+          "'self'",
+          "http://localhost:3000",
+          "http://localhost:8000",
+          "*",
+        ],
+      },
+    },
+  })
+);
+
+const corsOrigins = config.CORS_ORIGIN.split(',');
 app.use(
   cors({
-    origin: config.CORS_ORIGIN,
+    origin: corsOrigins.length === 1 ? corsOrigins[0] : corsOrigins,
     credentials: true,
   })
 );
@@ -29,6 +71,9 @@ app.use(compression());
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Serve static frontend assets from workspace root
+app.use(express.static(path.resolve(__dirname, '../')));
 
 // Custom Request tracing & logging
 app.use(requestIdMiddleware);

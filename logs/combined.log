@@ -62,3 +62,194 @@ Please make sure to provide valid database credentials for the database server a
     at $n.request (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:6307)
     at l (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:130:9633)
     at Server.<anonymous> (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\server.ts:12:5)
+[2026-07-10 15:36:05:365] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-10 15:36:05:365] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-10 15:36:07:367] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-10 15:36:34:3634] [WARN] [ReqID: 814871ba-3191-471e-9106-6980903c24be] AppError (404): Requested API route [GET] / was not found
+[2026-07-10 15:36:34:3634] [HTTP]  GET / 404 187 - 4.428 ms [ReqID: 814871ba-3191-471e-9106-6980903c24be]
+[2026-07-10 15:36:34:3634] [WARN] [ReqID: cdc70d7a-d0c0-426c-b20d-c55e707dd700] AppError (404): Requested API route [GET] /favicon.ico was not found
+[2026-07-10 15:36:34:3634] [HTTP]  GET /favicon.ico 404 198 - 1.525 ms [ReqID: cdc70d7a-d0c0-426c-b20d-c55e707dd700]
+[2026-07-10 15:36:39:3639] [WARN] [ReqID: 8c6aafb0-ecfb-48ad-b384-6959eeaa4d22] AppError (404): Requested API route [GET] /index.html was not found
+[2026-07-10 15:36:39:3639] [HTTP]  GET /index.html 404 197 - 11.097 ms [ReqID: 8c6aafb0-ecfb-48ad-b384-6959eeaa4d22]
+[2026-07-10 15:36:51:3651] [WARN] [ReqID: 953aedb3-e1b4-4aac-b01d-5055edb0c8d0] AppError (404): Requested API route [GET] /src/index.html was not found
+[2026-07-10 15:36:51:3651] [HTTP]  GET /src/index.html 404 201 - 1.239 ms [ReqID: 953aedb3-e1b4-4aac-b01d-5055edb0c8d0]
+[2026-07-10 15:38:57:3857] [WARN] [ReqID: 46892a44-4b0f-44fc-9c29-73228770b619] AppError (404): Requested API route [GET] /public/index.html was not found
+[2026-07-10 15:38:57:3857] [HTTP]  GET /public/index.html 404 204 - 2.277 ms [ReqID: 46892a44-4b0f-44fc-9c29-73228770b619]
+[2026-07-10 15:39:13:3913] [HTTP]  GET /api/auth/google 302 371 - 21.287 ms [ReqID: 617516df-b225-4d56-a64f-83c3a26d135b]
+[2026-07-10 15:42:33:4233] [ERROR]  ❌ Failed to send email to [test_integration@vertigo.ai]: Invalid login: 535 5.7.0 Invalid credentials
+Error: Invalid login: 535 5.7.0 Invalid credentials
+    at SMTPConnection._formatError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionAUTHComplete (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:1588:34)
+    at SMTPConnection.<anonymous> (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:556:26)
+    at SMTPConnection._processResponse (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at TLSSocket.SMTPConnection._onSocketData (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:508:28)
+    at addChunk (node:internal/streams/readable:559:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
+    at TLSSocket.Readable.push (node:internal/streams/readable:390:5)
+[2026-07-10 15:42:35:4235] [HTTP]  POST /api/auth/signup 201 237 - 9455.471 ms [ReqID: 4fc2b0e9-e5dd-40ae-a01a-047fc45ab303]
+[2026-07-10 15:43:14:4314] [WARN] [ReqID: 9ae7140d-d9fb-4063-adf7-724060dfde16] AppError (404): Requested API route [GET] / was not found
+[2026-07-10 15:43:14:4314] [HTTP]  GET / 404 187 - 1.044 ms [ReqID: 9ae7140d-d9fb-4063-adf7-724060dfde16]
+[2026-07-10 15:43:14:4314] [WARN] [ReqID: 35ff2a7f-2a8c-48c0-ab28-bb516503fcca] AppError (404): Requested API route [GET] /favicon.ico was not found
+[2026-07-10 15:43:14:4314] [HTTP]  GET /favicon.ico 404 198 - 0.567 ms [ReqID: 35ff2a7f-2a8c-48c0-ab28-bb516503fcca]
+[2026-07-10 15:46:36:4636] [WARN] [ReqID: a91648e4-8058-4d7f-8037-c0cf78a35634] AppError (404): Requested API route [GET] / was not found
+[2026-07-10 15:46:36:4636] [HTTP]  GET / 404 187 - 1.383 ms [ReqID: a91648e4-8058-4d7f-8037-c0cf78a35634]
+[2026-07-10 15:46:36:4636] [WARN] [ReqID: d919452d-5357-4be0-a4a4-bdf12954bfed] AppError (404): Requested API route [GET] /favicon.ico was not found
+[2026-07-10 15:46:36:4636] [HTTP]  GET /favicon.ico 404 198 - 1.178 ms [ReqID: d919452d-5357-4be0-a4a4-bdf12954bfed]
+[2026-07-10 15:57:57:5757] [WARN] [ReqID: 3c331b9f-5cdd-4f1f-99d9-8436d05cf9a3] AppError (404): Requested API route [GET] / was not found
+[2026-07-10 15:57:57:5757] [HTTP]  GET / 404 187 - 1.337 ms [ReqID: 3c331b9f-5cdd-4f1f-99d9-8436d05cf9a3]
+[2026-07-10 20:01:59:159] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-10 20:01:59:159] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-10 20:02:01:21] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-10 20:02:37:237] [WARN] [ReqID: 8f574e35-8dd9-483e-a6ee-200f58de1c60] AppError (401): Authentication token required.
+[2026-07-10 20:02:37:237] [HTTP]  GET /api/auth/session 401 176 - 9.291 ms [ReqID: 8f574e35-8dd9-483e-a6ee-200f58de1c60]
+[2026-07-10 20:04:01:41] [ERROR]  ❌ Failed to send email to [test_integration@vertigo.ai]: Invalid login: 535 5.7.0 Invalid credentials
+Error: Invalid login: 535 5.7.0 Invalid credentials
+    at SMTPConnection._formatError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionAUTHComplete (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:1588:34)
+    at SMTPConnection.<anonymous> (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:556:26)
+    at SMTPConnection._processResponse (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at TLSSocket.SMTPConnection._onSocketData (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:508:28)
+    at addChunk (node:internal/streams/readable:559:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
+    at TLSSocket.Readable.push (node:internal/streams/readable:390:5)
+[2026-07-10 20:04:01:41] [INFO]  🔑 [SECURITY/DEV] Generated OTP for test_integration@vertigo.ai (LOGIN): 244878
+[2026-07-10 20:04:01:41] [HTTP]  POST /api/auth/login 200 248 - 5462.380 ms [ReqID: 629723c7-5a10-4e0e-9920-3742fbfeac75]
+[2026-07-10 20:05:03:53] [HTTP]  POST /api/auth/verify-otp 200 588 - 5967.832 ms [ReqID: c4eafa20-a4fb-45f7-9730-32404a5bfef1]
+[2026-07-10 20:06:09:69] [HTTP]  POST /api/auth/logout 200 174 - 2591.089 ms [ReqID: 02dc3817-a715-4a19-8233-76eda7631397]
+[2026-07-10 20:12:19:1219] [WARN] [ReqID: 3306baec-e69f-473a-b0e4-c22d1380da7b] AppError (400): Verification code has expired or is invalid.
+[2026-07-10 20:12:19:1219] [HTTP]  POST /api/auth/verify-otp 400 190 - 3726.962 ms [ReqID: 3306baec-e69f-473a-b0e4-c22d1380da7b]
+[2026-07-10 20:16:14:1614] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-10 20:16:14:1614] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-10 20:16:16:1616] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-10 20:16:35:1635] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-10 20:16:35:1635] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-10 20:16:37:1637] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-10 20:18:08:188] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-10 20:18:08:188] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-10 20:18:11:1811] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-10 20:18:29:1829] [WARN] [ReqID: 23d8045a-64af-47b6-aeee-5e0486f47e6a] AppError (401): Authentication token required.
+[2026-07-10 20:18:29:1829] [HTTP]  GET /api/auth/session 401 176 - 18.074 ms [ReqID: 23d8045a-64af-47b6-aeee-5e0486f47e6a]
+[2026-07-10 20:20:20:2020] [WARN] [ReqID: d2a8c995-f67b-4f61-809d-cbf9e4fc458c] AppError (401): Account is not verified. Please verify your email.
+[2026-07-10 20:20:20:2020] [HTTP]  POST /api/auth/login 401 196 - 1077.100 ms [ReqID: d2a8c995-f67b-4f61-809d-cbf9e4fc458c]
+[2026-07-10 20:20:54:2054] [WARN] [ReqID: f0e93034-27a1-44ec-a325-839187185df7] AppError (401): Authentication token required.
+[2026-07-10 20:20:54:2054] [HTTP]  GET /api/auth/session 401 176 - 1.584 ms [ReqID: f0e93034-27a1-44ec-a325-839187185df7]
+[2026-07-10 20:21:43:2143] [ERROR]  ❌ Failed to send email to [test_integration2@vertigo.ai]: Invalid login: 535 5.7.0 Invalid credentials
+Error: Invalid login: 535 5.7.0 Invalid credentials
+    at SMTPConnection._formatError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionAUTHComplete (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:1588:34)
+    at SMTPConnection.<anonymous> (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:556:26)
+    at SMTPConnection._processResponse (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at TLSSocket.SMTPConnection._onSocketData (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:508:28)
+    at addChunk (node:internal/streams/readable:559:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
+    at TLSSocket.Readable.push (node:internal/streams/readable:390:5)
+[2026-07-10 20:21:43:2143] [INFO]  🔑 [SECURITY/DEV] Generated OTP for test_integration2@vertigo.ai (REGISTRATION): 453851
+[2026-07-10 20:21:45:2145] [HTTP]  POST /api/auth/signup 201 238 - 9901.923 ms [ReqID: 22017a6e-7076-4bbb-9b4d-8d65853d1037]
+[2026-07-10 20:22:48:2248] [HTTP]  GET /api/auth/google?state=http%3A%2F%2Flocalhost%3A3000 302 411 - 8.504 ms [ReqID: 2bfdff58-93b7-4e75-8b15-15c64b583559]
+[2026-07-10 20:22:51:2251] [WARN] [ReqID: 7b289d82-905c-488e-8f19-dd53f48492fd] AppError (401): Authentication token required.
+[2026-07-10 20:22:51:2251] [HTTP]  GET /api/auth/session 401 176 - 1.184 ms [ReqID: 7b289d82-905c-488e-8f19-dd53f48492fd]
+[2026-07-10 20:23:35:2335] [WARN] [ReqID: 4e41398e-5c9f-4288-bf5c-ca14758e90b8] AppError (409): Email address is already registered
+[2026-07-10 20:23:35:2335] [HTTP]  POST /api/auth/signup 409 181 - 2493.580 ms [ReqID: 4e41398e-5c9f-4288-bf5c-ca14758e90b8]
+[2026-07-10 20:25:48:2548] [ERROR]  ❌ Failed to send email to [test_integration4@vertigo.ai]: Invalid login: 535 5.7.0 Invalid credentials
+Error: Invalid login: 535 5.7.0 Invalid credentials
+    at SMTPConnection._formatError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionAUTHComplete (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:1588:34)
+    at SMTPConnection.<anonymous> (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:556:26)
+    at SMTPConnection._processResponse (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at TLSSocket.SMTPConnection._onSocketData (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:508:28)
+    at addChunk (node:internal/streams/readable:559:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
+    at TLSSocket.Readable.push (node:internal/streams/readable:390:5)
+[2026-07-10 20:25:48:2548] [INFO]  🔑 [SECURITY/DEV] Generated OTP for test_integration4@vertigo.ai (REGISTRATION): 831720
+[2026-07-10 20:25:50:2550] [HTTP]  POST /api/auth/signup 201 238 - 8813.297 ms [ReqID: 19773fbb-0e76-48d5-b5ec-1e1e0b63179b]
+[2026-07-10 20:27:21:2721] [WARN] [ReqID: f018a25b-fbf9-4b57-b474-ad557631f38f] AppError (401): Account is not verified. Please verify your email.
+[2026-07-10 20:27:21:2721] [HTTP]  POST /api/auth/login 401 196 - 780.982 ms [ReqID: f018a25b-fbf9-4b57-b474-ad557631f38f]
+[2026-07-10 20:28:41:2841] [WARN] [ReqID: 6fb9a8b9-c7c2-4ef9-8b05-4c26b48a1750] AppError (409): Email address is already registered
+[2026-07-10 20:28:41:2841] [HTTP]  POST /api/auth/signup 409 181 - 2833.788 ms [ReqID: 6fb9a8b9-c7c2-4ef9-8b05-4c26b48a1750]
+[2026-07-10 20:28:58:2858] [WARN] [ReqID: 23383613-ed7b-4ede-9a6e-e811300f23fa] AppError (409): Email address is already registered
+[2026-07-10 20:28:58:2858] [HTTP]  POST /api/auth/signup 409 181 - 477.084 ms [ReqID: 23383613-ed7b-4ede-9a6e-e811300f23fa]
+[2026-07-10 20:29:05:295] [WARN] [ReqID: 850d9d86-d4ef-4e86-92a6-71a6e36ec012] AppError (401): Authentication token required.
+[2026-07-10 20:29:05:295] [HTTP]  GET /api/auth/session 401 176 - 1.138 ms [ReqID: 850d9d86-d4ef-4e86-92a6-71a6e36ec012]
+[2026-07-10 20:30:24:3024] [WARN] [ReqID: fd7f9dbd-f532-467d-b046-09f93f96f87d] AppError (401): Account is not verified. Please verify your email.
+[2026-07-10 20:30:24:3024] [HTTP]  POST /api/auth/login 401 196 - 716.425 ms [ReqID: fd7f9dbd-f532-467d-b046-09f93f96f87d]
+[2026-07-10 20:30:54:3054] [WARN] [ReqID: b92213b7-d8e9-43ee-95c6-d457eb5bf78e] AppError (401): Account is not verified. Please verify your email.
+[2026-07-10 20:30:54:3054] [HTTP]  POST /api/auth/login 401 196 - 807.830 ms [ReqID: b92213b7-d8e9-43ee-95c6-d457eb5bf78e]
+[2026-07-10 20:31:15:3115] [WARN] [ReqID: 60a7e422-1cd3-46f7-8021-4184b829f051] AppError (401): Incorrect password.
+[2026-07-10 20:31:15:3115] [HTTP]  POST /api/auth/login 401 165 - 2794.955 ms [ReqID: 60a7e422-1cd3-46f7-8021-4184b829f051]
+[2026-07-10 20:31:30:3130] [WARN] [ReqID: 0952fd3f-53f0-442a-9b28-70f11d452c6c] AppError (401): Account is not verified. Please verify your email.
+[2026-07-10 20:31:30:3130] [HTTP]  POST /api/auth/login 401 196 - 745.023 ms [ReqID: 0952fd3f-53f0-442a-9b28-70f11d452c6c]
+[2026-07-10 20:33:25:3325] [WARN] [ReqID: e315b5b8-7c65-4363-8167-0fd8bdb67ffb] AppError (401): Account is not verified. Please verify your email.
+[2026-07-10 20:33:25:3325] [HTTP]  POST /api/auth/login 401 196 - 728.706 ms [ReqID: e315b5b8-7c65-4363-8167-0fd8bdb67ffb]
+[2026-07-10 20:34:34:3434] [WARN] [ReqID: 07fe73cb-eecb-4fd7-8ad9-190c43360c9d] AppError (401): Authentication token required.
+[2026-07-10 20:34:34:3434] [HTTP]  GET /api/auth/session 401 176 - 1.410 ms [ReqID: 07fe73cb-eecb-4fd7-8ad9-190c43360c9d]
+[2026-07-10 20:36:22:3622] [ERROR]  ❌ Failed to send email to [test_integration5@vertigo.ai]: Invalid login: 535 5.7.0 Invalid credentials
+Error: Invalid login: 535 5.7.0 Invalid credentials
+    at SMTPConnection._formatError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionAUTHComplete (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:1588:34)
+    at SMTPConnection.<anonymous> (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:556:26)
+    at SMTPConnection._processResponse (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at TLSSocket.SMTPConnection._onSocketData (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:508:28)
+    at addChunk (node:internal/streams/readable:559:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
+    at TLSSocket.Readable.push (node:internal/streams/readable:390:5)
+[2026-07-10 20:36:22:3622] [INFO]  🔑 [SECURITY/DEV] Generated OTP for test_integration5@vertigo.ai (REGISTRATION): 383465
+[2026-07-10 20:36:25:3625] [HTTP]  POST /api/auth/signup 201 238 - 12193.887 ms [ReqID: 5703a6ed-e39b-435a-8cff-740685416946]
+[2026-07-10 20:37:34:3734] [HTTP]  POST /api/auth/verify-otp 200 584 - 7129.282 ms [ReqID: 68336e90-fb00-4f43-bcd9-cfd6aad222e7]
+[2026-07-10 20:39:05:395] [HTTP]  POST /api/auth/logout 200 174 - 2599.734 ms [ReqID: 1563bc60-bbe4-4e79-bdd7-aadf42cabe26]
+[2026-07-10 20:41:38:4138] [ERROR]  ❌ Failed to send email to [test_integration5@vertigo.ai]: Invalid login: 535 5.7.0 Invalid credentials
+Error: Invalid login: 535 5.7.0 Invalid credentials
+    at SMTPConnection._formatError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionAUTHComplete (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:1588:34)
+    at SMTPConnection.<anonymous> (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:556:26)
+    at SMTPConnection._processResponse (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at TLSSocket.SMTPConnection._onSocketData (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:508:28)
+    at addChunk (node:internal/streams/readable:559:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
+    at TLSSocket.Readable.push (node:internal/streams/readable:390:5)
+[2026-07-10 20:41:38:4138] [INFO]  🔑 [SECURITY/DEV] Generated OTP for test_integration5@vertigo.ai (LOGIN): 651039
+[2026-07-10 20:41:40:4140] [HTTP]  POST /api/auth/login 200 222 - 8903.199 ms [ReqID: db5e210d-0a33-42c8-98b4-746580ed8d2d]
+[2026-07-10 20:49:07:497] [ERROR]  ❌ Failed to send email to [test_integration5@vertigo.ai]: Invalid login: 535 5.7.0 Invalid credentials
+Error: Invalid login: 535 5.7.0 Invalid credentials
+    at SMTPConnection._formatError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionAUTHComplete (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:1588:34)
+    at SMTPConnection.<anonymous> (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:556:26)
+    at SMTPConnection._processResponse (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at TLSSocket.SMTPConnection._onSocketData (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:508:28)
+    at addChunk (node:internal/streams/readable:559:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
+    at TLSSocket.Readable.push (node:internal/streams/readable:390:5)
+[2026-07-10 20:49:07:497] [INFO]  🔑 [SECURITY/DEV] Generated OTP for test_integration5@vertigo.ai (LOGIN): 749660
+[2026-07-10 20:49:07:497] [HTTP]  GET /api/auth/google?state=http%3A%2F%2Flocalhost%3A3000 302 411 - 1.314 ms [ReqID: 9183ab0f-b34a-41aa-9fe9-4ff797e503af]
+[2026-07-10 20:49:09:499] [HTTP]  POST /api/auth/login 200 222 - 8873.927 ms [ReqID: e4ef560d-db54-456d-a246-53633552331d]
+[2026-07-10 20:49:15:4915] [WARN] [ReqID: c85d0364-705b-443a-8eb5-3f10869bf18d] AppError (400): Invalid verification code.
+[2026-07-10 20:49:15:4915] [HTTP]  POST /api/auth/verify-otp 400 172 - 757.189 ms [ReqID: c85d0364-705b-443a-8eb5-3f10869bf18d]
+[2026-07-10 20:49:17:4917] [WARN] [ReqID: b3b9b677-4e36-43a4-9937-0f46c3aace10] AppError (400): Invalid verification code.
+[2026-07-10 20:49:17:4917] [HTTP]  POST /api/auth/verify-otp 400 172 - 512.773 ms [ReqID: b3b9b677-4e36-43a4-9937-0f46c3aace10]
+[2026-07-10 20:50:19:5019] [ERROR]  ❌ Failed to send email to [swapnanilrick10@gmail.com]: Invalid login: 535 5.7.0 Invalid credentials
+Error: Invalid login: 535 5.7.0 Invalid credentials
+    at SMTPConnection._formatError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionAUTHComplete (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:1588:34)
+    at SMTPConnection.<anonymous> (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:556:26)
+    at SMTPConnection._processResponse (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at TLSSocket.SMTPConnection._onSocketData (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:508:28)
+    at addChunk (node:internal/streams/readable:559:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
+    at TLSSocket.Readable.push (node:internal/streams/readable:390:5)
+[2026-07-10 20:50:19:5019] [INFO]  🔑 [SECURITY/DEV] Generated OTP for swapnanilrick10@gmail.com (REGISTRATION): 565705
+[2026-07-10 20:50:21:5021] [HTTP]  POST /api/auth/signup 201 235 - 7830.731 ms [ReqID: 3e78a9ac-37b6-43f1-a115-0169b7a0fb77]

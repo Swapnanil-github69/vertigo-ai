@@ -199,6 +199,8 @@ function auditLog(action, detail, type = "User") {
 let accessToken = localStorage.getItem('accessToken') || null;
 
 // Unified HTTP request helper
+const BACKEND_URL = window.location.port === '3000' ? 'http://localhost:8000' : '';
+
 async function apiFetch(url, options = {}) {
     if (!options.headers) options.headers = {};
     if (accessToken) {
@@ -214,7 +216,7 @@ async function apiFetch(url, options = {}) {
     options.credentials = 'include'; // Include cookies (refreshToken)
 
     try {
-        const response = await fetch(url, options);
+        const response = await fetch(BACKEND_URL + url, options);
         const json = await response.json();
         
         if (!response.ok) {

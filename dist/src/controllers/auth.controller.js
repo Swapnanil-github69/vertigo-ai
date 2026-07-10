@@ -90,7 +90,7 @@ class AuthController {
     }
     async verifyOtp(req, res) {
         const { email, code, type } = verifyOtpSchema.parse(req.body);
-        // Verify code
+        // Verify code (deletes it upon successful validation)
         await otp_service_1.otpService.verifyOtp(email, code, type);
         const user = await user_repository_1.userRepository.findByEmail(email);
         if (!user) {
@@ -104,7 +104,7 @@ class AuthController {
         const uaParsed = (0, userAgent_1.parseUserAgent)(req.headers['user-agent']);
         const sessionToken = (0, jwt_1.generateRefreshToken)({ userId: user.id, role: user.role, email: user.email });
         const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days
-        await session_repository_1.sessionRepository.create({
+        const session = await session_repository_1.sessionRepository.create({
             user: { connect: { id: user.id } },
             token: sessionToken,
             ipAddress: req.ip,
@@ -112,16 +112,50 @@ class AuthController {
             device: uaParsed.device,
             expiresAt,
         });
-        await client_1.prisma.loginHistory.create({
-            data: {
-                user: { connect: { id: user.id } },
-                ipAddress: req.ip,
-                userAgent: req.headers['user-agent'],
-                os: uaParsed.os,
-                browser: uaParsed.browser,
-                status: 'SUCCESS',
-            },
+        // Determine provider type
+        const provider = user.provider || 'credentials';
+        await user_repository_1.userRepository.update(user.id, {
+            lastLoginAt: new Date(),
+            provider,
         });
+        // Update latest PENDING login history to SUCCESS
+        const pendingLog = await client_1.prisma.loginHistory.findFirst({
+            where: {
+                userId: user.id,
+                status: 'PENDING',
+                provider,
+            },
+            orderBy: { createdAt: 'desc' },
+        });
+        if (pendingLog) {
+            await client_1.prisma.loginHistory.update({
+                where: { id: pendingLog.id },
+                data: {
+                    status: 'SUCCESS',
+                    sessionId: session.id,
+                    otpVerifiedAt: new Date(),
+                    loginTime: new Date(),
+                },
+            });
+        }
+        else {
+            await client_1.prisma.loginHistory.create({
+                data: {
+                    user: { connect: { id: user.id } },
+                    ipAddress: req.ip,
+                    userAgent: req.headers['user-agent'],
+                    os: uaParsed.os,
+                    browser: uaParsed.browser,
+                    device: uaParsed.device,
+                    sessionId: session.id,
+                    provider,
+                    otpGeneratedAt: new Date(), // fallback
+                    otpVerifiedAt: new Date(),
+                    loginTime: new Date(),
+                    status: 'SUCCESS',
+                },
+            });
+        }
         // Generate access token
         const accessToken = (0, jwt_1.generateAccessToken)({ userId: user.id, role: user.role, email: user.email });
         // Set HttpOnly secure cookie for session token
@@ -151,7 +185,7 @@ class AuthController {
         const { email, password } = loginSchema.parse(req.body);
         const user = await user_repository_1.userRepository.findByEmail(email);
         if (!user || !user.passwordHash) {
-            throw new errors_1.UnauthorizedError('Invalid credentials.');
+            throw new errors_1.UnauthorizedError('Account not found.');
         }
         const passwordMatch = await bcrypt_1.default.compare(password, user.passwordHash);
         if (!passwordMatch) {
@@ -162,42 +196,22 @@ class AuthController {
                     ipAddress: req.ip,
                     userAgent: req.headers['user-agent'],
                     status: 'FAILED',
+                    provider: 'credentials',
                 },
             });
-            throw new errors_1.UnauthorizedError('Invalid credentials.');
+            throw new errors_1.UnauthorizedError('Incorrect password.');
         }
-        // Check if OTP verification is required (e.g. login from new device/IP combination)
+        if (user.status !== 'ACTIVE') {
+            throw new errors_1.UnauthorizedError('Account is currently deactivated.');
+        }
+        if (!user.emailVerified) {
+            throw new errors_1.UnauthorizedError('Account is not verified. Please verify your email.');
+        }
+        // Generate and send OTP (always required in the redesigned flow)
+        await otp_service_1.otpService.sendVerificationOtp(email, 'LOGIN');
+        // Parse User-Agent details
         const uaParsed = (0, userAgent_1.parseUserAgent)(req.headers['user-agent']);
-        const existingLog = await client_1.prisma.loginHistory.findFirst({
-            where: {
-                userId: user.id,
-                ipAddress: req.ip,
-                userAgent: req.headers['user-agent'],
-                status: 'SUCCESS',
-            },
-        });
-        if (!existingLog) {
-            // New device/IP detected, require OTP login flow
-            await otp_service_1.otpService.sendVerificationOtp(email, 'LOGIN');
-            return res.status(200).json({
-                success: true,
-                message: 'New login vector detected. Verification OTP sent to your email.',
-                data: { otpRequired: true, email },
-                timestamp: new Date().toISOString(),
-                requestId: req.requestId || '-',
-            });
-        }
-        // Create session directly
-        const sessionToken = (0, jwt_1.generateRefreshToken)({ userId: user.id, role: user.role, email: user.email });
-        const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-        await session_repository_1.sessionRepository.create({
-            user: { connect: { id: user.id } },
-            token: sessionToken,
-            ipAddress: req.ip,
-            userAgent: req.headers['user-agent'],
-            device: uaParsed.device,
-            expiresAt,
-        });
+        // Record PENDING login event
         await client_1.prisma.loginHistory.create({
             data: {
                 user: { connect: { id: user.id } },
@@ -205,28 +219,16 @@ class AuthController {
                 userAgent: req.headers['user-agent'],
                 os: uaParsed.os,
                 browser: uaParsed.browser,
-                status: 'SUCCESS',
+                device: uaParsed.device,
+                provider: 'credentials',
+                otpGeneratedAt: new Date(),
+                status: 'PENDING',
             },
-        });
-        const accessToken = (0, jwt_1.generateAccessToken)({ userId: user.id, role: user.role, email: user.email });
-        res.cookie('refreshToken', sessionToken, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'strict',
-            maxAge: 7 * 24 * 60 * 60 * 1000,
         });
         return res.status(200).json({
             success: true,
-            message: 'Authentication successful.',
-            data: {
-                accessToken,
-                user: {
-                    id: user.id,
-                    name: user.name,
-                    email: user.email,
-                    role: user.role,
-                },
-            },
+            message: 'Verification OTP sent to your email.',
+            data: { otpRequired: true, email },
             timestamp: new Date().toISOString(),
             requestId: req.requestId || '-',
         });
@@ -326,6 +328,7 @@ class AuthController {
     }
     async googleLogin(req, res) {
         const rootUrl = 'https://accounts.google.com/o/oauth2/v2/auth';
+        const clientState = req.query.state || '';
         const options = {
             redirect_uri: `${req.protocol}://${req.get('host')}/api/auth/google/callback`,
             client_id: process.env.GOOGLE_CLIENT_ID || 'dummy_client_id',
@@ -336,13 +339,21 @@ class AuthController {
                 'https://www.googleapis.com/auth/userinfo.profile',
                 'https://www.googleapis.com/auth/userinfo.email',
             ].join(' '),
+            state: clientState,
         };
         const qs = new URLSearchParams(options);
         res.redirect(`${rootUrl}?${qs.toString()}`);
     }
     async googleCallback(req, res) {
-        const { code } = req.query;
-        const targetOrigin = process.env.CORS_ORIGIN || 'http://localhost:8000';
+        const { code, state } = req.query;
+        const corsOrigins = (process.env.CORS_ORIGIN || 'http://localhost:8000').split(',');
+        let targetOrigin = corsOrigins[0];
+        // If state contains a valid origin from our allowed origins, use it
+        if (state && typeof state === 'string' && state.startsWith('http')) {
+            if (corsOrigins.includes(state)) {
+                targetOrigin = state;
+            }
+        }
         if (!code) {
             return res.redirect(`${targetOrigin}/#/auth?error=CodeMissing`);
         }
@@ -411,15 +422,53 @@ class AuthController {
                 }
             }
             const uaParsed = (0, userAgent_1.parseUserAgent)(req.headers['user-agent']);
+            // Perform Risk Assessment: Check if successful history exists for this IP/UA
+            const existingLog = await client_1.prisma.loginHistory.findFirst({
+                where: {
+                    userId: user.id,
+                    ipAddress: req.ip,
+                    userAgent: req.headers['user-agent'],
+                    status: 'SUCCESS',
+                },
+            });
+            if (!existingLog) {
+                // Unrecognized device/location -> Require OTP!
+                await otp_service_1.otpService.sendVerificationOtp(user.email, 'LOGIN');
+                // Create PENDING login log
+                await client_1.prisma.loginHistory.create({
+                    data: {
+                        user: { connect: { id: user.id } },
+                        ipAddress: req.ip,
+                        userAgent: req.headers['user-agent'],
+                        os: uaParsed.os,
+                        browser: uaParsed.browser,
+                        device: uaParsed.device,
+                        provider: 'google',
+                        otpGeneratedAt: new Date(),
+                        status: 'PENDING',
+                    },
+                });
+                // Set provider info on user record
+                await user_repository_1.userRepository.update(user.id, {
+                    provider: 'google',
+                });
+                // Redirect to OTP verification page
+                return res.redirect(`${targetOrigin}/#/auth?otpRequired=true&email=${encodeURIComponent(user.email)}&provider=google`);
+            }
+            // Recognized device -> Log in immediately!
             const sessionToken = (0, jwt_1.generateRefreshToken)({ userId: user.id, role: user.role, email: user.email });
             const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-            await session_repository_1.sessionRepository.create({
+            const session = await session_repository_1.sessionRepository.create({
                 user: { connect: { id: user.id } },
                 token: sessionToken,
                 ipAddress: req.ip,
                 userAgent: req.headers['user-agent'],
                 device: uaParsed.device,
                 expiresAt,
+            });
+            await user_repository_1.userRepository.update(user.id, {
+                lastLoginAt: new Date(),
+                provider: 'google',
             });
             await client_1.prisma.loginHistory.create({
                 data: {
@@ -428,6 +477,9 @@ class AuthController {
                     userAgent: req.headers['user-agent'],
                     os: uaParsed.os,
                     browser: uaParsed.browser,
+                    device: uaParsed.device,
+                    sessionId: session.id,
+                    provider: 'google',
                     status: 'SUCCESS',
                 },
             });

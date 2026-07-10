@@ -5,7 +5,7 @@ interface ChatMessage {
 
 export class GeminiService {
   private apiKey: string | undefined;
-  private model = 'gemini-1.5-flash';
+  private model = 'gemini-2.5-flash';
 
   constructor() {
     this.apiKey = process.env.GEMINI_API_KEY;

@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.geminiService = exports.GeminiService = void 0;
 class GeminiService {
     apiKey;
-    model = 'gemini-1.5-flash';
+    model = 'gemini-2.5-flash';
     constructor() {
         this.apiKey = process.env.GEMINI_API_KEY;
     }
