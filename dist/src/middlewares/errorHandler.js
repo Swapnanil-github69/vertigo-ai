@@ -1,10 +1,27 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.errorHandlerMiddleware = void 0;
+const zod_1 = require("zod");
 const errors_1 = require("../utils/errors");
 const logger_1 = require("../utils/logger");
 const errorHandlerMiddleware = (err, req, res, _next) => {
     const requestId = req.requestId || '-';
+    if (err instanceof zod_1.ZodError) {
+        const formattedErrors = err.errors.map((e) => ({
+            field: e.path.join('.'),
+            message: e.message,
+        }));
+        const summaryMessage = err.errors.map((e) => e.message).join(', ');
+        logger_1.logger.warn(`ZodError: ${summaryMessage}`, { requestId });
+        return res.status(400).json({
+            success: false,
+            message: summaryMessage,
+            data: null,
+            errors: formattedErrors,
+            timestamp: new Date().toISOString(),
+            requestId,
+        });
+    }
     if (err instanceof errors_1.AppError) {
         // Log operational exceptions
         if (err.statusCode >= 500) {

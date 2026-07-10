@@ -556,3 +556,35 @@ html.light input::placeholder, html.light textarea::placeholder {
     opacity: 0.8 !important;
 }
 
+/* Smooth View Transitions */
+@keyframes route-fade-slide {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.route-view:not(.hidden) {
+    animation: route-fade-slide 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Smooth Tab Pane Switching Transitions */
+@keyframes pane-fade-slide {
+    from {
+        opacity: 0;
+        transform: translateX(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+#view-auth > div > div > div:not(.hidden) {
+    animation: pane-fade-slide 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+

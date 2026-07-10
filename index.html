@@ -174,7 +174,7 @@
                             real-time financial clarity. Navigate markets with absolute precision.
                         </p>
                         <div class="flex flex-wrap gap-4">
-                            <a href="#/auth"
+                            <a href="#/auth?tab=signup"
                                 class="px-8 py-4 bg-secondary-container text-white font-bold rounded-xl shadow-lg hover:shadow-secondary-container/20 transition-all hover:scale-[1.02] active:scale-95">
                                 Get Started Free
                             </a>
@@ -464,8 +464,8 @@
                                 <div>
                                     <div class="flex justify-between items-center mb-2">
                                         <label class="text-xs font-label-md text-on-surface-variant">PASSWORD</label>
-                                        <button type="button" onclick="showAuthTab('forgot')"
-                                            class="text-xs text-secondary hover:text-primary transition-colors">Forgot?</button>
+                                        <a href="#/auth?tab=forgot"
+                                            class="text-xs text-secondary hover:text-primary transition-colors">Forgot?</a>
                                     </div>
                                     <div class="relative">
                                         <input type="password" required id="login-password" placeholder="••••••••"
@@ -497,16 +497,15 @@
                                 <span>Google Workspace</span>
                             </a>
                             <div class="mt-6 text-center text-sm text-on-surface-variant">
-                                Need terminal clearance? <button onclick="showAuthTab('signup')"
-                                    class="text-secondary hover:underline">Request access</button>
+                                Don't have an account? <a href="#/auth?tab=signup"
+                                    class="text-secondary hover:underline cursor-pointer transition-all hover:brightness-110">Register!</a>
                             </div>
                         </div>
 
                         <!-- SIGN UP SCREEN -->
                         <div id="auth-signup-pane" class="hidden">
                             <header class="mb-6">
-                                <h3 class="text-2xl font-bold text-on-surface mb-2 font-headline-md">Clearance Request
-                                </h3>
+                                <h3 class="text-2xl font-bold text-on-surface mb-2 font-headline-md">Register</h3>
                                 <p class="text-sm text-on-surface-variant">Create a professional sandbox account.</p>
                             </header>
                             <form onsubmit="handleSignupSubmit(event)" class="space-y-4">
@@ -536,6 +535,20 @@
                                         </button>
                                     </div>
                                 </div>
+                                <div>
+                                    <label
+                                        class="block text-xs font-label-md text-on-surface-variant mb-2">CONFIRM PASSWORD</label>
+                                    <div class="relative">
+                                        <input type="password" required id="signup-confirm-password"
+                                            placeholder="Repeat password"
+                                            class="w-full bg-primary-container/60 border border-white/10 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary text-white pr-10" />
+                                        <button type="button" onclick="togglePasswordVisibility('signup-confirm-password', this)"
+                                            class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-white transition-colors"
+                                            style="display: flex; align-items: center; justify-content: center; background: none; border: none; padding: 0;">
+                                            <span class="material-symbols-outlined text-sm">visibility</span>
+                                        </button>
+                                    </div>
+                                </div>
                                 <button type="submit"
                                     class="w-full bg-secondary-container hover:brightness-110 text-white font-bold py-3.5 rounded-lg transition-all active:scale-95 shadow-lg shadow-secondary/10">
                                     Initialize clearance
@@ -556,8 +569,8 @@
                                 <span>Google Workspace</span>
                             </a>
                             <div class="mt-6 text-center text-sm text-on-surface-variant">
-                                Already cleared? <button onclick="showAuthTab('login')"
-                                    class="text-secondary hover:underline">Access terminal</button>
+                                Already a user? <a href="#/auth?tab=login"
+                                    class="text-secondary hover:underline cursor-pointer transition-all hover:brightness-110">Login!</a>
                             </div>
                         </div>
 
@@ -581,7 +594,7 @@
                             </form>
                             <div class="mt-6 text-center text-sm text-on-surface-variant flex justify-between">
                                 <button onclick="resendOtpCode()" class="text-secondary hover:underline">Resend code</button>
-                                <button onclick="showAuthTab('login')" class="text-on-surface-variant hover:underline">Back to Login</button>
+                                <a href="#/auth?tab=login" class="text-on-surface-variant hover:underline cursor-pointer">Back to Login</a>
                             </div>
                         </div>
 
@@ -604,8 +617,54 @@
                                 </button>
                             </form>
                             <div class="mt-6 text-center text-sm text-on-surface-variant">
-                                Remembered credentials? <button onclick="showAuthTab('login')"
-                                    class="text-secondary hover:underline">Log in</button>
+                                Remembered credentials? <a href="#/auth?tab=login"
+                                    class="text-secondary hover:underline cursor-pointer">Log in</a>
+                            </div>
+                        </div>
+
+                        <!-- RESET PASSWORD SCREEN -->
+                        <div id="auth-reset-pane" class="hidden">
+                            <header class="mb-6">
+                                <h3 class="text-2xl font-bold text-on-surface mb-2 font-headline-md">Reset Password</h3>
+                                <p class="text-sm text-on-surface-variant font-sans">Enter the code sent to your email and choose a new password.</p>
+                            </header>
+                            <form onsubmit="handleResetPasswordSubmit(event)" class="space-y-4">
+                                <div>
+                                    <label class="block text-xs font-label-md text-on-surface-variant mb-2">VERIFICATION CODE</label>
+                                    <input type="text" required id="reset-code" placeholder="123456" maxlength="6"
+                                        class="w-full bg-primary-container/60 border border-white/10 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary text-white text-center font-bold tracking-widest text-lg" />
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-label-md text-on-surface-variant mb-2">NEW PASSWORD</label>
+                                    <div class="relative">
+                                        <input type="password" required id="reset-password" placeholder="Minimum 8 characters"
+                                            class="w-full bg-primary-container/60 border border-white/10 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary text-white pr-10" />
+                                        <button type="button" onclick="togglePasswordVisibility('reset-password', this)"
+                                            class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-white transition-colors"
+                                            style="display: flex; align-items: center; justify-content: center; background: none; border: none; padding: 0;">
+                                            <span class="material-symbols-outlined text-sm">visibility</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-label-md text-on-surface-variant mb-2">CONFIRM NEW PASSWORD</label>
+                                    <div class="relative">
+                                        <input type="password" required id="reset-confirm-password" placeholder="Repeat new password"
+                                            class="w-full bg-primary-container/60 border border-white/10 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary text-white pr-10" />
+                                        <button type="button" onclick="togglePasswordVisibility('reset-confirm-password', this)"
+                                            class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-white transition-colors"
+                                            style="display: flex; align-items: center; justify-content: center; background: none; border: none; padding: 0;">
+                                            <span class="material-symbols-outlined text-sm">visibility</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <button type="submit"
+                                    class="w-full bg-secondary-container hover:brightness-110 text-white font-bold py-3.5 rounded-lg transition-all active:scale-95 shadow-lg shadow-secondary/10">
+                                    Reset Password
+                                </button>
+                            </form>
+                            <div class="mt-6 text-center text-sm text-on-surface-variant">
+                                <a href="#/auth?tab=login" class="text-secondary hover:underline cursor-pointer">Back to Login</a>
                             </div>
                         </div>
                     </div>
@@ -1833,6 +1892,7 @@
     <!-- ================= JAVASCRIPT APP LOADERS ================= -->
     <!-- Order-dependent sequential loads -->
     <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="src/js/state.js"></script>
     <script src="src/js/router.js"></script>
     <script src="src/js/auth.js"></script>

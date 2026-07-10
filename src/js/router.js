@@ -38,7 +38,8 @@ function updateActiveLinks(hash) {
 }
 
 function router() {
-    const hash = window.location.hash || '#/';
+    const rawHash = window.location.hash || '#/';
+    const hash = rawHash.split('?')[0];
     const publicRoutes = ['#/', '#/about', '#/auth'];
     const isPublic = publicRoutes.includes(hash);
     
@@ -73,6 +74,15 @@ function router() {
     
     const view = document.getElementById(viewId);
     if (view) view.classList.remove('hidden');
+    
+    // Switch auth tab if on auth page
+    if (hash === '#/auth') {
+        const urlParams = new URLSearchParams(rawHash.split('?')[1] || '');
+        const tab = urlParams.get('tab') || 'login';
+        if (typeof showAuthTab === 'function') {
+            showAuthTab(tab);
+        }
+    }
     
     // Switch layout shells
     const publicShell = document.getElementById('public-layout-shell');

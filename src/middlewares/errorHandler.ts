@@ -1,4 +1,5 @@
 import { Response, NextFunction } from 'express';
+import { ZodError } from 'zod';
 import { AppError } from '../utils/errors';
 import { logger } from '../utils/logger';
 import { CustomRequest } from './requestId';
@@ -10,6 +11,25 @@ export const errorHandlerMiddleware = (
   _next: NextFunction
 ) => {
   const requestId = req.requestId || '-';
+
+  if (err instanceof ZodError) {
+    const formattedErrors = err.errors.map((e) => ({
+      field: e.path.join('.'),
+      message: e.message,
+    }));
+    const summaryMessage = err.errors.map((e) => e.message).join(', ');
+
+    logger.warn(`ZodError: ${summaryMessage}`, { requestId });
+
+    return res.status(400).json({
+      success: false,
+      message: summaryMessage,
+      data: null,
+      errors: formattedErrors,
+      timestamp: new Date().toISOString(),
+      requestId,
+    });
+  }
 
   if (err instanceof AppError) {
     // Log operational exceptions

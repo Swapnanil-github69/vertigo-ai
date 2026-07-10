@@ -11,11 +11,12 @@ function showAuthTab(tab) {
     document.getElementById('auth-signup-pane').classList.add('hidden');
     document.getElementById('auth-forgot-pane').classList.add('hidden');
     document.getElementById('auth-otp-pane').classList.add('hidden');
+    document.getElementById('auth-reset-pane').classList.add('hidden');
     
     document.getElementById(`auth-${tab}-pane`).classList.remove('hidden');
     clearAllErrors();
 
-    if (tab !== 'otp' && otpInterval) {
+    if (tab !== 'otp' && tab !== 'reset' && otpInterval) {
         clearInterval(otpInterval);
     }
 }
@@ -161,11 +162,19 @@ async function handleSignupSubmit(e) {
     const name = document.getElementById('signup-name').value;
     const email = document.getElementById('signup-email').value;
     const password = document.getElementById('signup-password').value;
+    const confirmPassword = document.getElementById('signup-confirm-password').value;
+
+    if (password !== confirmPassword) {
+        displayInputError('signup-confirm-password', "Passwords do not match.");
+        submitBtn.disabled = false;
+        submitBtn.innerText = originalText;
+        return;
+    }
     
     try {
         const res = await apiFetch('/api/auth/signup', {
             method: 'POST',
-            body: { name, email, password }
+            body: { name, email, password, confirmPassword }
         });
 
         if (res.data && res.data.otpRequired) {
@@ -185,6 +194,8 @@ async function handleSignupSubmit(e) {
             displayInputError('signup-name', msg);
         } else if (msg.toLowerCase().includes('email')) {
             displayInputError('signup-email', msg);
+        } else if (msg.toLowerCase().includes('confirm')) {
+            displayInputError('signup-confirm-password', msg);
         } else if (msg.toLowerCase().includes('password')) {
             displayInputError('signup-password', msg);
         } else {
@@ -267,15 +278,59 @@ async function handleForgotSubmit(e) {
         showToast("Identity Audited", `Password reset code sent to ${email}.`, "info");
         otpContext = { email, type: 'PASSWORD_RESET' };
         
-        // Mask and set email element
-        const maskedSpan = document.getElementById('otp-masked-email');
-        if (maskedSpan) maskedSpan.innerText = maskEmail(email);
-
-        showAuthTab('otp');
-        startOtpCountdown();
+        showAuthTab('reset');
     } catch (err) {
         const msg = err.message || "Failed to trigger recovery.";
         displayInputError('forgot-email', msg);
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerText = originalText;
+    }
+}
+
+async function handleResetPasswordSubmit(e) {
+    e.preventDefault();
+    clearAllErrors();
+
+    const form = e.target;
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerText;
+
+    submitBtn.disabled = true;
+    submitBtn.innerText = "Resetting...";
+
+    const code = document.getElementById('reset-code').value;
+    const newPassword = document.getElementById('reset-password').value;
+    const confirmPassword = document.getElementById('reset-confirm-password').value;
+
+    if (newPassword !== confirmPassword) {
+        displayInputError('reset-confirm-password', "Passwords do not match.");
+        submitBtn.disabled = false;
+        submitBtn.innerText = originalText;
+        return;
+    }
+
+    try {
+        await apiFetch('/api/auth/reset-password', {
+            method: 'POST',
+            body: {
+                email: otpContext.email,
+                code,
+                newPassword
+            }
+        });
+
+        showToast("Credentials Restructured", "Password updated successfully. Please authenticate session.", "success");
+        showAuthTab('login');
+    } catch (err) {
+        const msg = err.message || "Failed to reset password.";
+        if (msg.toLowerCase().includes('code') || msg.toLowerCase().includes('otp') || msg.toLowerCase().includes('expired') || msg.toLowerCase().includes('invalid')) {
+            displayInputError('reset-code', msg);
+        } else if (msg.toLowerCase().includes('password')) {
+            displayInputError('reset-password', msg);
+        } else {
+            showToast("Reset Failed", msg, "error");
+        }
     } finally {
         submitBtn.disabled = false;
         submitBtn.innerText = originalText;
@@ -344,16 +399,86 @@ async function checkAuthSession() {
     }
 }
 
+let isGoogleConfigured = false;
+let googleInitError = null;
+
+async function checkGoogleConfig() {
+    try {
+        const res = await apiFetch('/api/auth/google/config');
+        if (res.success && res.data.configured) {
+            isGoogleConfigured = true;
+        } else {
+            googleInitError = res.data.error || "Google Auth configuration is missing on the server.";
+            console.error("❌ Google Login Configuration Error:", googleInitError);
+        }
+    } catch (err) {
+        googleInitError = "Failed to fetch Google configuration from the backend.";
+        console.error("❌ Google Login Configuration Error:", err);
+    }
+}
+
+function triggerGoogleLogin() {
+    if (!isGoogleConfigured) {
+        showToast("Configuration Error", googleInitError || "Google Authentication is not configured on the server. Please verify GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET are in .env.", "error");
+        console.error("❌ Google Login Trigger Failed:", googleInitError);
+        return;
+    }
+    
+    const origin = window.location.origin;
+    const backend = window.location.port === '3000' ? 'http://localhost:8000' : '';
+    
+    // Centered popup window
+    const width = 500;
+    const height = 650;
+    const left = window.screen.width / 2 - width / 2;
+    const top = window.screen.height / 2 - height / 2;
+    
+    const popup = window.open(
+        `${backend}/api/auth/google?state=${encodeURIComponent(origin)}`,
+        "GoogleSignIn",
+        `width=${width},height=${height},left=${left},top=${top},status=no,resizable=yes,scrollbars=yes`
+    );
+    
+    if (!popup) {
+        showToast("Popup Blocked", "Please allow popups for this site to sign in with Google.", "error");
+        return;
+    }
+}
+
 // Intercept clicks on Google OAuth buttons to inject current origin as state
 window.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('a[href="/api/auth/google"]').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
-            const origin = window.location.origin;
-            const backend = window.location.port === '3000' ? 'http://localhost:8000' : '';
-            window.location.href = `${backend}/api/auth/google?state=${encodeURIComponent(origin)}`;
+            triggerGoogleLogin();
         });
     });
+    
+    // Listen for popup messages
+    window.addEventListener('message', (event) => {
+        if (event.origin !== window.location.origin) return;
+        if (event.data && event.data.type === 'GOOGLE_AUTH_SUCCESS') {
+            const token = event.data.token;
+            accessToken = token;
+            localStorage.setItem('accessToken', token);
+            checkAuthSession();
+            showToast("Identity Approved", "Google authentication successful.");
+        }
+        if (event.data && event.data.type === 'GOOGLE_AUTH_ERROR') {
+            let friendlyMsg = "Google Authentication failed.";
+            const errorParam = event.data.error;
+            if (errorParam === 'OAuthCallbackError' || errorParam === 'TokenExchangeFailed') {
+                friendlyMsg = "Google Authentication Failed. Token exchange failed.";
+            } else if (errorParam === 'FetchUserInfoFailed') {
+                friendlyMsg = "Google Authentication Failed. User profile could not be parsed.";
+            } else if (errorParam === 'CodeMissing') {
+                friendlyMsg = "Google Authentication Failed. Authorization code missing.";
+            }
+            showToast("Google Authentication Failed", friendlyMsg, "error");
+        }
+    });
+    
+    checkGoogleConfig();
 });
 
 // Run initial session check and parse redirect params
@@ -366,21 +491,43 @@ const emailParam = urlParams.get('email');
 
 if (tokenParam) {
     window.location.hash = hashParts[0]; // strip parameters
-    accessToken = tokenParam;
-    localStorage.setItem('accessToken', tokenParam);
+    
+    // If running in a popup window, notify opener and close self
+    if (window.opener && window.opener !== window) {
+        try {
+            window.opener.postMessage({ type: 'GOOGLE_AUTH_SUCCESS', token: tokenParam }, window.location.origin);
+            window.close();
+        } catch (e) {
+            console.error("Failed to notify opener:", e);
+        }
+    } else {
+        accessToken = tokenParam;
+        localStorage.setItem('accessToken', tokenParam);
+    }
 }
 
 if (errorParam) {
     window.location.hash = hashParts[0]; // strip parameters
-    let friendlyMsg = "Google Authentication failed.";
-    if (errorParam === 'OAuthCallbackError' || errorParam === 'TokenExchangeFailed') {
-        friendlyMsg = "Google Authentication Failed. Token exchange failed.";
-    } else if (errorParam === 'FetchUserInfoFailed') {
-        friendlyMsg = "Google Authentication Failed. User profile could not be parsed.";
-    } else if (errorParam === 'CodeMissing') {
-        friendlyMsg = "Google Authentication Failed. Authorization code missing.";
+    
+    // If running in a popup window, notify opener and close self
+    if (window.opener && window.opener !== window) {
+        try {
+            window.opener.postMessage({ type: 'GOOGLE_AUTH_ERROR', error: errorParam }, window.location.origin);
+            window.close();
+        } catch (e) {
+            console.error("Failed to notify opener:", e);
+        }
+    } else {
+        let friendlyMsg = "Google Authentication failed.";
+        if (errorParam === 'OAuthCallbackError' || errorParam === 'TokenExchangeFailed') {
+            friendlyMsg = "Google Authentication Failed. Token exchange failed.";
+        } else if (errorParam === 'FetchUserInfoFailed') {
+            friendlyMsg = "Google Authentication Failed. User profile could not be parsed.";
+        } else if (errorParam === 'CodeMissing') {
+            friendlyMsg = "Google Authentication Failed. Authorization code missing.";
+        }
+        showToast("Google Authentication Failed", friendlyMsg, "error");
     }
-    showToast("Google Authentication Failed", friendlyMsg, "error");
 }
 
 if (otpRequiredParam && emailParam) {
@@ -393,6 +540,6 @@ if (otpRequiredParam && emailParam) {
     showToast("Risk Assessment Triggered", "Unrecognized device. OTP verification required.", "info");
     showAuthTab('otp');
     startOtpCountdown();
-} else {
+} else if (!tokenParam && !errorParam) {
     checkAuthSession();
 }

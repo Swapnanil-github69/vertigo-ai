@@ -6,6 +6,8 @@ import { userRepository } from '../repositories/user.repository';
 import { sessionRepository } from '../repositories/session.repository';
 import { auditLogsRepository } from '../repositories/audit-logs.repository';
 import { otpService } from '../services/otp.service';
+import { emailService } from '../services/email.service';
+import { logger } from '../utils/logger';
 import { generateAccessToken, generateRefreshToken } from '../utils/jwt';
 import { parseUserAgent } from '../helpers/userAgent';
 import { BadRequestError, UnauthorizedError, ConflictError } from '../utils/errors';
@@ -15,8 +17,18 @@ import { prisma } from '../database/client';
 const signupSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Invalid email address'),
-  password: z.string().min(8, 'Password must be at least 8 characters'),
+  password: z.string()
+    .min(8, 'Password must be at least 8 characters')
+    .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
+    .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
+    .regex(/[0-9]/, 'Password must contain at least one number')
+    .regex(/[^A-Za-z0-9]/, 'Password must contain at least one special character'),
+  confirmPassword: z.string(),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: 'Passwords do not match',
+  path: ['confirmPassword'],
 });
+
 
 const loginSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -114,6 +126,10 @@ export class AuthController {
     // If registration, mark user email as verified
     if (type === 'REGISTRATION') {
       await userRepository.update(user.id, { emailVerified: true });
+      // Send welcome email asynchronously so it doesn't block the HTTP response
+      emailService.sendWelcome(user.email, user.name || user.email.split('@')[0]).catch((err) => {
+        logger.error(`[EmailService] Failed to send Welcome email on registration: ${err.message}`);
+      });
     }
 
     // Set up session
@@ -407,19 +423,31 @@ export class AuthController {
       }
     }
 
+    const clientId = process.env.GOOGLE_CLIENT_ID;
+    const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+
+    if (!clientId || clientId === 'placeholder_google_client_id' || !clientSecret || clientSecret === 'placeholder_google_client_secret') {
+      logger.error('❌ [Google Auth Error] OAuth client configuration is missing or using placeholders. Verify GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET in .env.');
+      return res.redirect(`${targetOrigin}/#/auth?error=OAuthConfigurationMissing`);
+    }
+
     if (!code) {
+      logger.error('❌ [Google Auth Error] Authorization code is missing from the callback request.');
       return res.redirect(`${targetOrigin}/#/auth?error=CodeMissing`);
     }
 
     try {
       const tokenUrl = 'https://oauth2.googleapis.com/token';
+      const redirectUri = `${req.protocol}://${req.get('host')}/api/auth/google/callback`;
       const values = {
         code: code as string,
-        client_id: process.env.GOOGLE_CLIENT_ID || '',
-        client_secret: process.env.GOOGLE_CLIENT_SECRET || '',
-        redirect_uri: `${req.protocol}://${req.get('host')}/api/auth/google/callback`,
+        client_id: clientId,
+        client_secret: clientSecret,
+        redirect_uri: redirectUri,
         grant_type: 'authorization_code',
       };
+
+      logger.info(`[Google Auth] Attempting token exchange. Redirect URI: "${redirectUri}"`);
 
       const tokenRes = await fetch(tokenUrl, {
         method: 'POST',
@@ -428,6 +456,17 @@ export class AuthController {
       });
 
       if (!tokenRes.ok) {
+        const errDetails = await tokenRes.text();
+        logger.error(`❌ [Google Auth Error] Token exchange failed with status ${tokenRes.status}. Details: ${errDetails}`);
+        
+        if (errDetails.includes('redirect_uri_mismatch')) {
+          logger.error('❌ [Google Auth Hint] Redirect URI mismatch. Ensure your backend callback URL is whitelisted in Google Cloud Console.');
+          return res.redirect(`${targetOrigin}/#/auth?error=RedirectUriMismatch`);
+        }
+        if (errDetails.includes('invalid_grant')) {
+          logger.error('❌ [Google Auth Hint] Authorization code has expired or was already used.');
+          return res.redirect(`${targetOrigin}/#/auth?error=AuthCodeExpired`);
+        }
         return res.redirect(`${targetOrigin}/#/auth?error=TokenExchangeFailed`);
       }
 
@@ -439,6 +478,8 @@ export class AuthController {
       });
 
       if (!userRes.ok) {
+        const errDetails = await userRes.text();
+        logger.error(`❌ [Google Auth Error] Fetching user profile from Google failed with status ${userRes.status}. Details: ${errDetails}`);
         return res.redirect(`${targetOrigin}/#/auth?error=FetchUserInfoFailed`);
       }
 
@@ -452,6 +493,7 @@ export class AuthController {
             googleId: googleUser.sub,
             avatarUrl: googleUser.picture,
             emailVerified: true,
+            provider: 'google',
           });
         } else {
           user = await prisma.$transaction(async (tx) => {
@@ -462,6 +504,7 @@ export class AuthController {
                 googleId: googleUser.sub,
                 avatarUrl: googleUser.picture,
                 emailVerified: true,
+                provider: 'google',
               },
             });
 
@@ -487,45 +530,7 @@ export class AuthController {
 
       const uaParsed = parseUserAgent(req.headers['user-agent']);
 
-      // Perform Risk Assessment: Check if successful history exists for this IP/UA
-      const existingLog = await prisma.loginHistory.findFirst({
-        where: {
-          userId: user.id,
-          ipAddress: req.ip,
-          userAgent: req.headers['user-agent'],
-          status: 'SUCCESS',
-        },
-      });
-
-      if (!existingLog) {
-        // Unrecognized device/location -> Require OTP!
-        await otpService.sendVerificationOtp(user.email, 'LOGIN');
-
-        // Create PENDING login log
-        await prisma.loginHistory.create({
-          data: {
-            user: { connect: { id: user.id } },
-            ipAddress: req.ip,
-            userAgent: req.headers['user-agent'],
-            os: uaParsed.os,
-            browser: uaParsed.browser,
-            device: uaParsed.device,
-            provider: 'google',
-            otpGeneratedAt: new Date(),
-            status: 'PENDING',
-          },
-        });
-
-        // Set provider info on user record
-        await userRepository.update(user.id, {
-          provider: 'google',
-        });
-
-        // Redirect to OTP verification page
-        return res.redirect(`${targetOrigin}/#/auth?otpRequired=true&email=${encodeURIComponent(user.email)}&provider=google`);
-      }
-
-      // Recognized device -> Log in immediately!
+      // Recognized/Google Verified User -> Log in immediately (bypassing local OTP check)
       const sessionToken = generateRefreshToken({ userId: user.id, role: user.role, email: user.email });
       const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
 
@@ -566,9 +571,14 @@ export class AuthController {
         maxAge: 7 * 24 * 60 * 60 * 1000,
       });
 
+      logger.info(`✅ [Google Auth] Session successfully initialized for [${user.email}]`);
       return res.redirect(`${targetOrigin}/#/auth?token=${accessToken}`);
-    } catch (err) {
-      console.error('Google OAuth callback error:', err);
+    } catch (err: any) {
+      logger.error('❌ [Google Auth Error] Unexpected failure during Google OAuth process:', err);
+      if (err.code === 'ENOTFOUND' || err.message.includes('fetch')) {
+        logger.error('   -> Hint: Network connection failure to Google services.');
+        return res.redirect(`${targetOrigin}/#/auth?error=NetworkError`);
+      }
       return res.redirect(`${targetOrigin}/#/auth?error=OAuthCallbackError`);
     }
   }
@@ -591,6 +601,192 @@ export class AuthController {
       },
       timestamp: new Date().toISOString(),
       requestId: req.requestId || '-',
+    });
+  }
+
+  async getGoogleConfig(_req: CustomRequest, res: Response): Promise<Response> {
+    const clientId = process.env.GOOGLE_CLIENT_ID;
+    const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+
+    const hasClientId = !!clientId && clientId !== 'placeholder_google_client_id';
+    const hasClientSecret = !!clientSecret && clientSecret !== 'placeholder_google_client_secret';
+
+    if (!hasClientId || !hasClientSecret) {
+      let errorMsg = 'Google OAuth is not configured on the server. ';
+      if (!hasClientId) errorMsg += 'GOOGLE_CLIENT_ID is missing or set to placeholder. ';
+      if (!hasClientSecret) errorMsg += 'GOOGLE_CLIENT_SECRET is missing or set to placeholder. ';
+      return res.status(200).json({
+        success: true,
+        data: {
+          configured: false,
+          error: errorMsg
+        }
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: {
+        configured: true,
+        clientId
+      }
+    });
+  }
+
+  async verifyGoogleToken(req: CustomRequest, res: Response): Promise<Response> {
+    const { token } = z.object({
+      token: z.string().min(1, 'Token is required')
+    }).parse(req.body);
+
+    const clientId = process.env.GOOGLE_CLIENT_ID;
+    const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+
+    if (!clientId || clientId === 'placeholder_google_client_id' ||
+        !clientSecret || clientSecret === 'placeholder_google_client_secret') {
+      throw new BadRequestError('Google Authentication is not configured on the server.');
+    }
+
+    // Verify token with Google API
+    const tokenInfoRes = await fetch(`https://oauth2.googleapis.com/tokeninfo?id_token=${token}`);
+    if (!tokenInfoRes.ok) {
+      throw new UnauthorizedError('Failed to verify Google Identity Token.');
+    }
+
+    const payload = await tokenInfoRes.json() as {
+      aud: string;
+      iss: string;
+      sub: string;
+      email: string;
+      email_verified: string | boolean;
+      name: string;
+      picture?: string;
+    };
+
+    // Validate audience and issuer
+    if (payload.aud !== clientId) {
+      throw new UnauthorizedError('Google Identity Token audience mismatch.');
+    }
+
+    if (payload.iss !== 'accounts.google.com' && payload.iss !== 'https://accounts.google.com') {
+      throw new UnauthorizedError('Google Identity Token issuer is invalid.');
+    }
+
+    const emailVerified = payload.email_verified === true || payload.email_verified === 'true';
+
+    // Find or create user
+    let user = await userRepository.findByGoogleId(payload.sub);
+    if (!user) {
+      user = await userRepository.findByEmail(payload.email);
+      if (user) {
+        // Link existing email account to Google ID
+        user = await userRepository.update(user.id, {
+          googleId: payload.sub,
+          avatarUrl: payload.picture || user.avatarUrl,
+          emailVerified: true,
+          provider: 'google'
+        });
+      } else {
+        // Create new account
+        user = await prisma.$transaction(async (tx) => {
+          const newUser = await tx.user.create({
+            data: {
+              email: payload.email,
+              name: payload.name,
+              googleId: payload.sub,
+              avatarUrl: payload.picture || null,
+              emailVerified: emailVerified,
+              provider: 'google'
+            }
+          });
+
+          await tx.userPreferences.create({
+            data: {
+              userId: newUser.id,
+              theme: 'dark'
+            }
+          });
+
+          await tx.portfolio.create({
+            data: {
+              userId: newUser.id,
+              name: 'Primary Portfolio',
+              cashBalance: 100000
+            }
+          });
+
+          return newUser;
+        });
+      }
+    }
+
+    const uaParsed = parseUserAgent(req.headers['user-agent']);
+    const sessionToken = generateRefreshToken({ userId: user.id, role: user.role, email: user.email });
+    const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days
+
+    const session = await sessionRepository.create({
+      user: { connect: { id: user.id } },
+      token: sessionToken,
+      ipAddress: req.ip,
+      userAgent: req.headers['user-agent'],
+      device: uaParsed.device,
+      expiresAt,
+    });
+
+    await userRepository.update(user.id, {
+      lastLoginAt: new Date(),
+      provider: 'google'
+    });
+
+    // Store login history
+    await prisma.loginHistory.create({
+      data: {
+        user: { connect: { id: user.id } },
+        ipAddress: req.ip,
+        userAgent: req.headers['user-agent'],
+        os: uaParsed.os,
+        browser: uaParsed.browser,
+        device: uaParsed.device,
+        sessionId: session.id,
+        provider: 'google',
+        status: 'SUCCESS',
+        loginTime: new Date(),
+        otpVerifiedAt: new Date()
+      }
+    });
+
+    await auditLogsRepository.create({
+      user: { connect: { id: user.id } },
+      action: 'Google Login',
+      details: `User logged in using Google OAuth (IP: ${req.ip})`,
+      ipAddress: req.ip,
+    });
+
+    // Generate access token
+    const accessToken = generateAccessToken({ userId: user.id, role: user.role, email: user.email });
+
+    // Set HttpOnly secure cookie for session token
+    res.cookie('refreshToken', sessionToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: 'Google login successful. Session authorized.',
+      data: {
+        accessToken,
+        user: {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+          avatarUrl: user.avatarUrl
+        }
+      },
+      timestamp: new Date().toISOString(),
+      requestId: req.requestId || '-'
     });
   }
 }
