@@ -1,0 +1,1750 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Vertigo | Premium AI Financial Intelligence</title>
+    <!-- Tailwind CSS with Forms and Container Queries Plugins -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+
+    <!-- Custom Tailwind Configuration -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1415A8",
+                        "primary-hover": "#2628d0",
+                        "primary-pressed": "#0c0d75",
+                        "primary-container": "#0e1015",
+                        "surface": "#080809",
+                        "surface-dim": "#080809",
+                        "background": "#080809",
+                        "surface-container-lowest": "#080809",
+                        "surface-container-low": "#0e1015",
+                        "surface-container": "#111216",
+                        "surface-container-high": "#18191e",
+                        "surface-container-highest": "#22232a",
+                        "surface-variant": "#111216",
+                        "surface-bright": "#1c1d24",
+                        "on-surface": "#ffffff",
+                        "on-background": "#f1f5f9",
+                        "on-surface-variant": "#94A3B8",
+                        "on-primary": "#ffffff",
+                        "on-primary-container": "#94A3B8",
+                        "secondary": "#1415A8",
+                        "secondary-container": "#1415A8",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#bfc2ff",
+                        "tertiary": "#1FCA17",
+                        "tertiary-fixed": "#1FCA17",
+                        "tertiary-fixed-dim": "#1FCA17",
+                        "tertiary-container": "#0b1a0b",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-container": "#1FCA17",
+                        "error": "#ef4444",
+                        "error-container": "#450a0a",
+                        "on-error": "#ffffff",
+                        "on-error-container": "#ffdad6",
+                        "outline": "#94A3B8",
+                        "outline-variant": "rgba(255, 255, 255, 0.06)",
+                        "neutral": "#94A3B8"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "unit": "4px",
+                        "margin-mobile": "16px",
+                        "container-max-width": "1440px",
+                        "margin-desktop": "48px",
+                        "gutter": "24px"
+                    },
+                    fontFamily: {
+                        "label-md": ["JetBrains Mono"],
+                        "headline-lg-mobile": ["Raleway"],
+                        "headline-md": ["Raleway"],
+                        "display-lg": ["Raleway"],
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-lg": ["Raleway"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    fontSize: {
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Modular Stylesheet Link -->
+    <link href="src/css/styles.css" rel="stylesheet" />
+</head>
+
+<body class="selection:bg-secondary-container/30 selection:text-white">
+
+    <!-- Global Background Ambient Glows -->
+    <div class="fixed top-0 right-0 w-[900px] h-[900px] glow-accent -mr-64 -mt-64 z-0"></div>
+    <div class="fixed bottom-0 left-0 w-[700px] h-[700px] glow-accent -ml-32 -mb-32 z-0"></div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed bottom-6 right-6 z-[9999] flex flex-col gap-3 pointer-events-none"></div>
+
+    <!-- ================= PUBLIC/MARKETING SHELL ================= -->
+    <div id="public-layout-shell" class="relative z-10 flex flex-col min-h-screen">
+        <!-- Public Navigation Header -->
+        <header
+            class="bg-surface/40 backdrop-blur-3xl border-b border-white/5 shadow-2xl flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop h-16 sticky top-0 z-50">
+            <div class="flex items-center gap-8">
+                <a href="#/" class="font-display-lg text-headline-md font-bold text-primary tracking-tight">Vertigo</a>
+                <nav class="hidden md:flex gap-6">
+                    <a class="nav-link text-on-surface hover:text-primary transition-colors text-body-md"
+                        href="#/">Home</a>
+                    <a class="nav-link text-on-surface-variant hover:text-on-surface transition-colors text-body-md"
+                        href="#/about">Features</a>
+                    <a class="nav-link text-on-surface-variant hover:text-on-surface transition-colors text-body-md"
+                        href="#/auth">Portal login</a>
+                </nav>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="#/auth"
+                    class="px-5 py-2 bg-secondary-container hover:brightness-110 text-white font-semibold rounded-lg text-sm transition-all active:scale-95">
+                    Access Terminal
+                </a>
+            </div>
+        </header>
+
+        <!-- Public Core Content Viewport -->
+        <main class="flex-grow">
+            <!-- 1. LANDING PAGE VIEW -->
+            <div id="view-landing" class="route-view hidden">
+                <!-- Hero Section -->
+                <section
+                    class="relative pt-16 md:pt-24 pb-32 px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center font-sans">
+                    <div>
+                        <div
+                            class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-secondary-container/20 border border-secondary-container/30 text-secondary mb-6">
+                            <span class="material-symbols-outlined text-sm"
+                                style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                            <span class="font-label-sm text-xs uppercase tracking-widest">Next-Gen Intelligence</span>
+                        </div>
+                        <h1
+                            class="font-display-lg text-4xl md:text-5xl lg:text-6xl text-on-surface mb-6 leading-tight font-bold">
+                            Invest <span class="text-secondary">Smarter</span> with <br class="hidden sm:inline" />
+                            <span class="relative">
+                                AI Copilot
+                                <span
+                                    class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-secondary-container to-transparent opacity-50"></span>
+                            </span>
+                        </h1>
+                        <p class="font-body-lg text-lg text-on-surface-variant max-w-lg mb-10 leading-relaxed">
+                            Vertigo combines institutional-grade data density with cutting-edge LLMs to provide
+                            real-time financial clarity. Navigate markets with absolute precision.
+                        </p>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="#/auth"
+                                class="px-8 py-4 bg-secondary-container text-white font-bold rounded-xl shadow-lg hover:shadow-secondary-container/20 transition-all hover:scale-[1.02] active:scale-95">
+                                Get Started Free
+                            </a>
+                            <a href="#/about"
+                                class="px-8 py-4 bg-white/5 border border-white/10 text-on-surface font-bold rounded-xl hover:bg-white/10 transition-all backdrop-blur-md">
+                                Core Capabilities
+                            </a>
+                        </div>
+                        <div class="mt-12 flex items-center gap-6 opacity-60">
+                            <span class="font-label-sm text-xs text-on-surface-variant">TRUSTED BY LEADERS</span>
+                            <div class="flex gap-8 items-center grayscale invert font-semibold">
+                                <span class="tracking-widest text-sm opacity-70">METRA</span>
+                                <span class="tracking-widest text-sm opacity-70">QUANT</span>
+                                <span class="tracking-widest text-sm opacity-70">FLUX</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Floating Dashboard Preview -->
+                    <div class="relative hidden lg:block">
+                        <div class="floating-dashboard relative w-full max-w-[500px] mx-auto font-sans">
+                            <div class="glass-panel rounded-2xl w-full p-6 border border-white/10 relative shadow-2xl">
+                                <div class="flex justify-between items-center mb-6">
+                                    <div class="flex gap-2">
+                                        <div class="w-3 h-3 rounded-full bg-red-500/50"></div>
+                                        <div class="w-3 h-3 rounded-full bg-amber-500/50"></div>
+                                        <div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+                                    </div>
+                                    <div
+                                        class="h-6 w-32 bg-white/5 rounded-full flex items-center justify-center text-[10px] font-label-sm text-primary">
+                                        PORTFOLIO SURVEILLANCE</div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 mb-6">
+                                    <div class="bg-primary-container/40 rounded-xl border border-white/5 p-4">
+                                        <p class="text-[10px] text-on-surface-variant font-label-sm">PORTFOLIO HEALTH
+                                        </p>
+                                        <h3 class="text-2xl font-bold text-tertiary mt-1">88/100</h3>
+                                    </div>
+                                    <div class="bg-primary-container/40 rounded-xl border border-white/5 p-4">
+                                        <p class="text-[10px] text-on-surface-variant font-label-sm">BETA COEFFICIENT
+                                        </p>
+                                        <h3 class="text-2xl font-bold text-secondary mt-1">0.94β</h3>
+                                    </div>
+                                </div>
+                                <div
+                                    class="h-44 bg-surface-container-lowest/50 border border-white/5 rounded-xl p-4 flex flex-col justify-between">
+                                    <div class="flex justify-between text-xs font-label-md">
+                                        <span>Real-time Risk Vectors</span>
+                                        <span class="text-tertiary">SURVEILLANCE LIVE</span>
+                                    </div>
+                                    <svg class="w-full h-24 stroke-secondary" viewbox="0 0 400 100" fill="none">
+                                        <path d="M0 80 Q50 30, 100 60 T200 20 T300 50 T400 30" stroke-width="3"
+                                            stroke-linecap="round"></path>
+                                        <path d="M0 80 Q50 30, 100 60 T200 20 T300 50 T400 30 L400 100 L0 100 Z"
+                                            fill="url(#heroGrad)" stroke="none"></path>
+                                        <defs>
+                                            <linearGradient id="heroGrad" x1="0" x2="0" y1="0" y2="1">
+                                                <stop offset="0%" stop-color="#bfc2ff" stop-opacity="0.3"></stop>
+                                                <stop offset="100%" stop-color="#bfc2ff" stop-opacity="0"></stop>
+                                            </linearGradient>
+                                        </defs>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Feature Teaser Section -->
+                <section class="py-24 bg-surface-container-lowest/30 border-t border-white/5">
+                    <div class="max-w-container-max-width mx-auto px-margin-mobile md:px-margin-desktop font-sans">
+                        <div class="text-center max-w-2xl mx-auto mb-16">
+                            <h2 class="text-3xl font-bold mb-4 font-display-lg">Outperform With Intelligent Data</h2>
+                            <p class="text-on-surface-variant">Experience a standard of depth that makes traditional
+                                retail platforms look like toys.</p>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            <div class="glass-panel p-8 rounded-2xl">
+                                <span class="material-symbols-outlined text-4xl text-secondary mb-4">hub</span>
+                                <h3 class="text-xl font-bold mb-3 font-headline-md">AI Neural Core</h3>
+                                <p class="text-on-surface-variant text-sm leading-relaxed">Continuous training on
+                                    tick-by-tick order flows and sentiment vectors. Spot structural breakdowns first.
+                                </p>
+                            </div>
+                            <div class="glass-panel p-8 rounded-2xl">
+                                <span class="material-symbols-outlined text-4xl text-tertiary mb-4">radar</span>
+                                <h3 class="text-xl font-bold mb-3 font-headline-md">Anomaly Scanner</h3>
+                                <p class="text-on-surface-variant text-sm leading-relaxed">Scanning global equities and
+                                    indices in real-time, matching patterns to historical macro pivots.</p>
+                            </div>
+                            <div class="glass-panel p-8 rounded-2xl">
+                                <span class="material-symbols-outlined text-4xl text-primary mb-4">pie_chart</span>
+                                <h3 class="text-xl font-bold mb-3 font-headline-md">Dynamic Allocation</h3>
+                                <p class="text-on-surface-variant text-sm leading-relaxed">Real-time risk assessment,
+                                    portfolio health checks, and mathematical optimization metrics.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Pricing / Testimonials Section -->
+                <section class="py-24 px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center font-sans">
+                        <div>
+                            <h2 class="text-3xl font-bold mb-6 font-display-lg">Built for Absolute Conviction</h2>
+                            <div class="glass-panel p-8 rounded-2xl italic relative mb-6">
+                                <p class="text-on-surface leading-relaxed text-sm mb-4">
+                                    "Most retail tools feel like toys. Vertigo feels like a weapon. The execution
+                                    latency and sentiment analysis tools are on par with terminals that cost five times
+                                    as much per seat."
+                                </p>
+                                <div class="font-bold text-sm text-primary">Marcus Chen</div>
+                                <div class="text-xs text-on-surface-variant font-label-sm">Managing Director, Nova
+                                    Capital</div>
+                            </div>
+                        </div>
+                        <div class="glass-panel p-8 rounded-2xl border border-secondary/20">
+                            <h3 class="text-2xl font-bold mb-2">Vertigo Pro Unlimited</h3>
+                            <p class="text-on-surface-variant text-sm mb-6">Full institutional intelligence for serious
+                                portfolios.</p>
+                            <div class="text-4xl font-bold text-white mb-6">$79<span
+                                    class="text-lg text-on-surface-variant font-normal">/month</span></div>
+                            <ul class="space-y-3 text-sm mb-8">
+                                <li class="flex items-center gap-2"><span
+                                        class="material-symbols-outlined text-tertiary text-sm">check_circle</span>
+                                    Unlimited AI Assistant Queries</li>
+                                <li class="flex items-center gap-2"><span
+                                        class="material-symbols-outlined text-tertiary text-sm">check_circle</span> Full
+                                    120-Exchange Real-Time Scanner</li>
+                                <li class="flex items-center gap-2"><span
+                                        class="material-symbols-outlined text-tertiary text-sm">check_circle</span>
+                                    1.2ms Portfolio Volatility Backtesting</li>
+                                <li class="flex items-center gap-2"><span
+                                        class="material-symbols-outlined text-tertiary text-sm">check_circle</span>
+                                    Custom PDF Report Generation</li>
+                            </ul>
+                            <a href="#/auth"
+                                class="w-full block text-center py-3 bg-primary text-primary-container font-bold rounded-lg hover:brightness-110 transition-all">Start
+                                Your Subscription</a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- 2. ABOUT / FEATURES PAGE VIEW -->
+            <div id="view-about" class="route-view hidden">
+                <section class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop py-16 font-sans">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-24 items-center">
+                        <div class="lg:col-span-7">
+                            <div
+                                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-container border border-primary/20 mb-6">
+                                <span class="w-2 h-2 rounded-full bg-tertiary breathing-glow"></span>
+                                <span class="font-label-sm text-xs text-tertiary uppercase tracking-widest">Neural
+                                    Network v4.2 Live</span>
+                            </div>
+                            <h1
+                                class="font-display-lg text-4xl md:text-5xl text-on-surface mb-6 leading-tight font-bold">
+                                Next-Generation <br />
+                                <span class="text-gradient-cobalt">Financial Intelligence.</span>
+                            </h1>
+                            <p class="font-body-lg text-lg text-on-surface-variant mb-8 max-w-xl">
+                                Vertigo is not a simple dashboard. It is a high-intelligence autonomous engine that
+                                decodes global market volatility into surgical precision assets.
+                            </p>
+                            <div class="flex gap-4">
+                                <a href="#/auth"
+                                    class="bg-secondary-container text-white px-8 py-3.5 rounded-lg font-label-md text-sm font-semibold hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-secondary-container/20">
+                                    Launch Terminal
+                                </a>
+                                <a href="#/"
+                                    class="bg-white/5 border border-white/10 text-on-surface px-8 py-3.5 rounded-lg font-label-md text-sm font-semibold hover:bg-white/10 active:scale-95 transition-all">
+                                    Return Home
+                                </a>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-5 relative h-[380px]">
+                            <div
+                                class="absolute inset-0 glass-panel rounded-2xl overflow-hidden flex items-center justify-center">
+                                <div
+                                    class="w-48 h-48 glass-panel rounded-3xl flex items-center justify-center rotate-12 relative shadow-2xl">
+                                    <span class="material-symbols-outlined text-6xl text-secondary"
+                                        style="font-variation-settings: 'FILL' 1;">psychology</span>
+                                </div>
+                            </div>
+                            <div
+                                class="absolute -bottom-6 -left-6 glass-panel p-4 rounded-xl border border-white/10 z-10">
+                                <div class="font-label-sm text-[10px] text-on-surface-variant mb-1">Latency</div>
+                                <div class="text-xl font-bold text-tertiary">1.2ms</div>
+                            </div>
+                            <div
+                                class="absolute -top-4 -right-4 glass-panel p-4 rounded-xl border border-white/10 z-10">
+                                <div class="font-label-sm text-[10px] text-on-surface-variant mb-1">Nodes Active</div>
+                                <div class="text-xl font-bold text-secondary">8,492</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bento Features Grid -->
+                    <div class="mb-24">
+                        <div class="flex flex-col mb-12">
+                            <h2 class="text-3xl font-bold mb-2">Core Methodologies</h2>
+                            <p class="text-on-surface-variant">Three pillars of Vertigo's proprietary intelligence
+                                architecture.</p>
+                        </div>
+                        <div class="grid grid-cols-12 gap-6">
+                            <!-- AI Neural Engine -->
+                            <div
+                                class="col-span-12 md:col-span-8 glass-panel p-8 rounded-2xl flex flex-col justify-between overflow-hidden relative min-h-[300px]">
+                                <div class="relative z-10 max-w-lg">
+                                    <span class="material-symbols-outlined text-4xl text-secondary mb-4">hub</span>
+                                    <h3 class="text-2xl font-bold mb-4 font-headline-md">AI Neural Engine</h3>
+                                    <p class="text-on-surface-variant text-sm leading-relaxed mb-6">
+                                        Utilizing Transformer architectures trained on 40 years of tick-by-tick data.
+                                        Our engine detects macro-correlations that standard quantitative models miss.
+                                    </p>
+                                    <div class="flex flex-wrap gap-3">
+                                        <span
+                                            class="px-3 py-1 bg-white/5 rounded-full text-xs font-label-sm border border-white/5">Sentiment
+                                            Analysis</span>
+                                        <span
+                                            class="px-3 py-1 bg-white/5 rounded-full text-xs font-label-sm border border-white/5">Pattern
+                                            Recognition</span>
+                                        <span
+                                            class="px-3 py-1 bg-white/5 rounded-full text-xs font-label-sm border border-white/5">Recursive
+                                            Learning</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Opportunity Scanner -->
+                            <div
+                                class="col-span-12 md:col-span-4 glass-panel p-8 rounded-2xl flex flex-col justify-between relative min-h-[300px]">
+                                <div class="relative z-10">
+                                    <span class="material-symbols-outlined text-4xl text-tertiary mb-4">radar</span>
+                                    <h3 class="text-2xl font-bold mb-4 font-headline-md">Opportunity Scanner</h3>
+                                    <p class="text-on-surface-variant text-sm leading-relaxed mb-6">
+                                        Real-time anomaly detection across 120 global exchanges. It finds the "needle in
+                                        the haystack" before the market reacts.
+                                    </p>
+                                </div>
+                                <div
+                                    class="h-16 bg-primary-container/50 rounded-xl border border-white/5 p-4 flex items-end gap-1.5">
+                                    <div class="w-full bg-tertiary/20 h-[20%] rounded-sm"></div>
+                                    <div class="w-full bg-tertiary/20 h-[45%] rounded-sm"></div>
+                                    <div class="w-full bg-tertiary/20 h-[30%] rounded-sm"></div>
+                                    <div class="w-full bg-tertiary/50 h-[80%] rounded-sm breathing-glow"></div>
+                                    <div class="w-full bg-tertiary/20 h-[15%] rounded-sm"></div>
+                                    <div class="w-full bg-tertiary/20 h-[50%] rounded-sm"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- 3. AUTH HUB (LOGIN, SIGN UP, FORGOT PASSWORD) VIEW -->
+            <div id="view-auth" class="route-view hidden py-16 px-4 flex justify-center items-center">
+                <div class="w-full max-w-md">
+                    <!-- Logo block -->
+                    <div class="text-center mb-8">
+                        <h2 class="text-4xl font-bold text-primary font-display-lg tracking-tighter">Vertigo</h2>
+                        <p class="font-label-md text-xs text-on-surface-variant uppercase tracking-widest mt-1">
+                            Intelligence Portal</p>
+                    </div>
+
+                    <!-- Main Container Card -->
+                    <div
+                        class="bg-surface-container/20 backdrop-blur-3xl rounded-2xl p-8 glass-panel shadow-2xl relative overflow-hidden font-sans">
+                        <div class="absolute -top-24 -right-24 w-48 h-48 bg-secondary/10 rounded-full blur-[80px]">
+                        </div>
+                        <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-tertiary/5 rounded-full blur-[80px]">
+                        </div>
+
+                        <!-- LOGIN SCREEN -->
+                        <div id="auth-login-pane" class="">
+                            <header class="mb-6">
+                                <h3 class="text-2xl font-bold text-on-surface mb-2 font-headline-md">Welcome Back</h3>
+                                <p class="text-sm text-on-surface-variant">Sign in to access your intelligence
+                                    dashboard.</p>
+                            </header>
+                            <form onsubmit="handleLoginSubmit(event)" class="space-y-4">
+                                <div>
+                                    <label class="block text-xs font-label-md text-on-surface-variant mb-2">EMAIL
+                                        ADDRESS</label>
+                                    <input type="email" required id="login-email" value="alex.vance@vertigo.ai"
+                                        class="w-full bg-primary-container/60 border border-white/10 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary text-white" />
+                                </div>
+                                <div>
+                                    <div class="flex justify-between items-center mb-2">
+                                        <label class="text-xs font-label-md text-on-surface-variant">PASSWORD</label>
+                                        <button type="button" onclick="showAuthTab('forgot')"
+                                            class="text-xs text-secondary hover:text-primary transition-colors">Forgot?</button>
+                                    </div>
+                                    <input type="password" required id="login-password" value="••••••••"
+                                        class="w-full bg-primary-container/60 border border-white/10 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary text-white" />
+                                </div>
+                                <button type="submit"
+                                    class="w-full bg-secondary-container hover:brightness-110 text-white font-bold py-3.5 rounded-lg transition-all active:scale-95 shadow-lg shadow-secondary/10">
+                                    Authenticate Session
+                                </button>
+                            </form>
+                            <div class="mt-6 text-center text-sm text-on-surface-variant">
+                                Need terminal clearance? <button onclick="showAuthTab('signup')"
+                                    class="text-secondary hover:underline">Request access</button>
+                            </div>
+                        </div>
+
+                        <!-- SIGN UP SCREEN -->
+                        <div id="auth-signup-pane" class="hidden">
+                            <header class="mb-6">
+                                <h3 class="text-2xl font-bold text-on-surface mb-2 font-headline-md">Clearance Request
+                                </h3>
+                                <p class="text-sm text-on-surface-variant">Create a professional sandbox account.</p>
+                            </header>
+                            <form onsubmit="handleSignupSubmit(event)" class="space-y-4">
+                                <div>
+                                    <label class="block text-xs font-label-md text-on-surface-variant mb-2">FULL
+                                        NAME</label>
+                                    <input type="text" required id="signup-name" placeholder="Alex Vance"
+                                        class="w-full bg-primary-container/60 border border-white/10 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary text-white" />
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-label-md text-on-surface-variant mb-2">EMAIL
+                                        ADDRESS</label>
+                                    <input type="email" required id="signup-email" placeholder="alex.vance@company.com"
+                                        class="w-full bg-primary-container/60 border border-white/10 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary text-white" />
+                                </div>
+                                <div>
+                                    <label
+                                        class="block text-xs font-label-md text-on-surface-variant mb-2">PASSWORD</label>
+                                    <input type="password" required id="signup-password"
+                                        placeholder="Minimum 8 characters"
+                                        class="w-full bg-primary-container/60 border border-white/10 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary text-white" />
+                                </div>
+                                <button type="submit"
+                                    class="w-full bg-secondary-container hover:brightness-110 text-white font-bold py-3.5 rounded-lg transition-all active:scale-95 shadow-lg shadow-secondary/10">
+                                    Initialize clearance
+                                </button>
+                            </form>
+                            <div class="mt-6 text-center text-sm text-on-surface-variant">
+                                Already cleared? <button onclick="showAuthTab('login')"
+                                    class="text-secondary hover:underline">Access terminal</button>
+                            </div>
+                        </div>
+
+                        <!-- FORGOT PASSWORD SCREEN -->
+                        <div id="auth-forgot-pane" class="hidden">
+                            <header class="mb-6">
+                                <h3 class="text-2xl font-bold text-on-surface mb-2 font-headline-md">Identity Audit</h3>
+                                <p class="text-sm text-on-surface-variant">Verify credentials to re-issue keys.</p>
+                            </header>
+                            <form onsubmit="handleForgotSubmit(event)" class="space-y-4">
+                                <div>
+                                    <label class="block text-xs font-label-md text-on-surface-variant mb-2">REGISTERED
+                                        EMAIL</label>
+                                    <input type="email" required id="forgot-email" placeholder="alex.vance@company.com"
+                                        class="w-full bg-primary-container/60 border border-white/10 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary text-white" />
+                                </div>
+                                <button type="submit"
+                                    class="w-full bg-primary text-primary-container font-bold py-3.5 rounded-lg transition-all active:scale-95">
+                                    Send Recovery Vector
+                                </button>
+                            </form>
+                            <div class="mt-6 text-center text-sm text-on-surface-variant">
+                                Remembered credentials? <button onclick="showAuthTab('login')"
+                                    class="text-secondary hover:underline">Log in</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Public Footer -->
+        <footer
+            class="bg-surface-container-low border-t border-white/5 py-12 px-margin-mobile md:px-margin-desktop font-sans">
+            <div class="max-w-container-max-width mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+                <div>
+                    <span class="font-display-lg text-xl font-bold text-primary">Vertigo</span>
+                    <p class="text-on-surface-variant text-xs mt-1">Autonomous Financial Intelligence Portal.</p>
+                </div>
+                <div class="flex gap-6 text-sm text-on-surface-variant font-label-sm">
+                    <a href="#/" class="hover:text-primary">Home</a>
+                    <a href="#/about" class="hover:text-primary">Features</a>
+                    <a href="#/auth" class="hover:text-primary">Terminal</a>
+                </div>
+                <div class="text-[10px] text-on-surface-variant opacity-55">
+                    © 2026 Vertigo Inc. Status: STABLE
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+    <!-- ================= AUTHENTICATED SYSTEM SHELL ================= -->
+    <div id="authenticated-layout-shell" class="hidden relative z-10 flex min-h-screen">
+        <!-- Sidebar Navigation (Desktop) -->
+        <aside
+            class="fixed left-0 top-0 h-[calc(100vh-2rem)] w-72 m-4 hidden md:flex flex-col z-40 nav-sidebar-container rounded-xl overflow-hidden shadow-2xl">
+            <div class="p-6 flex flex-col h-full font-sans">
+                <!-- Brand logo -->
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
+                        <span class="material-symbols-outlined text-primary-container"
+                            style="font-variation-settings: 'FILL' 1;">bolt</span>
+                    </div>
+                    <div>
+                        <h1 class="font-headline-md text-lg font-bold text-primary leading-tight">Vertigo</h1>
+                        <p class="font-label-sm text-[10px] text-on-surface-variant opacity-60">Premium Intelligence</p>
+                    </div>
+                </div>
+
+                <!-- Navigation links -->
+                <nav class="flex-1 space-y-1 overflow-y-auto pr-1">
+                    <a class="nav-sidebar-link flex items-center gap-3 text-on-surface-variant hover:bg-white/5 hover:text-on-surface px-4 py-2.5 rounded-lg transition-all text-sm font-medium"
+                        href="#/dashboard" id="sidebar-dashboard">
+                        <span class="material-symbols-outlined text-lg">dashboard</span>
+                        <span>Dashboard</span>
+                    </a>
+                    <a class="nav-sidebar-link flex items-center gap-3 text-on-surface-variant hover:bg-white/5 hover:text-on-surface px-4 py-2.5 rounded-lg transition-all text-sm font-medium"
+                        href="#/markets" id="sidebar-markets">
+                        <span class="material-symbols-outlined text-lg">show_chart</span>
+                        <span>Markets</span>
+                    </a>
+                    <a class="nav-sidebar-link flex items-center gap-3 text-on-surface-variant hover:bg-white/5 hover:text-on-surface px-4 py-2.5 rounded-lg transition-all text-sm font-medium"
+                        href="#/portfolio" id="sidebar-portfolio">
+                        <span class="material-symbols-outlined text-lg">pie_chart</span>
+                        <span>Portfolio</span>
+                    </a>
+                    <a class="nav-sidebar-link flex items-center gap-3 text-on-surface-variant hover:bg-white/5 hover:text-on-surface px-4 py-2.5 rounded-lg transition-all text-sm font-medium"
+                        href="#/watchlist" id="sidebar-watchlist">
+                        <span class="material-symbols-outlined text-lg">visibility</span>
+                        <span>Watchlist</span>
+                    </a>
+                    <a class="nav-sidebar-link flex items-center gap-3 text-on-surface-variant hover:bg-white/5 hover:text-on-surface px-4 py-2.5 rounded-lg transition-all text-sm font-medium"
+                        href="#/ai-assistant" id="sidebar-ai-assistant">
+                        <span class="material-symbols-outlined text-lg">psychology</span>
+                        <span>AI Assistant</span>
+                    </a>
+                    <a class="nav-sidebar-link flex items-center gap-3 text-on-surface-variant hover:bg-white/5 hover:text-on-surface px-4 py-2.5 rounded-lg transition-all text-sm font-medium"
+                        href="#/ai-scanner" id="sidebar-ai-scanner">
+                        <span class="material-symbols-outlined text-lg">auto_awesome</span>
+                        <span>Opportunity Scanner</span>
+                    </a>
+                    <a class="nav-sidebar-link flex items-center gap-3 text-on-surface-variant hover:bg-white/5 hover:text-on-surface px-4 py-2.5 rounded-lg transition-all text-sm font-medium"
+                        href="#/compare" id="sidebar-compare">
+                        <span class="material-symbols-outlined text-lg">science</span>
+                        <span>Research &amp; Compare</span>
+                    </a>
+                    <a class="nav-sidebar-link flex items-center gap-3 text-on-surface-variant hover:bg-white/5 hover:text-on-surface px-4 py-2.5 rounded-lg transition-all text-sm font-medium"
+                        href="#/reports" id="sidebar-reports">
+                        <span class="material-symbols-outlined text-lg">description</span>
+                        <span>PDF Reports</span>
+                    </a>
+                    <a class="nav-sidebar-link flex items-center gap-3 text-on-surface-variant hover:bg-white/5 hover:text-on-surface px-4 py-2.5 rounded-lg transition-all text-sm font-medium"
+                        href="#/alerts" id="sidebar-alerts">
+                        <span class="material-symbols-outlined text-lg">notifications_active</span>
+                        <span>Alerts</span>
+                    </a>
+                    <a class="nav-sidebar-link flex items-center gap-3 text-on-surface-variant hover:bg-white/5 hover:text-on-surface px-4 py-2.5 rounded-lg transition-all text-sm font-medium"
+                        href="#/logs" id="sidebar-logs">
+                        <span class="material-symbols-outlined text-lg">security</span>
+                        <span>Security Logs</span>
+                    </a>
+                    <a class="nav-sidebar-link flex items-center gap-3 text-on-surface-variant hover:bg-white/5 hover:text-on-surface px-4 py-2.5 rounded-lg transition-all text-sm font-medium"
+                        href="#/settings" id="sidebar-settings">
+                        <span class="material-symbols-outlined text-lg">settings</span>
+                        <span>Settings</span>
+                    </a>
+                </nav>
+
+                <!-- Profile footer inside sidebar -->
+                <div class="mt-auto space-y-4 pt-4 border-t border-white/5">
+                    <div class="flex items-center gap-3 px-2">
+                        <div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center border border-white/10 text-white font-bold"
+                            id="sidebar-avatar-placeholder">
+                            AV
+                        </div>
+                        <div class="flex-1 overflow-hidden">
+                            <p class="font-label-md text-xs truncate text-white" id="sidebar-user-name">Alex Vance</p>
+                            <p class="text-[10px] text-on-surface-variant font-label-sm truncate"
+                                id="sidebar-user-tier">Enterprise Tier</p>
+                        </div>
+                        <button onclick="handleLogout()"
+                            class="p-1 hover:bg-white/10 rounded-full transition-colors active:scale-90"
+                            title="Sign Out">
+                            <span class="material-symbols-outlined text-on-surface-variant text-sm">logout</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Viewport (Desktop offset) -->
+        <main class="flex-grow md:ml-80 flex flex-col min-h-screen relative overflow-y-auto">
+            <!-- Unified Top Navigation Bar -->
+            <header
+                class="flex justify-between items-center w-full px-4 md:px-10 h-16 sticky top-0 z-30 bg-surface/40 backdrop-blur-3xl border-b border-white/5 shadow-md font-sans">
+                <div class="flex items-center gap-4">
+                    <!-- Mobile Hamburger Menu Button -->
+                    <button onclick="toggleMobileSidebar()"
+                        class="md:hidden w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center border border-white/10 text-primary">
+                        <span class="material-symbols-outlined">menu</span>
+                    </button>
+                    <span class="md:hidden font-headline-md text-lg font-bold text-primary">Vertigo</span>
+
+                    <!-- Search input -->
+                    <div
+                        class="hidden md:flex items-center px-4 py-2 bg-white/5 rounded-full border border-white/10 w-96 relative">
+                        <span class="material-symbols-outlined text-on-surface-variant mr-3 text-sm">search</span>
+                        <input id="global-search-input" onkeydown="handleGlobalSearch(event)"
+                            class="bg-transparent border-none focus:ring-0 text-sm w-full placeholder:text-on-surface-variant/40 text-white"
+                            placeholder="Search ticker (e.g. AAPL, NVDA, TSLA)..." />
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <span
+                        class="flex items-center gap-1 text-[9px] font-label-sm px-2 py-0.5 bg-green-500/10 text-green-500 rounded border border-green-500/20">
+                        <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span> OPERATIONAL
+                    </span>
+                    <button onclick="window.location.hash='#/alerts'"
+                        class="p-1 hover:bg-white/10 rounded-full text-primary duration-200 relative">
+                        <span class="material-symbols-outlined">notifications</span>
+                        <span class="absolute top-0 right-0 w-2 h-2 bg-secondary rounded-full"></span>
+                    </button>
+                    <button onclick="window.location.hash='#/settings'"
+                        class="p-1 hover:bg-white/10 rounded-full text-primary duration-200">
+                        <span class="material-symbols-outlined">settings</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Authenticated Mobile Sidebar (Hidden by default) -->
+            <div id="mobile-sidebar" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex font-sans">
+                <div class="w-72 bg-surface-container p-6 flex flex-col h-full border-r border-white/10">
+                    <div class="flex justify-between items-center mb-8">
+                        <span class="font-headline-md text-lg font-bold text-primary">Vertigo</span>
+                        <button onclick="toggleMobileSidebar()"
+                            class="w-8 h-8 rounded-full hover:bg-white/10 flex items-center justify-center"><span
+                                class="material-symbols-outlined text-white">close</span></button>
+                    </div>
+                    <nav class="flex-1 space-y-1 overflow-y-auto">
+                        <a onclick="toggleMobileSidebar()"
+                            class="flex items-center gap-3 text-on-surface-variant hover:bg-white/5 hover:text-on-surface px-4 py-2.5 rounded-lg text-sm font-medium"
+                            href="#/dashboard">
+                            <span class="material-symbols-outlined text-lg">dashboard</span>
+                            <span>Dashboard</span>
+                        </a>
+                        <a onclick="toggleMobileSidebar()"
+                            class="flex items-center gap-3 text-on-surface-variant hover:bg-white/5 hover:text-on-surface px-4 py-2.5 rounded-lg text-sm font-medium"
+                            href="#/markets">
+                            <span class="material-symbols-outlined text-lg">show_chart</span>
+                            <span>Markets</span>
+                        </a>
+                        <a onclick="toggleMobileSidebar()"
+                            class="flex items-center gap-3 text-on-surface-variant hover:bg-white/5 hover:text-on-surface px-4 py-2.5 rounded-lg text-sm font-medium"
+                            href="#/portfolio">
+                            <span class="material-symbols-outlined text-lg">pie_chart</span>
+                            <span>Portfolio</span>
+                        </a>
+                        <a onclick="toggleMobileSidebar()"
+                            class="flex items-center gap-3 text-on-surface-variant hover:bg-white/5 hover:text-on-surface px-4 py-2.5 rounded-lg text-sm font-medium"
+                            href="#/watchlist">
+                            <span class="material-symbols-outlined text-lg">visibility</span>
+                            <span>Watchlist</span>
+                        </a>
+                        <a onclick="toggleMobileSidebar()"
+                            class="flex items-center gap-3 text-on-surface-variant hover:bg-white/5 hover:text-on-surface px-4 py-2.5 rounded-lg text-sm font-medium"
+                            href="#/ai-assistant">
+                            <span class="material-symbols-outlined text-lg">psychology</span>
+                            <span>AI Assistant</span>
+                        </a>
+                        <a onclick="toggleMobileSidebar()"
+                            class="flex items-center gap-3 text-on-surface-variant hover:bg-white/5 hover:text-on-surface px-4 py-2.5 rounded-lg text-sm font-medium"
+                            href="#/ai-scanner">
+                            <span class="material-symbols-outlined text-lg">auto_awesome</span>
+                            <span>Opportunity Scanner</span>
+                        </a>
+                        <a onclick="toggleMobileSidebar()"
+                            class="flex items-center gap-3 text-on-surface-variant hover:bg-white/5 hover:text-on-surface px-4 py-2.5 rounded-lg text-sm font-medium"
+                            href="#/compare">
+                            <span class="material-symbols-outlined text-lg">science</span>
+                            <span>Compare</span>
+                        </a>
+                        <a onclick="toggleMobileSidebar()"
+                            class="flex items-center gap-3 text-on-surface-variant hover:bg-white/5 hover:text-on-surface px-4 py-2.5 rounded-lg text-sm font-medium"
+                            href="#/reports">
+                            <span class="material-symbols-outlined text-lg">description</span>
+                            <span>PDF Reports</span>
+                        </a>
+                        <a onclick="toggleMobileSidebar()"
+                            class="flex items-center gap-3 text-on-surface-variant hover:bg-white/5 hover:text-on-surface px-4 py-2.5 rounded-lg text-sm font-medium"
+                            href="#/alerts">
+                            <span class="material-symbols-outlined text-lg">notifications_active</span>
+                            <span>Alerts</span>
+                        </a>
+                        <a onclick="toggleMobileSidebar()"
+                            class="flex items-center gap-3 text-on-surface-variant hover:bg-white/5 hover:text-on-surface px-4 py-2.5 rounded-lg text-sm font-medium"
+                            href="#/logs">
+                            <span class="material-symbols-outlined text-lg">security</span>
+                            <span>Logs</span>
+                        </a>
+                        <a onclick="toggleMobileSidebar()"
+                            class="flex items-center gap-3 text-on-surface-variant hover:bg-white/5 hover:text-on-surface px-4 py-2.5 rounded-lg text-sm font-medium"
+                            href="#/settings">
+                            <span class="material-symbols-outlined text-lg">settings</span>
+                            <span>Settings</span>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Page Views Panel -->
+            <div class="px-4 md:px-10 py-8 flex-1 w-full max-w-container-max-width mx-auto">
+
+                <!-- 4. DASHBOARD VIEW -->
+                <div id="view-dashboard" class="route-view hidden space-y-gutter">
+                    <!-- Heading -->
+                    <div class="mb-8 font-sans">
+                        <h2 class="text-3xl font-bold font-display-lg text-on-surface">Intelligence Dashboard</h2>
+                        <p class="text-on-surface-variant text-sm mt-1" id="dashboard-welcome-msg">Welcome back, Alex.
+                            Your risk vectors are stabilized.</p>
+                    </div>
+
+                    <!-- Top stats grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 font-sans">
+                        <div class="glass-panel p-6 rounded-xl">
+                            <p class="text-xs text-on-surface-variant font-label-md">PORTFOLIO VALUATION</p>
+                            <h3 class="text-3xl font-bold text-white mt-2 font-display-lg">$142,400.00</h3>
+                            <span class="text-xs text-tertiary flex items-center mt-1"><span
+                                    class="material-symbols-outlined text-sm mr-1">trending_up</span>+$1,980.00 (+1.4%)
+                                Today</span>
+                        </div>
+                        <div class="glass-panel p-6 rounded-xl">
+                            <p class="text-xs text-on-surface-variant font-label-md">AI HEALTH RATING</p>
+                            <h3 class="text-3xl font-bold text-tertiary mt-2 font-display-lg">88/100</h3>
+                            <span class="text-xs text-on-surface-variant flex items-center mt-1">Diversification:
+                                Excellent</span>
+                        </div>
+                        <div class="glass-panel p-6 rounded-xl">
+                            <p class="text-xs text-on-surface-variant font-label-md">SURVEILLANCE WATCH</p>
+                            <h3 class="text-3xl font-bold text-secondary mt-2 font-display-lg"
+                                id="dashboard-active-alerts-count">3 Alerts</h3>
+                            <span class="text-xs text-on-surface-variant flex items-center mt-1">Real-time triggers
+                                active</span>
+                        </div>
+                    </div>
+
+                    <!-- Macro overview & Briefing -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter font-sans">
+                        <!-- AI Briefing -->
+                        <div class="lg:col-span-8 glass-panel p-6 rounded-xl space-y-4">
+                            <div class="flex justify-between items-center border-b border-white/5 pb-3">
+                                <h4 class="font-bold text-lg flex items-center gap-2 text-primary font-headline-md">
+                                    <span class="material-symbols-outlined text-secondary">auto_awesome</span>
+                                    AI Daily Portfolio Briefing
+                                </h4>
+                                <span
+                                    class="text-[10px] font-label-sm text-secondary uppercase bg-secondary/10 px-2 py-0.5 rounded border border-secondary/20">Active</span>
+                            </div>
+                            <div class="space-y-3 text-sm leading-relaxed text-on-surface-variant">
+                                <p>
+                                    Your portfolio is positioned well for current volatility. <strong
+                                        class="text-white font-medium">NVIDIA (NVDA)</strong> continues to command your
+                                    highest weight (55%), carrying a high conviction AI Score of 96/100 following
+                                    positive yield reports from suppliers.
+                                </p>
+                                <p>
+                                    <strong class="text-white font-medium">Risk Advisory:</strong> High concentration in
+                                    technology assets creates systemic exposure (0.94β). Consider rebalancing into
+                                    Financials or executing target hedges.
+                                </p>
+                            </div>
+                            <div class="pt-2 flex gap-3">
+                                <button onclick="window.location.hash='#/ai-assistant'"
+                                    class="px-4 py-2 bg-secondary-container hover:brightness-110 text-white font-semibold text-xs rounded-lg transition-all">Consult
+                                    Copilot</button>
+                                <button onclick="window.location.hash='#/ai-scanner'"
+                                    class="px-4 py-2 bg-white/5 hover:bg-white/10 text-white font-semibold text-xs rounded-lg transition-all border border-white/10">Scan
+                                    Opportunities</button>
+                            </div>
+                        </div>
+
+                        <!-- Mini Market Overview -->
+                        <div class="lg:col-span-4 glass-panel p-6 rounded-xl flex flex-col justify-between">
+                            <h4 class="font-bold text-sm text-white mb-4 font-label-md">MARKET INDICES</h4>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center text-xs">
+                                    <span>S&amp;P 500 Index</span>
+                                    <span class="text-tertiary font-bold font-label-md">+0.84%</span>
+                                </div>
+                                <div class="flex justify-between items-center text-xs">
+                                    <span>Nasdaq Composite</span>
+                                    <span class="text-tertiary font-bold font-label-md">+1.25%</span>
+                                </div>
+                                <div class="flex justify-between items-center text-xs">
+                                    <span>Dow Jones Industrials</span>
+                                    <span class="text-error font-bold font-label-md">-0.12%</span>
+                                </div>
+                            </div>
+                            <div class="mt-6 border-t border-white/5 pt-4 text-center">
+                                <a href="#/markets"
+                                    class="text-xs text-secondary hover:text-primary transition-colors">Browse all
+                                    markets →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trending stocks grid -->
+                    <div class="glass-panel p-6 rounded-xl font-sans">
+                        <h4 class="font-bold text-lg mb-6 font-headline-md text-white">Trending Coverage</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="dashboard-trending-grid">
+                            <!-- Populated dynamically via JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. MARKETS PAGE VIEW -->
+                <div id="view-markets" class="route-view hidden space-y-gutter">
+                    <div
+                        class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-8 font-sans">
+                        <div>
+                            <h2 class="text-3xl font-bold font-display-lg text-on-surface">Global Markets</h2>
+                            <p class="text-on-surface-variant text-sm mt-1">Surveil key equities, crypto, and sector
+                                statistics.</p>
+                        </div>
+                        <!-- Search and filter -->
+                        <div class="flex flex-wrap gap-3 w-full md:w-auto">
+                            <input id="market-search-input" oninput="filterMarketsTable()"
+                                class="bg-primary-container border border-white/10 rounded-lg px-4 py-2.5 text-xs text-white placeholder:text-on-surface-variant/40 w-full sm:w-60 focus:outline-none focus:border-secondary"
+                                placeholder="Filter markets..." />
+                            <div class="flex border border-white/10 rounded-lg overflow-hidden bg-primary-container">
+                                <button onclick="setMarketsSectorFilter('ALL')" id="market-btn-ALL"
+                                    class="market-filter-btn px-4 py-2.5 text-xs bg-white/10 text-white font-semibold">ALL</button>
+                                <button onclick="setMarketsSectorFilter('Tech')" id="market-btn-Tech"
+                                    class="market-filter-btn px-4 py-2.5 text-xs text-on-surface-variant hover:text-white font-medium">Tech</button>
+                                <button onclick="setMarketsSectorFilter('Auto')" id="market-btn-Auto"
+                                    class="market-filter-btn px-4 py-2.5 text-xs text-on-surface-variant hover:text-white font-medium">Auto</button>
+                                <button onclick="setMarketsSectorFilter('Crypto')" id="market-btn-Crypto"
+                                    class="market-filter-btn px-4 py-2.5 text-xs text-on-surface-variant hover:text-white font-medium">Crypto</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel rounded-xl overflow-hidden shadow-2xl font-sans text-xs">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse zebra-blur">
+                                <thead>
+                                    <tr
+                                        class="border-b border-white/10 text-xs font-label-md text-on-surface-variant uppercase bg-white/5">
+                                        <th class="px-6 py-4">Asset Ticker</th>
+                                        <th class="px-6 py-4">Name</th>
+                                        <th class="px-6 py-4">Sector</th>
+                                        <th class="px-6 py-4">Price</th>
+                                        <th class="px-6 py-4">24h Change</th>
+                                        <th class="px-6 py-4 text-center">AI Score</th>
+                                        <th class="px-6 py-4">Recommendation</th>
+                                        <th class="px-6 py-4 text-right">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="markets-table-body">
+                                    <!-- Populated dynamically via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. STOCK DETAILS PAGE VIEW -->
+                <div id="view-stock-details" class="route-view hidden space-y-gutter">
+                    <!-- Dynamic details block -->
+                    <div
+                        class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 mb-8 border-b border-white/5 pb-6 font-sans">
+                        <div class="flex items-center gap-4">
+                            <div class="w-16 h-16 rounded-xl bg-primary flex items-center justify-center text-primary-container font-black text-2xl"
+                                id="stock-detail-avatar">
+                                N
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-3">
+                                    <h2 class="text-3xl font-bold font-display-lg text-on-surface"
+                                        id="stock-detail-name">NVIDIA Corp.</h2>
+                                    <span
+                                        class="font-label-md text-xs px-2.5 py-1 bg-white/5 border border-white/10 rounded"
+                                        id="stock-detail-symbol">NVDA.US</span>
+                                </div>
+                                <p class="text-on-surface-variant text-sm mt-1" id="stock-detail-sector">Technology |
+                                    Artificial Intelligence Hardware</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-4 items-center">
+                            <div class="text-right">
+                                <div class="text-3xl font-bold font-label-md text-white" id="stock-detail-price">$127.40
+                                </div>
+                                <span class="text-xs text-tertiary flex items-center justify-end mt-0.5"
+                                    id="stock-detail-change"><span
+                                        class="material-symbols-outlined text-sm mr-0.5">trending_up</span>+$5.20
+                                    (+4.25%)</span>
+                            </div>
+                            <button id="detail-watchlist-btn" onclick="toggleWatchlistDetail()"
+                                class="px-5 py-3 rounded-lg border border-white/10 bg-white/5 font-label-md text-xs hover:bg-white/10 transition-all flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-sm">bookmark</span>
+                                <span>Watchlist</span>
+                            </button>
+                            <button onclick="openNewAlertModal()"
+                                class="px-5 py-3 rounded-lg bg-primary text-on-primary font-label-md text-xs hover:brightness-110 shadow-lg active:scale-95 transition-all flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-sm">notifications</span>
+                                <span>Create Alert</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Chart Grid -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter font-sans">
+                        <div class="lg:col-span-8 glass-panel p-6 rounded-xl space-y-6">
+                            <div class="flex justify-between items-center">
+                                <h4 class="font-bold text-sm text-white font-label-md">PRICE MOMENTUM</h4>
+                                <div
+                                    class="flex border border-white/5 bg-white/5 rounded-lg overflow-hidden text-[10px] font-label-sm">
+                                    <button class="px-3 py-1.5 hover:text-white text-on-surface-variant">1D</button>
+                                    <button class="px-3 py-1.5 bg-white/10 text-white font-semibold">1W</button>
+                                    <button class="px-3 py-1.5 hover:text-white text-on-surface-variant">1M</button>
+                                    <button class="px-3 py-1.5 hover:text-white text-on-surface-variant">1Y</button>
+                                </div>
+                            </div>
+                            <!-- Price vector SVG -->
+                            <div class="h-64 flex items-end">
+                                <svg class="w-full h-full text-tertiary" viewbox="0 0 500 150" fill="none"
+                                    id="stock-detail-svg-chart">
+                                    <!-- Loaded dynamically -->
+                                </svg>
+                            </div>
+                        </div>
+
+                        <!-- AI Recommendation card -->
+                        <div
+                            class="lg:col-span-4 glass-panel p-6 rounded-xl flex flex-col justify-between border-l-4 border-tertiary">
+                            <div class="space-y-6">
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-tertiary-container/30 flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-tertiary"
+                                            style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-[10px] text-on-surface-variant font-label-sm">AI SYSTEM SCORE</p>
+                                        <h3 class="text-2xl font-bold text-white font-display-lg"
+                                            id="stock-detail-ai-score">96 / 100</h3>
+                                    </div>
+                                </div>
+                                <div class="space-y-4">
+                                    <div class="flex justify-between text-xs border-b border-white/5 pb-2">
+                                        <span class="text-on-surface-variant">Volatility Risk</span>
+                                        <span class="text-white font-bold" id="stock-detail-volatility">1.21σ
+                                            (Moderate)</span>
+                                    </div>
+                                    <div class="flex justify-between text-xs border-b border-white/5 pb-2">
+                                        <span class="text-on-surface-variant">Systemic Beta</span>
+                                        <span class="text-white font-bold" id="stock-detail-beta">1.84β (High)</span>
+                                    </div>
+                                    <div class="flex justify-between text-xs border-b border-white/5 pb-2">
+                                        <span class="text-on-surface-variant">Neural Sentiment</span>
+                                        <span class="text-tertiary font-bold" id="stock-detail-sentiment">Bullish</span>
+                                    </div>
+                                </div>
+                                <div class="p-4 bg-white/5 rounded-lg text-xs leading-relaxed text-on-surface-variant"
+                                    id="stock-detail-recommendation-p">
+                                    NVDA continues to showcase strong transformer-driven correlation signals. Blackwell
+                                    tape-out recovery yields support an upward vector towards $145.00.
+                                </div>
+                            </div>
+                            <button onclick="window.location.hash='#/ai-assistant'"
+                                class="w-full py-3 bg-white/5 border border-white/10 hover:bg-white/10 text-white font-semibold text-xs rounded-lg transition-all mt-6">
+                                Discuss Catalyst in Copilot
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Financial metrics & news bento -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter font-sans text-xs">
+                        <!-- Key Stats -->
+                        <div class="glass-panel p-6 rounded-xl">
+                            <h4 class="font-bold text-sm text-white mb-6 font-label-md">KEY METRICS</h4>
+                            <div class="grid grid-cols-2 gap-6 text-xs">
+                                <div>
+                                    <p class="text-on-surface-variant mb-1">Market Cap</p>
+                                    <p class="text-white font-bold font-label-md" id="stock-detail-mcap">$3.13T</p>
+                                </div>
+                                <div>
+                                    <p class="text-on-surface-variant mb-1">P/E Ratio</p>
+                                    <p class="text-white font-bold font-label-md" id="stock-detail-pe">74.2</p>
+                                </div>
+                                <div>
+                                    <p class="text-on-surface-variant mb-1">52-Week Range</p>
+                                    <p class="text-white font-bold font-label-md" id="stock-detail-range">$82.40 -
+                                        $140.76</p>
+                                </div>
+                                <div>
+                                    <p class="text-on-surface-variant mb-1">Average Volume</p>
+                                    <p class="text-white font-bold font-label-md" id="stock-detail-volume">42.5M</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Neural news feed -->
+                        <div class="glass-panel p-6 rounded-xl">
+                            <h4 class="font-bold text-sm text-white mb-6 font-label-md">NEURAL NEWS CORRELATION</h4>
+                            <div class="space-y-4" id="stock-detail-news-feed">
+                                <!-- News items loaded dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. PORTFOLIO PAGE VIEW -->
+                <div id="view-portfolio" class="route-view hidden space-y-gutter">
+                    <!-- Heading -->
+                    <div class="mb-8 font-sans">
+                        <h2 class="text-3xl font-bold font-display-lg text-on-surface">Portfolio Intelligence</h2>
+                        <p class="text-on-surface-variant text-sm mt-1">Mathematical risk distribution and asset
+                            weighting model.</p>
+                    </div>
+
+                    <!-- Portfolio allocation breakdown -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter font-sans">
+                        <!-- Holdings table -->
+                        <div class="lg:col-span-8 glass-panel p-6 rounded-xl space-y-6">
+                            <h4 class="font-bold text-sm text-white font-label-md">CURRENT STRATEGY HOLDINGS</h4>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left border-collapse zebra-blur text-xs">
+                                    <thead>
+                                        <tr
+                                            class="border-b border-white/5 text-[10px] font-label-md text-on-surface-variant uppercase bg-white/5">
+                                            <th class="px-4 py-3">Asset</th>
+                                            <th class="px-4 py-3">Shares</th>
+                                            <th class="px-4 py-3">Avg Cost</th>
+                                            <th class="px-4 py-3">Price</th>
+                                            <th class="px-4 py-3">Market Value</th>
+                                            <th class="px-4 py-3">Profit &amp; Loss</th>
+                                            <th class="px-4 py-3 text-right">Allocation</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="portfolio-holdings-body">
+                                        <!-- Loaded dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Allocation chart & score -->
+                        <div class="lg:col-span-4 glass-panel p-6 rounded-xl flex flex-col justify-between">
+                            <div class="space-y-6 text-xs">
+                                <h4 class="font-bold text-sm text-white font-label-md">ASSET WEIGHT DISTRIBUTION</h4>
+                                <div class="flex items-center justify-center py-4 relative">
+                                    <!-- Mock SVG Allocation Donut -->
+                                    <svg class="w-44 h-44 transform -rotate-90">
+                                        <circle cx="88" cy="88" r="70" stroke="rgba(255,255,255,0.03)" stroke-width="16"
+                                            fill="none" />
+                                        <!-- Tech segment (55%) -->
+                                        <circle cx="88" cy="88" r="70" stroke="#1415A8" stroke-width="16" fill="none"
+                                            stroke-dasharray="440" stroke-dashoffset="198" />
+                                        <!-- Crypto segment (15%) -->
+                                        <circle cx="88" cy="88" r="70" stroke="#1FCA17" stroke-width="16" fill="none"
+                                            stroke-dasharray="440" stroke-dashoffset="374" class="origin-center"
+                                            style="transform: rotate(198deg);" />
+                                        <!-- Auto segment (15%) -->
+                                        <circle cx="88" cy="88" r="70" stroke="#ef4444" stroke-width="16" fill="none"
+                                            stroke-dasharray="440" stroke-dashoffset="374" class="origin-center"
+                                            style="transform: rotate(252deg);" />
+                                        <!-- Cash/Others (15%) -->
+                                        <circle cx="88" cy="88" r="70" stroke="#94A3B8" stroke-width="16" fill="none"
+                                            stroke-dasharray="440" stroke-dashoffset="374" class="origin-center"
+                                            style="transform: rotate(306deg);" />
+                                    </svg>
+                                    <div class="absolute flex flex-col items-center justify-center">
+                                        <span class="text-[10px] text-on-surface-variant font-label-sm">TECH BASE</span>
+                                        <span class="text-xl font-bold text-white">55%</span>
+                                    </div>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="flex justify-between items-center">
+                                        <span class="flex items-center gap-2"><span
+                                                class="w-2.5 h-2.5 rounded bg-secondary"></span> Technology</span>
+                                        <span class="font-bold">55%</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="flex items-center gap-2"><span
+                                                class="w-2.5 h-2.5 rounded bg-tertiary"></span> Cryptocurrencies</span>
+                                        <span class="font-bold">15%</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="flex items-center gap-2"><span
+                                                class="w-2.5 h-2.5 rounded bg-error"></span> Automotive</span>
+                                        <span class="font-bold">15%</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="flex items-center gap-2"><span
+                                                class="w-2.5 h-2.5 rounded bg-outline-variant"></span>
+                                            Cash/Reserve</span>
+                                        <span class="font-bold">15%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Risk Rebalancing Optimizer -->
+                    <div class="glass-panel p-6 rounded-xl font-sans text-xs">
+                        <div
+                            class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 border-b border-white/5 pb-4">
+                            <div>
+                                <h4 class="font-bold text-lg font-headline-md text-white">AI Allocation Rebalancer</h4>
+                                <p class="text-on-surface-variant text-xs mt-0.5">Adjust target limits and calculate
+                                    vector divergence weights.</p>
+                            </div>
+                            <button onclick="recalculateOptimizer()"
+                                class="px-5 py-2.5 bg-tertiary text-on-tertiary font-bold text-xs rounded-lg hover:brightness-110 transition-all flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-sm">sync</span>
+                                <span>Optimize Allocations</span>
+                            </button>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="space-y-2">
+                                <div class="flex justify-between text-xs">
+                                    <span class="text-on-surface-variant">Technology Limit</span>
+                                    <span id="rebalance-val-tech" class="font-bold">55%</span>
+                                </div>
+                                <input type="range" id="rebalance-range-tech" min="10" max="80" value="55"
+                                    oninput="updateRebalanceDisplay()" class="w-full accent-secondary" />
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex justify-between text-xs">
+                                    <span class="text-on-surface-variant">Cryptocurrency Limit</span>
+                                    <span id="rebalance-val-crypto" class="font-bold">15%</span>
+                                </div>
+                                <input type="range" id="rebalance-range-crypto" min="5" max="40" value="15"
+                                    oninput="updateRebalanceDisplay()" class="w-full accent-tertiary" />
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex justify-between text-xs">
+                                    <span class="text-on-surface-variant">Automotive Limit</span>
+                                    <span id="rebalance-val-auto" class="font-bold">15%</span>
+                                </div>
+                                <input type="range" id="rebalance-range-auto" min="5" max="40" value="15"
+                                    oninput="updateRebalanceDisplay()" class="w-full accent-error" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8. WATCHLIST PAGE VIEW -->
+                <div id="view-watchlist" class="route-view hidden space-y-gutter">
+                    <!-- Heading -->
+                    <div
+                        class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-8 font-sans">
+                        <div>
+                            <h2 class="text-3xl font-bold font-display-lg text-on-surface">Surveillance Watchlist</h2>
+                            <p class="text-on-surface-variant text-sm mt-1">Monitored assets with AI score triggers and
+                                real-time sentiment status.</p>
+                        </div>
+                        <!-- Add ticker -->
+                        <div class="flex gap-2 w-full md:w-auto">
+                            <input id="watchlist-add-input"
+                                class="bg-primary-container border border-white/10 rounded-lg px-4 py-2.5 text-xs text-white placeholder:text-on-surface-variant/40 w-full sm:w-48 focus:outline-none focus:border-secondary"
+                                placeholder="Ticker (e.g. MSFT)..." />
+                            <button onclick="addToWatchlistFromInput()"
+                                class="px-5 py-2.5 bg-primary text-on-primary font-bold text-xs rounded-lg hover:brightness-110 active:scale-95 transition-all">Add</button>
+                        </div>
+                    </div>
+
+                    <!-- Watchlist grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 font-sans" id="watchlist-grid">
+                        <!-- Loaded dynamically -->
+                    </div>
+                </div>
+
+                <!-- 9. AI ASSISTANT PAGE VIEW -->
+                <div id="view-ai-assistant" class="route-view hidden flex flex-col h-[calc(100vh-12rem)] min-h-[500px]">
+                    <div class="mb-4 font-sans">
+                        <h2 class="text-3xl font-bold font-display-lg text-on-surface">AI Investment Copilot</h2>
+                        <p class="text-on-surface-variant text-sm mt-1">Full conversational model trained on real-time
+                            financial statements and web sentiment vectors.</p>
+                    </div>
+
+                    <!-- Main chat box -->
+                    <div
+                        class="flex-1 glass-panel rounded-xl overflow-hidden flex flex-col relative border border-white/10 bg-surface-container-low/40 font-sans">
+                        <!-- Message viewport -->
+                        <div class="flex-1 p-6 overflow-y-auto space-y-4 text-xs" id="chat-messages-container">
+                            <!-- Loaded dynamically -->
+                        </div>
+
+                        <!-- Suggestions chips -->
+                        <div class="px-6 py-3 bg-white/5 border-t border-white/5 flex gap-2 flex-wrap items-center">
+                            <span class="text-[10px] text-on-surface-variant font-label-sm uppercase mr-2">Quick
+                                analysis:</span>
+                            <button onclick="sendChatMessage('Analyze my portfolio health')"
+                                class="px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-white">Analyze
+                                Portfolio</button>
+                            <button onclick="sendChatMessage('Compare AAPL and TSLA')"
+                                class="px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-white">Compare
+                                AAPL &amp; TSLA</button>
+                            <button onclick="sendChatMessage('What is the outlook for S&P 500?')"
+                                class="px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-white">S&amp;P
+                                500 Outlook</button>
+                        </div>
+
+                        <!-- Typing input -->
+                        <div class="p-4 border-t border-white/5 flex gap-3 items-center">
+                            <input id="chat-input" onkeydown="handleChatSubmit(event)"
+                                class="flex-1 bg-primary-container border border-white/10 rounded-lg px-4 py-3.5 text-xs text-white placeholder:text-on-surface-variant/40 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary"
+                                placeholder="Ask anything about equity analysis, macro trends, or rebalancing..." />
+                            <button onclick="handleChatSendBtn()"
+                                class="px-5 py-3.5 bg-secondary-container hover:brightness-110 text-white font-bold text-xs rounded-lg transition-all active:scale-95 flex items-center gap-1">
+                                <span>Send</span>
+                                <span class="material-symbols-outlined text-sm">send</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 10. AI OPPORTUNITY SCANNER VIEW -->
+                <div id="view-ai-scanner" class="route-view hidden space-y-gutter">
+                    <!-- Heading -->
+                    <div
+                        class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-8 font-sans">
+                        <div>
+                            <h2 class="text-3xl font-bold font-display-lg text-on-surface">Opportunity Scanner</h2>
+                            <p class="text-on-surface-variant text-sm mt-1">Autonomous neural patterns ranking global
+                                breakout equities.</p>
+                        </div>
+                        <button onclick="triggerScannerRun()"
+                            class="px-5 py-3 bg-secondary-container text-white font-bold text-xs rounded-lg hover:brightness-110 active:scale-95 transition-all flex items-center gap-1.5 shadow-lg shadow-secondary-container/10">
+                            <span class="material-symbols-outlined text-sm">radar</span>
+                            <span>Trigger Neural Scan</span>
+                        </button>
+                    </div>
+
+                    <!-- Progress scanner logging -->
+                    <div id="scanner-progress-panel"
+                        class="hidden glass-panel p-6 rounded-xl border border-secondary/20 relative overflow-hidden bg-primary-container/20 font-sans text-xs">
+                        <div class="flex justify-between items-center mb-4">
+                            <h4
+                                class="font-bold text-sm text-white font-label-md uppercase tracking-wider flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 bg-secondary rounded-full animate-ping"></span>
+                                Neural Correlation Scan in progress
+                            </h4>
+                            <span id="scanner-progress-percent"
+                                class="text-xs font-bold text-secondary font-label-md">0%</span>
+                        </div>
+                        <div class="w-full bg-white/5 h-2 rounded-full overflow-hidden mb-6">
+                            <div id="scanner-progress-bar" class="h-full bg-secondary transition-all duration-300 w-0">
+                            </div>
+                        </div>
+                        <div class="bg-black/50 border border-white/5 rounded-lg p-4 h-32 font-label-sm text-[11px] text-green-500 overflow-y-auto space-y-1.5"
+                            id="scanner-progress-logs">
+                            <!-- Populated progressively -->
+                        </div>
+                    </div>
+
+                    <!-- Scanner results table -->
+                    <div class="glass-panel rounded-xl overflow-hidden shadow-2xl font-sans text-xs">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse zebra-blur text-xs">
+                                <thead>
+                                    <tr
+                                        class="border-b border-white/10 text-[10px] font-label-md text-on-surface-variant uppercase bg-white/5">
+                                        <th class="px-6 py-4 text-center">Rank</th>
+                                        <th class="px-6 py-4">Asset</th>
+                                        <th class="px-6 py-4 text-center">AI Score</th>
+                                        <th class="px-6 py-4">Sentiment Vector</th>
+                                        <th class="px-6 py-4">Current Price</th>
+                                        <th class="px-6 py-4">Market Catalyst</th>
+                                        <th class="px-6 py-4 text-right">Clearance Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="scanner-table-body">
+                                    <!-- Loaded dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 11. RESEARCH / COMPARE VIEW -->
+                <div id="view-compare" class="route-view hidden space-y-gutter">
+                    <!-- Heading -->
+                    <div
+                        class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-8 font-sans">
+                        <div>
+                            <h2 class="text-3xl font-bold font-display-lg text-on-surface">Alpha Asset Comparison</h2>
+                            <p class="text-on-surface-variant text-sm mt-1">Multi-asset vector analysis and risk
+                                exposure benchmarking.</p>
+                        </div>
+                        <div class="flex gap-2 w-full md:w-auto">
+                            <select id="compare-add-select"
+                                class="bg-primary-container border border-white/10 rounded-lg px-4 py-2.5 text-xs text-white focus:outline-none focus:border-secondary w-full sm:w-48">
+                                <option value="AAPL">Apple Inc. (AAPL)</option>
+                                <option value="MSFT">Microsoft Corp. (MSFT)</option>
+                                <option value="TSLA">Tesla Motors (TSLA)</option>
+                                <option value="BTC.X">Bitcoin (BTC.X)</option>
+                            </select>
+                            <button onclick="addAssetToComparison()"
+                                class="px-5 py-2.5 bg-primary text-on-primary font-bold text-xs rounded-lg hover:brightness-110 transition-all flex items-center gap-1"><span
+                                    class="material-symbols-outlined text-sm">add</span>Compare</button>
+                        </div>
+                    </div>
+
+                    <!-- Comparison Table Grid -->
+                    <div class="glass-panel rounded-xl overflow-hidden shadow-2xl font-sans text-xs">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse zebra-blur text-xs">
+                                <thead>
+                                    <tr
+                                        class="border-b border-white/10 text-[10px] font-label-md text-on-surface-variant uppercase bg-white/5">
+                                        <th class="px-6 py-4">Asset Coverage</th>
+                                        <th class="px-6 py-4 text-center">AI Score Index</th>
+                                        <th class="px-6 py-4">Tail Risk Metric</th>
+                                        <th class="px-6 py-4">Volatility Sparkline</th>
+                                        <th class="px-6 py-4">Market Cap</th>
+                                        <th class="px-6 py-4">Sentiment Strength</th>
+                                        <th class="px-6 py-4 text-right">Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="compare-table-body">
+                                    <!-- Loaded dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 12. REPORTS PAGE VIEW -->
+                <div id="view-reports" class="route-view hidden space-y-gutter">
+                    <!-- Heading -->
+                    <div class="mb-8 font-sans">
+                        <h2 class="text-3xl font-bold font-display-lg text-on-surface">Intelligence Reports</h2>
+                        <p class="text-on-surface-variant text-sm mt-1">Compile comprehensive investment intelligence
+                            dossiers.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter font-sans">
+                        <!-- Generator Control -->
+                        <div class="lg:col-span-4 glass-panel p-6 rounded-xl space-y-6">
+                            <h4 class="font-bold text-sm text-white font-label-md">REPORT CONFIGURATOR</h4>
+                            <div class="space-y-4 text-xs">
+                                <div>
+                                    <label class="block text-[10px] font-label-md text-on-surface-variant mb-2">TARGET
+                                        ASSET</label>
+                                    <select id="report-asset-select"
+                                        class="w-full bg-primary-container border border-white/10 rounded-lg px-4 py-3 text-xs text-white focus:outline-none focus:border-secondary">
+                                        <option value="NVDA">NVIDIA Corp. (NVDA)</option>
+                                        <option value="AAPL">Apple Inc. (AAPL)</option>
+                                        <option value="MSFT">Microsoft Corp. (MSFT)</option>
+                                        <option value="TSLA">Tesla Motors (TSLA)</option>
+                                        <option value="PORTFOLIO">Full Strategy Portfolio</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-label-md text-on-surface-variant mb-2">ANALYSIS
+                                        VECTORS</label>
+                                    <select id="report-type-select"
+                                        class="w-full bg-primary-container border border-white/10 rounded-lg px-4 py-3 text-xs text-white focus:outline-none focus:border-secondary">
+                                        <option value="Full Comprehensive">Full Comprehensive Assessment</option>
+                                        <option value="Technical Analysis">Technical &amp; Price Action Vectors</option>
+                                        <option value="Sentiment Audit">Sentiment &amp; News Correlation</option>
+                                        <option value="Financial Health">Financial Statements &amp; Valuations</option>
+                                    </select>
+                                </div>
+                                <button onclick="triggerReportGeneration()" id="report-gen-btn"
+                                    class="w-full py-3.5 bg-secondary-container hover:brightness-110 text-white font-bold text-xs rounded-lg transition-all flex items-center justify-center gap-1.5">
+                                    <span class="material-symbols-outlined text-sm">picture_as_pdf</span>
+                                    <span>Compile PDF Report</span>
+                                </button>
+                            </div>
+                            <!-- Generation Progress -->
+                            <div id="report-progress-panel"
+                                class="hidden border border-white/5 rounded-lg p-4 space-y-3 bg-white/5">
+                                <div class="flex justify-between text-xs">
+                                    <span id="report-progress-text" class="text-on-surface-variant italic">Assembling
+                                        data...</span>
+                                    <span id="report-progress-pct" class="font-bold text-secondary">0%</span>
+                                </div>
+                                <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
+                                    <div id="report-progress-bar"
+                                        class="h-full bg-secondary w-0 transition-all duration-300"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Generated Reports Dossier -->
+                        <div class="lg:col-span-8 glass-panel p-6 rounded-xl space-y-6">
+                            <h4 class="font-bold text-sm text-white font-label-md">INTEL SYSTEM DOSSIERS</h4>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left border-collapse zebra-blur text-xs">
+                                    <thead>
+                                        <tr
+                                            class="border-b border-white/5 text-[10px] font-label-md text-on-surface-variant uppercase bg-white/5">
+                                            <th class="px-4 py-3">Report Document</th>
+                                            <th class="px-4 py-3">Document Size</th>
+                                            <th class="px-4 py-3">Date Compiled</th>
+                                            <th class="px-4 py-3 text-right">Clearance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="reports-table-body">
+                                        <!-- Loaded dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 13. ALERTS PAGE VIEW -->
+                <div id="view-alerts" class="route-view hidden space-y-gutter">
+                    <!-- Heading -->
+                    <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6 font-sans">
+                        <div>
+                            <h2 class="text-3xl font-bold font-display-lg text-on-surface">Surveillance Alert Center
+                            </h2>
+                            <p class="text-on-surface-variant text-sm mt-1">Real-time triggers watching volatility and
+                                price changes.</p>
+                        </div>
+                        <div class="flex gap-4">
+                            <button onclick="openNewAlertModal()"
+                                class="px-5 py-3 rounded-lg bg-primary text-on-primary font-label-md text-xs hover:brightness-110 shadow-lg active:scale-95 transition-all flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-sm">add</span>
+                                <span>Create Smart Alert</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Alerts active lists -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter font-sans text-xs">
+                        <div class="lg:col-span-12 glass-panel p-6 rounded-xl space-y-6">
+                            <h4 class="font-bold text-sm text-white font-label-md">ACTIVE WATCHDOG TRIGGERS</h4>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left border-collapse zebra-blur text-xs">
+                                    <thead>
+                                        <tr
+                                            class="border-b border-white/5 text-[10px] font-label-md text-on-surface-variant uppercase bg-white/5">
+                                            <th class="px-4 py-3">Asset</th>
+                                            <th class="px-4 py-3">Trigger Class</th>
+                                            <th class="px-4 py-3">Surveillance Condition</th>
+                                            <th class="px-4 py-3">Status</th>
+                                            <th class="px-4 py-3">Created</th>
+                                            <th class="px-4 py-3 text-right">Delete Trigger</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="alerts-table-body">
+                                        <!-- Loaded dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 14. ACTIVITY / INTERACTION LOGS PAGE VIEW -->
+                <div id="view-logs" class="route-view hidden space-y-gutter">
+                    <!-- Heading -->
+                    <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6 font-sans">
+                        <div>
+                            <h2 class="text-3xl font-bold font-display-lg text-on-surface">Security &amp; Interaction
+                                Audit</h2>
+                            <p class="text-on-surface-variant text-sm mt-1">Surgical logs detailing system access,
+                                searches, alerts, and AI copilot transactions.</p>
+                        </div>
+                        <div class="flex gap-4">
+                            <button onclick="clearSystemLogs()"
+                                class="px-5 py-3 rounded-lg border border-white/10 bg-white/5 font-label-md text-xs hover:bg-white/10 transition-all flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-sm">delete</span>
+                                <span>Reset Audit Trail</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-xl space-y-6 font-sans text-xs">
+                        <div class="flex justify-between items-center border-b border-white/5 pb-4">
+                            <h4 class="font-bold text-sm text-white font-label-md">LIVE LOG TIMELINE</h4>
+                            <span
+                                class="text-[10px] font-label-sm text-tertiary uppercase bg-tertiary/10 px-2 py-0.5 rounded border border-tertiary/20">Audit
+                                Trail Active</span>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse zebra-blur text-xs">
+                                <thead>
+                                    <tr
+                                        class="border-b border-white/5 text-[10px] font-label-md text-on-surface-variant uppercase bg-white/5">
+                                        <th class="px-4 py-3">Timestamp</th>
+                                        <th class="px-4 py-3">Action Module</th>
+                                        <th class="px-4 py-3">Log Details</th>
+                                        <th class="px-4 py-3 text-right">Class</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="logs-table-body">
+                                    <!-- Loaded dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 15. SETTINGS & PROFILE VIEW -->
+                <div id="view-settings" class="route-view hidden space-y-gutter">
+                    <!-- Heading -->
+                    <div class="mb-8 font-sans">
+                        <h2 class="text-3xl font-bold font-display-lg text-on-surface">System Configuration</h2>
+                        <p class="text-on-surface-variant text-sm mt-1">Configure profile coordinates, API security, and
+                            account preferences.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter font-sans text-xs">
+                        <!-- Profile Card -->
+                        <div class="lg:col-span-8 glass-panel p-6 rounded-xl space-y-6">
+                            <h4 class="font-bold text-sm text-white font-label-md">IDENTITY INFORMATION</h4>
+                            <form onsubmit="handleSaveProfile(event)"
+                                class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                                <div>
+                                    <label class="block text-[10px] font-label-md text-on-surface-variant mb-2">FULL
+                                        NAME</label>
+                                    <input type="text" id="settings-name" value="Alex Vance"
+                                        class="w-full bg-primary-container border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-secondary" />
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-label-md text-on-surface-variant mb-2">EMAIL
+                                        COORDINATE</label>
+                                    <input type="email" id="settings-email" value="alex.vance@vertigo.ai"
+                                        class="w-full bg-primary-container border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-secondary" />
+                                </div>
+                                <div>
+                                    <label
+                                        class="block text-[10px] font-label-md text-on-surface-variant mb-2">CLEARANCE
+                                        ROLE</label>
+                                    <input type="text" disabled value="Managing Director"
+                                        class="w-full bg-primary-container border border-white/5 rounded-lg px-4 py-3 text-on-surface-variant opacity-60 cursor-not-allowed" />
+                                </div>
+                                <div>
+                                    <label
+                                        class="block text-[10px] font-label-md text-on-surface-variant mb-2">SUBSCRIPTION
+                                        STATUS</label>
+                                    <div
+                                        class="flex items-center justify-between bg-primary-container border border-white/10 rounded-lg px-4 py-3">
+                                        <span class="text-white font-bold" id="settings-billing-tier">Pro Unlimited
+                                            ($79/mo)</span>
+                                        <span
+                                            class="text-[9px] font-label-sm px-2 py-0.5 bg-secondary/15 text-secondary border border-secondary/30 rounded">ACTIVE</span>
+                                    </div>
+                                </div>
+                                <div class="md:col-span-2 text-right">
+                                    <button type="submit"
+                                        class="px-5 py-3 bg-secondary-container hover:brightness-110 text-white font-bold rounded-lg transition-all">Save
+                                        Changes</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- API Credentials panel -->
+                        <div class="lg:col-span-4 glass-panel p-6 rounded-xl flex flex-col justify-between">
+                            <div class="space-y-6">
+                                <h4 class="font-bold text-sm text-white font-label-md">API CREDENTIAL KEYS</h4>
+                                <p class="text-on-surface-variant text-[11px] leading-relaxed">Generate security vectors
+                                    to access Vertigo sentiment APIs from custom quantitative models.</p>
+                                <div class="space-y-3" id="settings-keys-list">
+                                    <!-- Loaded dynamically -->
+                                </div>
+                            </div>
+                            <button onclick="generateApiKey()"
+                                class="w-full py-3 bg-white/5 hover:bg-white/10 text-white font-semibold text-xs rounded-lg transition-all border border-white/10 flex items-center justify-center gap-1 mt-6">
+                                <span class="material-symbols-outlined text-sm">vpn_key</span>
+                                <span>Issue New Key</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Security preferences -->
+                    <div class="glass-panel p-6 rounded-xl font-sans text-xs">
+                        <h4 class="font-bold text-sm text-white mb-6 font-label-md">ACCOUNT PREFERENCES</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs">
+                            <div
+                                class="flex justify-between items-center bg-primary-container/40 p-4 rounded-lg border border-white/5">
+                                <div>
+                                    <p class="text-white font-semibold mb-1">Two-Factor Authentication</p>
+                                    <p class="text-on-surface-variant text-[10px]">Secure login with dynamic tokens</p>
+                                </div>
+                                <input type="checkbox" checked
+                                    class="rounded bg-primary-container border-white/10 text-secondary focus:ring-secondary" />
+                            </div>
+                            <div
+                                class="flex justify-between items-center bg-primary-container/40 p-4 rounded-lg border border-white/5">
+                                <div>
+                                    <p class="text-white font-semibold mb-1">AI Smart Notifications</p>
+                                    <p class="text-on-surface-variant text-[10px]">Immediate alert vectors via Copilot
+                                    </p>
+                                </div>
+                                <input type="checkbox" checked
+                                    class="rounded bg-primary-container border-white/10 text-secondary focus:ring-secondary" />
+                            </div>
+                            <div
+                                class="flex justify-between items-center bg-primary-container/40 p-4 rounded-lg border border-white/5">
+                                <div>
+                                    <p class="text-white font-semibold mb-1">System Audit Logs</p>
+                                    <p class="text-on-surface-variant text-[10px]">Write activities to audit timeline
+                                    </p>
+                                </div>
+                                <input type="checkbox" checked
+                                    class="rounded bg-primary-container border-white/10 text-secondary focus:ring-secondary" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Create Alert Modal (Generic) -->
+    <div id="new-alert-modal"
+        class="fixed inset-0 z-[999] bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div
+            class="w-full max-w-md bg-surface-container-low p-6 rounded-xl glass-panel relative border border-white/10 shadow-2xl">
+            <h4 class="font-bold text-lg text-white font-headline-md mb-4 flex items-center gap-2">
+                <span class="material-symbols-outlined text-secondary">notifications_active</span>
+                Create Smart Watchdog Alert
+            </h4>
+            <form onsubmit="handleCreateAlertSubmit(event)" class="space-y-4 text-xs">
+                <div>
+                    <label class="block text-on-surface-variant mb-2">TARGET ASSET</label>
+                    <select id="modal-alert-asset"
+                        class="w-full bg-primary-container border border-white/10 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-secondary">
+                        <option value="NVDA">NVIDIA Corp. (NVDA)</option>
+                        <option value="AAPL">Apple Inc. (AAPL)</option>
+                        <option value="MSFT">Microsoft Corp. (MSFT)</option>
+                        <option value="TSLA">Tesla Motors (TSLA)</option>
+                        <option value="BTC.X">Bitcoin (BTC.X)</option>
+                    </select>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-on-surface-variant mb-2">TRIGGER TYPE</label>
+                        <select id="modal-alert-type"
+                            class="w-full bg-primary-container border border-white/10 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-secondary">
+                            <option value="Price Above">Price Above</option>
+                            <option value="Price Below">Price Below</option>
+                            <option value="Volatility Spike">Volatility Spike</option>
+                            <option value="Sentiment Shift">Sentiment Shift</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-on-surface-variant mb-2">VALUE THRESHOLD</label>
+                        <input type="text" id="modal-alert-val" value="135.00"
+                            class="w-full bg-primary-container border border-white/10 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-secondary" />
+                    </div>
+                </div>
+                <div class="flex justify-end gap-3 pt-4 font-sans">
+                    <button type="button" onclick="closeNewAlertModal()"
+                        class="px-4 py-2 rounded border border-white/10 hover:bg-white/5 text-white font-medium">Cancel</button>
+                    <button type="submit"
+                        class="px-5 py-2 bg-primary text-on-primary font-bold rounded hover:brightness-110 transition-all">Activate
+                        Trigger</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- ================= JAVASCRIPT APP LOADERS ================= -->
+    <!-- Order-dependent sequential loads -->
+    <script src="src/js/state.js"></script>
+    <script src="src/js/router.js"></script>
+    <script src="src/js/auth.js"></script>
+    <script src="src/js/dashboard.js"></script>
+    <script src="src/js/markets.js"></script>
+    <script src="src/js/stockDetails.js"></script>
+    <script src="src/js/portfolio.js"></script>
+    <script src="src/js/watchlist.js"></script>
+    <script src="src/js/aiAssistant.js"></script>
+    <script src="src/js/scanner.js"></script>
+    <script src="src/js/compare.js"></script>
+    <script src="src/js/reports.js"></script>
+    <script src="src/js/alerts.js"></script>
+    <script src="src/js/settings.js"></script>
+    <script src="src/js/app.js"></script>
+</body>
+
+</html>
