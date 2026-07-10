@@ -7,8 +7,12 @@ function loadChatHistory() {
         const div = document.createElement('div');
         div.className = `flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`;
         
-        // Render bold text
-        let formattedText = msg.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        // Render rich markdown formats
+        let formattedText = msg.text
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/^### (.*?)$/gm, '<h4 class="font-bold text-sm text-white mb-2 mt-3 font-label-md">$1</h4>')
+            .replace(/^\* (.*?)$/gm, '<li class="ml-4 list-disc mt-1 text-on-surface-variant">$1</li>')
+            .replace(/\n/g, '<br/>');
         
         div.innerHTML = `
             <div class="max-w-[75%] rounded-xl p-4 text-xs shadow-md border ${
@@ -24,7 +28,7 @@ function loadChatHistory() {
     container.scrollTop = container.scrollHeight;
 }
 
-function sendChatMessage(text) {
+async function sendChatMessage(text) {
     if (!text.trim()) return;
     
     // Add user prompt
@@ -47,10 +51,30 @@ function sendChatMessage(text) {
     container.appendChild(typingIndicator);
     container.scrollTop = container.scrollHeight;
     
-    // Formulate answer
-    setTimeout(() => {
+    try {
+        const history = state.chatMessages.slice(0, -1).map(msg => ({
+            role: msg.sender === 'user' ? 'user' : 'model',
+            text: msg.text
+        }));
+
+        const res = await apiFetch('/api/ai/chat', {
+            method: 'POST',
+            body: { message: text, history }
+        });
+
         typingIndicator.remove();
         
+        if (res.success && res.data && res.data.reply) {
+            state.chatMessages.push({ sender: "ai", text: res.data.reply });
+            loadChatHistory();
+            auditLog("AI Copilot Response", "Generated neural intelligence reply", "AI Engine");
+        } else {
+            throw new Error("Invalid reply format");
+        }
+    } catch (err) {
+        console.warn("Real-time AI Assistant call failed, using high-fidelity local models:", err);
+        
+        typingIndicator.remove();
         let response = "I am Vertigo's neural intelligence agent. I can perform deep-dive financial analysis, generate investment reports, scan for market anomalies, or audit your portfolio's risk exposure. Let me know what you'd like to analyze.";
         const query = text.toLowerCase();
         
@@ -68,8 +92,8 @@ function sendChatMessage(text) {
         
         state.chatMessages.push({ sender: "ai", text: response });
         loadChatHistory();
-        auditLog("AI Copilot Response", "Generated neural intelligence reply", "AI Engine");
-    }, 1200);
+        auditLog("AI Copilot Response", "Generated local neural intelligence reply", "AI Engine");
+    }
 }
 
 function handleChatSubmit(e) {

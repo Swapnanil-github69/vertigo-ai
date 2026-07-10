@@ -194,3 +194,35 @@ function auditLog(action, detail, type = "User") {
         loadLogsTable();
     }
 }
+
+// Global JWT Access Token storage
+let accessToken = localStorage.getItem('accessToken') || null;
+
+// Unified HTTP request helper
+async function apiFetch(url, options = {}) {
+    if (!options.headers) options.headers = {};
+    if (accessToken) {
+        options.headers['Authorization'] = `Bearer ${accessToken}`;
+    }
+    
+    // Automatically serialize object bodies to JSON
+    if (options.body && typeof options.body === 'object' && !(options.body instanceof FormData)) {
+        options.headers['Content-Type'] = 'application/json';
+        options.body = JSON.stringify(options.body);
+    }
+    
+    options.credentials = 'include'; // Include cookies (refreshToken)
+
+    try {
+        const response = await fetch(url, options);
+        const json = await response.json();
+        
+        if (!response.ok) {
+            throw new Error(json.message || 'API request failed');
+        }
+        return json;
+    } catch (err) {
+        throw err;
+    }
+}
+

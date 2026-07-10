@@ -1,9 +1,38 @@
+:root {
+    --color-background: #080809;
+    --color-surface: #080809;
+    --color-surface-container: #111216;
+    --color-surface-container-low: #0e1015;
+    --color-surface-container-high: #18191e;
+    --color-surface-container-highest: #22232a;
+    --color-primary-container: #0e1015;
+    --color-on-surface: #ffffff;
+    --color-on-background: #f1f5f9;
+    --color-on-surface-variant: #94A3B8;
+    --color-outline-variant: rgba(255, 255, 255, 0.06);
+}
+
+html.light {
+    --color-background: #f8fafc;
+    --color-surface: #ffffff;
+    --color-surface-container: #f1f5f9;
+    --color-surface-container-low: #e2e8f0;
+    --color-surface-container-high: #cbd5e1;
+    --color-surface-container-highest: #94a3b8;
+    --color-primary-container: #e2e8f0;
+    --color-on-surface: #0f172a;
+    --color-on-background: #1e293b;
+    --color-on-surface-variant: #475569;
+    --color-outline-variant: rgba(15, 23, 42, 0.08);
+}
+
 body {
-    background-color: #080809;
-    color: #f1f5f9;
+    background-color: var(--color-background);
+    color: var(--color-on-background);
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 .font-display-lg, .font-headline-lg, .font-headline-md {
@@ -377,3 +406,131 @@ body {
 .group:hover .watchlist-sparkline-path {
     stroke-width: 2.2px;
 }
+
+/* ==========================================================================
+   macOS-Inspired Premium Cursor System
+   ========================================================================== */
+@media (min-width: 768px) {
+    /* Only disable custom cursor class on desktop devices */
+    html.custom-cursor-enabled,
+    html.custom-cursor-enabled * {
+        cursor: none !important;
+    }
+}
+
+.custom-cursor {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
+    z-index: 999999;
+    will-change: transform;
+    /* Hardware accelerated styling */
+    transform: translate3d(-100px, -100px, 0);
+    transition: filter 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Ensure that when custom cursor is active, it only renders on desktop */
+@media (min-width: 768px) {
+    html.custom-cursor-enabled .custom-cursor {
+        display: block;
+    }
+}
+
+/* SVG contents */
+.custom-cursor svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Initial shadow */
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.35));
+}
+
+/* Cursor shapes & fills */
+.custom-cursor .cursor-path {
+    fill: #ffffff;
+    stroke: #000000;
+    stroke-width: 1.2px;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    transition: fill 0.15s ease, stroke 0.15s ease;
+}
+
+/* Grabbing and I-beam stylings */
+.custom-cursor.state-ibeam svg {
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+}
+
+.custom-cursor.state-ibeam .cursor-path {
+    fill: #ffffff;
+    stroke: #000000;
+    stroke-width: 1.2px;
+}
+
+/* Hover State Glow & Scale */
+.custom-cursor.state-hovering svg {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 8px rgba(20, 21, 168, 0.6)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35));
+}
+
+/* Click Compression State */
+.custom-cursor.state-clicking svg {
+    transform: scale(0.92);
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+/* Grabbing Drag state */
+.custom-cursor.state-grabbing svg {
+    transform: scale(1.0);
+    filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.4));
+}
+
+/* Link Hover State */
+.custom-cursor.state-link-hovering svg {
+    transform: scale(1.05);
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4)) drop-shadow(0 0 4px rgba(20, 21, 168, 0.3));
+}
+
+/* Minimal Spinner Integration */
+.custom-cursor-spinner {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    width: 12px;
+    height: 12px;
+    border: 2px solid rgba(20, 21, 168, 0.2);
+    border-top: 2px solid #1415A8;
+    border-radius: 50%;
+    animation: cursor-spin 0.6s linear infinite;
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.custom-cursor.state-loading .custom-cursor-spinner {
+    opacity: 1;
+    transform: scale(1);
+}
+
+@keyframes cursor-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Accessibility: respect user prefers-reduced-motion settings */
+@media (prefers-reduced-motion: reduce) {
+    .custom-cursor,
+    .custom-cursor svg,
+    .custom-cursor-spinner,
+    .custom-cursor .cursor-path {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+

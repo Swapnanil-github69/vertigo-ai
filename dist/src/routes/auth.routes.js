@@ -1,0 +1,18 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const auth_controller_1 = require("../controllers/auth.controller");
+const auth_1 = require("../middlewares/auth");
+const asyncHandler_1 = require("../middlewares/asyncHandler");
+const router = (0, express_1.Router)();
+router.post('/signup', (0, asyncHandler_1.asyncHandler)(auth_controller_1.authController.signup));
+router.post('/verify-otp', (0, asyncHandler_1.asyncHandler)(auth_controller_1.authController.verifyOtp));
+router.post('/login', (0, asyncHandler_1.asyncHandler)(auth_controller_1.authController.login));
+router.post('/resend-otp', (0, asyncHandler_1.asyncHandler)(auth_controller_1.authController.resendOtp));
+router.post('/logout', (0, asyncHandler_1.asyncHandler)(auth_controller_1.authController.logout));
+router.post('/forgot-password', (0, asyncHandler_1.asyncHandler)(auth_controller_1.authController.forgotPassword));
+router.post('/reset-password', (0, asyncHandler_1.asyncHandler)(auth_controller_1.authController.resetPassword));
+router.get('/google', (0, asyncHandler_1.asyncHandler)(auth_controller_1.authController.googleLogin));
+router.get('/google/callback', (0, asyncHandler_1.asyncHandler)(auth_controller_1.authController.googleCallback));
+router.get('/session', auth_1.authMiddleware, (0, asyncHandler_1.asyncHandler)(auth_controller_1.authController.checkSession));
+exports.default = router;

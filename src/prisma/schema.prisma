@@ -38,8 +38,11 @@ enum ChatRole {
 model User {
   id                String             @id @default(uuid()) @db.Uuid
   email             String             @unique
-  passwordHash      String
+  passwordHash      String?
   name              String
+  googleId          String?            @unique
+  avatarUrl         String?
+  emailVerified     Boolean            @default(false)
   role              Role               @default(USER)
   status            UserStatus         @default(ACTIVE)
   createdAt         DateTime           @default(now())
@@ -60,6 +63,7 @@ model User {
   auditLogs         AuditLogs[]
 
   @@index([email])
+  @@index([googleId])
 }
 
 model RefreshToken {
@@ -291,4 +295,19 @@ model AuditLogs {
   timestamp DateTime @default(now())
 
   @@index([userId])
+}
+
+model Otp {
+  id          String    @id @default(uuid()) @db.Uuid
+  email       String
+  code        String
+  type        String    // e.g. REGISTRATION, LOGIN, PASSWORD_RESET, SENSITIVE_ACTION
+  expiresAt   DateTime
+  verifiedAt  DateTime?
+  attempts    Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([email])
+  @@index([code])
 }
