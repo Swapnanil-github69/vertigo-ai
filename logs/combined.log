@@ -253,3 +253,158 @@ Error: Invalid login: 535 5.7.0 Invalid credentials
     at TLSSocket.Readable.push (node:internal/streams/readable:390:5)
 [2026-07-10 20:50:19:5019] [INFO]  🔑 [SECURITY/DEV] Generated OTP for swapnanilrick10@gmail.com (REGISTRATION): 565705
 [2026-07-10 20:50:21:5021] [HTTP]  POST /api/auth/signup 201 235 - 7830.731 ms [ReqID: 3e78a9ac-37b6-43f1-a115-0169b7a0fb77]
+[2026-07-11 00:54:52:5452] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 00:54:52:5452] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 00:54:55:5455] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 01:01:12:112] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 01:01:12:112] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 01:01:15:115] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 01:01:46:146] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 01:01:46:146] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 01:01:48:148] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 01:01:53:153] [WARN] [ReqID: 6d1e4c8e-5af3-465b-8ba0-a7dd2c9e27c5] AppError (401): Authentication token required.
+[2026-07-11 01:01:53:153] [HTTP]  GET /api/auth/session 401 176 - 6.835 ms [ReqID: 6d1e4c8e-5af3-465b-8ba0-a7dd2c9e27c5]
+[2026-07-11 01:01:53:153] [HTTP]  GET /api/auth/google/config 200 129 - 1.140 ms [ReqID: b7e0d61d-f820-4825-bd2d-23e73b4395fb]
+[2026-07-11 01:01:53:153] [WARN] [ReqID: 88fcd694-d3d7-4118-8914-2ae99566eaf6] AppError (404): Requested API route [GET] /favicon.ico was not found
+[2026-07-11 01:01:53:153] [HTTP]  GET /favicon.ico 404 198 - 1.148 ms [ReqID: 88fcd694-d3d7-4118-8914-2ae99566eaf6]
+[2026-07-11 01:02:03:23] [WARN] [ReqID: 0e2771b4-d1f8-4ca9-8713-584c00397fb0] AppError (401): Authentication token required.
+[2026-07-11 01:02:03:23] [HTTP]  GET /api/auth/session 401 176 - 1.757 ms [ReqID: 0e2771b4-d1f8-4ca9-8713-584c00397fb0]
+[2026-07-11 01:02:03:23] [HTTP]  GET /api/auth/google/config 304 - - 0.602 ms [ReqID: a5e7362b-3926-4559-a1a8-97d7ebdd72c4]
+[2026-07-11 01:04:47:447] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 01:04:47:447] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 01:04:49:449] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 01:06:29:629] [WARN] [ReqID: 14e4a2ec-229a-449c-ade1-8e4ea64d69e0] AppError (401): Authentication token required.
+[2026-07-11 01:06:29:629] [HTTP]  GET /api/auth/session 401 176 - 6.349 ms [ReqID: 14e4a2ec-229a-449c-ade1-8e4ea64d69e0]
+[2026-07-11 01:06:29:629] [HTTP]  GET /api/auth/google/config 200 129 - 1.014 ms [ReqID: 76851e23-0ab0-4ee9-be77-715dd8344fd7]
+[2026-07-11 01:07:49:749] [ERROR]  ❌ Failed to send email to [test@example.com]: Invalid login: 535 5.7.0 Invalid credentials
+Error: Invalid login: 535 5.7.0 Invalid credentials
+    at SMTPConnection._formatError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionAUTHComplete (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:1588:34)
+    at SMTPConnection.<anonymous> (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:556:26)
+    at SMTPConnection._processResponse (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at TLSSocket.SMTPConnection._onSocketData (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:508:28)
+    at addChunk (node:internal/streams/readable:559:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
+    at TLSSocket.Readable.push (node:internal/streams/readable:390:5)
+[2026-07-11 01:07:49:749] [INFO]  🔑 [SECURITY/DEV] Generated OTP for test@example.com (REGISTRATION): 456021
+[2026-07-11 01:07:51:751] [HTTP]  POST /api/auth/signup 201 226 - 9161.454 ms [ReqID: be20d757-1fbc-4369-ad3d-d6cfb2a529aa]
+[2026-07-11 01:08:33:833] [HTTP]  GET /api/auth/google?state=http%3A%2F%2Flocalhost%3A3000 302 468 - 16.779 ms [ReqID: c5df1ccc-62e4-45de-bff2-d5e9fbff700c]
+[2026-07-11 01:09:13:913] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 01:09:13:913] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 01:09:15:915] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 01:09:43:943] [WARN] [ReqID: ac710e67-2d8b-4c65-af92-b6b740d97e6d] AppError (401): Authentication token required.
+[2026-07-11 01:09:43:943] [HTTP]  GET /api/auth/session 401 176 - 7.859 ms [ReqID: ac710e67-2d8b-4c65-af92-b6b740d97e6d]
+[2026-07-11 01:09:43:943] [HTTP]  GET /api/auth/google/config 304 - - 0.867 ms [ReqID: 2914ab4d-efce-4f03-a084-d1f3ea2c2155]
+[2026-07-11 01:10:16:1016] [HTTP]  GET /api/auth/google/config 200 129 - 0.424 ms [ReqID: 7f0d3f67-3dc7-41c0-9f3f-b2f799328bcb]
+[2026-07-11 01:11:32:1132] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 01:11:32:1132] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 01:11:35:1135] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 01:11:38:1138] [WARN] [ReqID: d54b819b-90dd-40a2-a656-8fb4de95b052] AppError (401): Authentication token required.
+[2026-07-11 01:11:38:1138] [HTTP]  GET /api/auth/session 401 176 - 5.224 ms [ReqID: d54b819b-90dd-40a2-a656-8fb4de95b052]
+[2026-07-11 01:11:38:1138] [HTTP]  GET /api/auth/google/config 304 - - 1.089 ms [ReqID: 11c6e6c3-9c9d-4ccc-ab04-298d2c48709a]
+[2026-07-11 01:11:59:1159] [HTTP]  GET /api/auth/google?state=http%3A%2F%2Flocalhost%3A3000 302 468 - 2.308 ms [ReqID: 055a8e7c-8425-4b8c-86c2-3d923f810c4c]
+[2026-07-11 01:11:59:1159] [HTTP]  GET /api/auth/google?state=http%3A%2F%2Flocalhost%3A3000 302 468 - 1.062 ms [ReqID: 4b90298d-1be0-49b0-b7e1-baf144de5171]
+[2026-07-11 01:11:59:1159] [HTTP]  GET /api/auth/google?state=http%3A%2F%2Flocalhost%3A3000 302 468 - 0.684 ms [ReqID: 5ba873e0-f8cb-48f6-bf29-12b6a1f58d98]
+[2026-07-11 01:16:17:1617] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 01:16:17:1617] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 01:16:20:1620] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 01:16:21:1621] [WARN] [ReqID: 127867aa-6925-43bf-bae6-130e28cdcd68] AppError (401): Authentication token required.
+[2026-07-11 01:16:21:1621] [HTTP]  GET /api/auth/session 401 176 - 3.909 ms [ReqID: 127867aa-6925-43bf-bae6-130e28cdcd68]
+[2026-07-11 01:16:21:1621] [HTTP]  GET /api/auth/google/config 304 - - 0.744 ms [ReqID: cbc46719-fa2e-455f-983c-c27715e4ae0a]
+[2026-07-11 01:20:55:2055] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 01:20:55:2055] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 01:20:57:2057] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 01:21:12:2112] [WARN] [ReqID: 9abd5607-e91b-40a5-97fa-8455fca532c8] AppError (401): Authentication token required.
+[2026-07-11 01:21:12:2112] [HTTP]  GET /api/auth/session 401 176 - 7.051 ms [ReqID: 9abd5607-e91b-40a5-97fa-8455fca532c8]
+[2026-07-11 01:21:12:2112] [HTTP]  GET /api/auth/google/config 304 - - 1.671 ms [ReqID: ff06e50c-afea-4442-876d-225e5334a7db]
+[2026-07-11 01:21:34:2134] [HTTP]  GET /api/auth/google/config 304 - - 1.665 ms [ReqID: 59a73934-5725-458f-849f-fcc5833a2966]
+[2026-07-11 01:21:34:2134] [WARN] [ReqID: b13f2a2f-8328-484c-bc8c-341ee88beafb] AppError (404): Requested API route [GET] /favicon.ico was not found
+[2026-07-11 01:21:34:2134] [HTTP]  GET /favicon.ico 404 198 - 2.252 ms [ReqID: b13f2a2f-8328-484c-bc8c-341ee88beafb]
+[2026-07-11 01:21:40:2140] [WARN] [ReqID: 221860b7-9d4a-48f1-991a-00e1e6079108] AppError (401): Authentication token required.
+[2026-07-11 01:21:40:2140] [HTTP]  GET /api/auth/session 401 176 - 2.403 ms [ReqID: 221860b7-9d4a-48f1-991a-00e1e6079108]
+[2026-07-11 01:21:40:2140] [HTTP]  GET /api/auth/google/config 304 - - 0.506 ms [ReqID: 2b85a85c-c42a-4b92-b54b-97fccf20a04a]
+[2026-07-11 01:21:51:2151] [HTTP]  GET /api/auth/google?state=http%3A%2F%2Flocalhost%3A3000 302 468 - 2.882 ms [ReqID: 9f90f46d-5919-467b-8bc9-9dbb907d9cf5]
+[2026-07-11 01:23:41:2341] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 01:23:41:2341] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 01:23:43:2343] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 01:25:04:254] [HTTP]  GET /api/auth/google?state=http%3A%2F%2Flocalhost%3A3000 302 468 - 15.157 ms [ReqID: e24f09af-eac6-4364-b83e-9d8058bea3e1]
+[2026-07-11 01:26:44:2644] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 01:26:44:2644] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 01:26:46:2646] [WARN] [ReqID: 7fc36918-3259-4239-aa6d-24f2a4e715e5] AppError (401): Authentication token required.
+[2026-07-11 01:26:46:2646] [HTTP]  GET /api/auth/session 401 176 - 3.165 ms [ReqID: 7fc36918-3259-4239-aa6d-24f2a4e715e5]
+[2026-07-11 01:26:46:2646] [HTTP]  GET /api/auth/google/config 304 - - 0.798 ms [ReqID: 65efafa3-a27e-4888-acea-882ac4d302a5]
+[2026-07-11 01:26:46:2646] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 01:26:49:2649] [HTTP]  GET /api/auth/google?state=http%3A%2F%2Flocalhost%3A8000 302 468 - 3.923 ms [ReqID: 23aa7524-edcf-4959-a69b-9de1a22da315]
+[2026-07-11 01:27:01:271] [ERROR]  ❌ Failed to send email to [swapnanilrick10@gmail.com]: Invalid login: 535 5.7.0 Invalid credentials
+Error: Invalid login: 535 5.7.0 Invalid credentials
+    at SMTPConnection._formatError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionAUTHComplete (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:1588:34)
+    at SMTPConnection.<anonymous> (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:556:26)
+    at SMTPConnection._processResponse (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at TLSSocket.SMTPConnection._onSocketData (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:508:28)
+    at addChunk (node:internal/streams/readable:559:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
+    at TLSSocket.Readable.push (node:internal/streams/readable:390:5)
+[2026-07-11 01:27:01:271] [INFO]  🔑 [SECURITY/DEV] Generated OTP for swapnanilrick10@gmail.com (LOGIN): 319342
+[2026-07-11 01:27:04:274] [HTTP]  GET /api/auth/google/callback?state=http%3A%2F%2Flocalhost%3A8000&iss=https%3A%2F%2Faccounts.google.com&code=4%2F0AdkVLPzs4qzOOD4iYnJrHXg8dTJ4WOmaAfaikmDhIk2F4Qwv1VZ2L6j0WLNByu8OYmlyvA&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent 302 132 - 9146.768 ms [ReqID: e91a00df-9e0d-4e66-b6d6-5e9d163dcfb0]
+[2026-07-11 01:27:04:274] [HTTP]  GET /api/auth/google/config 304 - - 0.721 ms [ReqID: 5a7f94c2-f4cb-4571-aca9-493e1fb23c01]
+[2026-07-11 01:40:18:4018] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 01:40:18:4018] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 01:40:21:4021] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 01:40:21:4021] [WARN] [ReqID: a4a7bb21-d77f-43a5-a444-6c323ed82e50] AppError (401): Authentication token required.
+[2026-07-11 01:40:21:4021] [HTTP]  GET /api/auth/session 401 176 - 5.567 ms [ReqID: a4a7bb21-d77f-43a5-a444-6c323ed82e50]
+[2026-07-11 01:40:21:4021] [HTTP]  GET /api/auth/google/config 304 - - 0.615 ms [ReqID: 2a248b08-e2af-4032-b3a0-b83c8e06467e]
+[2026-07-11 01:40:29:4029] [HTTP]  GET /api/auth/google?state=http%3A%2F%2Flocalhost%3A8000 302 468 - 1.998 ms [ReqID: 31e337ca-c14f-4388-b578-5e7ff9777922]
+[2026-07-11 01:40:41:4041] [WARN]  [Resend] Delivery attempt 1/3 failed: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 01:40:42:4042] [INFO]  [Resend] Retrying email delivery (Attempt 2/3)...
+[2026-07-11 01:40:42:4042] [WARN]  [Resend] Delivery attempt 2/3 failed: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 01:40:44:4044] [INFO]  [Resend] Retrying email delivery (Attempt 3/3)...
+[2026-07-11 01:40:44:4044] [WARN]  [Resend] Delivery attempt 3/3 failed: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 01:40:44:4044] [ERROR]  [Resend] Delivery attempt 3/3 encountered error: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 01:40:44:4044] [ERROR]  [Resend] Internal API failure details: Name=validation_error, Message=The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 01:40:44:4044] [HTTP]  GET /api/auth/google/callback?state=http%3A%2F%2Flocalhost%3A8000&iss=https%3A%2F%2Faccounts.google.com&code=4%2F0AdkVLPxoF49lv3R7-9EUjclwfUGG1FKeWS26jBEj_CYBG5WLRdSJL2rQx2efaIja8_XIRQ&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=2&prompt=consent 302 82 - 9791.034 ms [ReqID: abcd785a-d2fd-4a2c-be12-4ba267abf020]
+[2026-07-11 01:40:45:4045] [HTTP]  GET /api/auth/google/config 304 - - 0.350 ms [ReqID: 30f9bdda-de6b-493c-b670-462baa6c21d5]
+[2026-07-11 01:42:41:4241] [HTTP]  GET /api/auth/google?state=http%3A%2F%2Flocalhost%3A8000 302 468 - 0.466 ms [ReqID: 8daf883d-db62-42a8-8e2f-a2e261690132]
+[2026-07-11 01:42:49:4249] [WARN]  [Resend] Delivery attempt 1/3 failed: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 01:42:50:4250] [INFO]  [Resend] Retrying email delivery (Attempt 2/3)...
+[2026-07-11 01:42:50:4250] [WARN]  [Resend] Delivery attempt 2/3 failed: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 01:42:52:4252] [INFO]  [Resend] Retrying email delivery (Attempt 3/3)...
+[2026-07-11 01:42:53:4253] [WARN]  [Resend] Delivery attempt 3/3 failed: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 01:42:53:4253] [ERROR]  [Resend] Delivery attempt 3/3 encountered error: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 01:42:53:4253] [ERROR]  [Resend] Internal API failure details: Name=validation_error, Message=The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 01:42:53:4253] [HTTP]  GET /api/auth/google/callback?state=http%3A%2F%2Flocalhost%3A8000&iss=https%3A%2F%2Faccounts.google.com&code=4%2F0AXEQxIDhPBkVqt715VArbvvRsjn_7YliHsF9Vqdr3HDR1CBbtML7EukZtFTeDC_IDTK3RQ&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent 302 82 - 5947.439 ms [ReqID: 545c329b-4b9b-4f35-971f-9869c9880ef9]
+[2026-07-11 01:42:53:4253] [HTTP]  GET /api/auth/google/config 304 - - 0.423 ms [ReqID: 3633d3d4-0fe2-48c1-a426-6061d4256e1c]
+[2026-07-11 01:46:37:4637] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 01:46:37:4637] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 01:46:39:4639] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 01:49:34:4934] [WARN] [ReqID: 0c0a5ea9-fbbd-4e8d-8c14-ed0d761ff5a1] AppError (401): Authentication token required.
+[2026-07-11 01:49:34:4934] [HTTP]  GET /api/auth/session 401 176 - 13.729 ms [ReqID: 0c0a5ea9-fbbd-4e8d-8c14-ed0d761ff5a1]
+[2026-07-11 01:49:34:4934] [HTTP]  GET /api/auth/google/config 304 - - 1.179 ms [ReqID: b470addd-d52d-49a8-97c5-ff97b69944a7]
+[2026-07-11 01:49:34:4934] [WARN] [ReqID: fc831906-0118-4d83-9070-f3155bd422db] AppError (404): Requested API route [GET] /favicon.ico was not found
+[2026-07-11 01:49:34:4934] [HTTP]  GET /favicon.ico 404 198 - 1.220 ms [ReqID: fc831906-0118-4d83-9070-f3155bd422db]
+[2026-07-11 02:00:17:017] [WARN] [ReqID: 37ed0519-ffbe-406a-87c8-b93c1da5f9c4] AppError (401): Authentication token required.
+[2026-07-11 02:00:17:017] [HTTP]  GET /api/auth/session 401 176 - 1.446 ms [ReqID: 37ed0519-ffbe-406a-87c8-b93c1da5f9c4]
+[2026-07-11 02:00:17:017] [HTTP]  GET /api/auth/google/config 304 - - 0.379 ms [ReqID: cee0eeea-b519-40ad-b44c-2835fd391946]
+[2026-07-11 02:03:50:350] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 02:03:50:350] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 02:03:53:353] [WARN] [ReqID: 418277a2-677e-454d-8b7c-a42821156655] AppError (401): Authentication token required.
+[2026-07-11 02:03:53:353] [HTTP]  GET /api/auth/session 401 176 - 6.579 ms [ReqID: 418277a2-677e-454d-8b7c-a42821156655]
+[2026-07-11 02:03:53:353] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 02:03:53:353] [HTTP]  GET /api/auth/google/config 304 - - 1.064 ms [ReqID: 5607425f-9b50-4c51-8adf-f218a181a69b]
+[2026-07-11 02:03:58:358] [HTTP]  GET /api/auth/google?state=http%3A%2F%2Flocalhost%3A8000 302 468 - 2.467 ms [ReqID: 287e8417-c0b1-4841-b92d-1bd2be036c43]
+[2026-07-11 02:04:04:44] [INFO]  [Google Auth] Attempting token exchange. Redirect URI: "http://localhost:8000/api/auth/google/callback"
+[2026-07-11 02:04:10:410] [INFO]  ✅ [Google Auth] Session successfully initialized for [swapnanilrick10@gmail.com]
+[2026-07-11 02:04:10:410] [HTTP]  GET /api/auth/google/callback?state=http%3A%2F%2Flocalhost%3A8000&iss=https%3A%2F%2Faccounts.google.com&code=4%2F0AXEQxICG6-rQxb1YaWnaSgrV_iM4keM6ciUzEzj9izlGz7t-nRUA8mrjQbbHbICKuKTe-w&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent 302 323 - 5274.295 ms [ReqID: 414ad33d-a57c-435f-bca2-d6604a52ba95]
+[2026-07-11 02:04:10:410] [HTTP]  GET /api/auth/google/config 304 - - 0.420 ms [ReqID: 90a673d3-bd81-4432-b496-8e6de0b0201c]
+[2026-07-11 02:06:14:614] [HTTP]  GET /api/auth/google?state=http%3A%2F%2Flocalhost%3A8000 302 468 - 0.741 ms [ReqID: b150ab2b-814c-4920-b54a-814f282c6f26]
+[2026-07-11 02:06:18:618] [HTTP]  GET /api/auth/google?state=http%3A%2F%2Flocalhost%3A8000 302 468 - 0.835 ms [ReqID: 8f2d1978-876c-48da-9385-8b8de627b269]
+[2026-07-11 02:06:39:639] [HTTP]  GET /api/auth/google?state=http%3A%2F%2Flocalhost%3A8000 302 468 - 0.584 ms [ReqID: 6a6e2d2c-9b64-4447-9563-407a8a742782]
+[2026-07-11 02:06:43:643] [HTTP]  GET /api/auth/google?state=http%3A%2F%2Flocalhost%3A8000 302 468 - 0.835 ms [ReqID: 3c569c0a-3994-4e2a-9180-c0e611c76d8f]
+[2026-07-11 02:06:48:648] [INFO]  [Google Auth] Attempting token exchange. Redirect URI: "http://localhost:8000/api/auth/google/callback"
+[2026-07-11 02:06:52:652] [INFO]  ✅ [Google Auth] Session successfully initialized for [swapnanilbanerjee695@gmail.com]
+[2026-07-11 02:06:52:652] [HTTP]  GET /api/auth/google/callback?state=http%3A%2F%2Flocalhost%3A8000&iss=https%3A%2F%2Faccounts.google.com&code=4%2F0AXEQxIB7XLtp681V8ZMxYnvWI2XHZ6ok-6wCW-yC-KAXIGiMOyJ47CmdNG5GaAdzMPSgCg&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=2&prompt=consent 302 329 - 3455.659 ms [ReqID: 42f96f5d-a90f-49f6-b9dc-086ed4331332]
+[2026-07-11 02:06:52:652] [HTTP]  GET /api/auth/google/config 304 - - 0.417 ms [ReqID: 33a88d5d-1f28-47f4-84f8-3d682a9d2ee7]

@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 import { otpRepository } from '../repositories/otp.repository';
-import { mailService } from './mail.service';
+import { emailService } from './email.service';
 import { BadRequestError } from '../utils/errors';
 import { Otp } from '@prisma/client';
 import { logger } from '../utils/logger';
@@ -48,7 +48,11 @@ export class OtpService {
 
     // Send code via email service
     const purposeText = this.getPurposeText(type);
-    await mailService.sendOtp(email, code, purposeText);
+    if (type === 'PASSWORD_RESET') {
+      await emailService.sendPasswordReset(email, code);
+    } else {
+      await emailService.sendOtp(email, code, purposeText);
+    }
 
     // Print to console for easy local testing
     logger.info(`🔑 [SECURITY/DEV] Generated OTP for ${email} (${type}): ${code}`);

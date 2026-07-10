@@ -14,6 +14,9 @@ router.post('/forgot-password', asyncHandler(authController.forgotPassword));
 router.post('/reset-password', asyncHandler(authController.resetPassword));
 router.get('/google', asyncHandler(authController.googleLogin));
 router.get('/google/callback', asyncHandler(authController.googleCallback));
+router.get('/google/config', asyncHandler(authController.getGoogleConfig));
+router.post('/google/verify-token', asyncHandler(authController.verifyGoogleToken));
 router.get('/session', authMiddleware, asyncHandler(authController.checkSession));
 
 export default router;
+

@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.otpService = exports.OtpService = void 0;
 const crypto_1 = __importDefault(require("crypto"));
 const otp_repository_1 = require("../repositories/otp.repository");
-const mail_service_1 = require("./mail.service");
+const email_service_1 = require("./email.service");
 const errors_1 = require("../utils/errors");
 const logger_1 = require("../utils/logger");
 const client_1 = require("../database/client");
@@ -46,7 +46,12 @@ class OtpService {
         });
         // Send code via email service
         const purposeText = this.getPurposeText(type);
-        await mail_service_1.mailService.sendOtp(email, code, purposeText);
+        if (type === 'PASSWORD_RESET') {
+            await email_service_1.emailService.sendPasswordReset(email, code);
+        }
+        else {
+            await email_service_1.emailService.sendOtp(email, code, purposeText);
+        }
         // Print to console for easy local testing
         logger_1.logger.info(`🔑 [SECURITY/DEV] Generated OTP for ${email} (${type}): ${code}`);
         return otp;

@@ -151,3 +151,31 @@ Error: Invalid login: 535 5.7.0 Invalid credentials
     at addChunk (node:internal/streams/readable:559:12)
     at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
     at TLSSocket.Readable.push (node:internal/streams/readable:390:5)
+[2026-07-11 01:07:49:749] [ERROR]  ❌ Failed to send email to [test@example.com]: Invalid login: 535 5.7.0 Invalid credentials
+Error: Invalid login: 535 5.7.0 Invalid credentials
+    at SMTPConnection._formatError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionAUTHComplete (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:1588:34)
+    at SMTPConnection.<anonymous> (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:556:26)
+    at SMTPConnection._processResponse (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at TLSSocket.SMTPConnection._onSocketData (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:508:28)
+    at addChunk (node:internal/streams/readable:559:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
+    at TLSSocket.Readable.push (node:internal/streams/readable:390:5)
+[2026-07-11 01:27:01:271] [ERROR]  ❌ Failed to send email to [swapnanilrick10@gmail.com]: Invalid login: 535 5.7.0 Invalid credentials
+Error: Invalid login: 535 5.7.0 Invalid credentials
+    at SMTPConnection._formatError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionAUTHComplete (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:1588:34)
+    at SMTPConnection.<anonymous> (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:556:26)
+    at SMTPConnection._processResponse (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at TLSSocket.SMTPConnection._onSocketData (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:508:28)
+    at addChunk (node:internal/streams/readable:559:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
+    at TLSSocket.Readable.push (node:internal/streams/readable:390:5)
+[2026-07-11 01:40:44:4044] [ERROR]  [Resend] Delivery attempt 3/3 encountered error: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 01:40:44:4044] [ERROR]  [Resend] Internal API failure details: Name=validation_error, Message=The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 01:42:53:4253] [ERROR]  [Resend] Delivery attempt 3/3 encountered error: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 01:42:53:4253] [ERROR]  [Resend] Internal API failure details: Name=validation_error, Message=The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains

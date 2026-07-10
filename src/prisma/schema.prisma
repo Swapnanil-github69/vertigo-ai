@@ -46,6 +46,16 @@ model User {
   role              Role               @default(USER)
   status            UserStatus         @default(ACTIVE)
   provider          String             @default("credentials")
+  firstName         String?
+  lastName          String?
+  phoneNumber       String?
+  dateOfBirth       DateTime?
+  gender            String?
+  country           String?
+  language          String?            @default("en")
+  locale            String?
+  timezone          String?
+  loginCount        Int                @default(0)
   lastLoginAt       DateTime?
   createdAt         DateTime           @default(now())
   updatedAt         DateTime           @updatedAt
