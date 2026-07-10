@@ -15,6 +15,10 @@ const responseFormatter_1 = require("./middlewares/responseFormatter");
 const logger_1 = require("./utils/logger");
 const errorHandler_1 = require("./middlewares/errorHandler");
 const notFound_1 = require("./middlewares/notFound");
+const auth_routes_1 = __importDefault(require("./routes/auth.routes"));
+const user_routes_1 = __importDefault(require("./routes/user.routes"));
+const stock_routes_1 = __importDefault(require("./routes/stock.routes"));
+const ai_routes_1 = __importDefault(require("./routes/ai.routes"));
 const app = (0, express_1.default)();
 // Standard Security and Compression Layers
 app.use((0, helmet_1.default)());
@@ -45,9 +49,17 @@ const apiLimiter = (0, express_rate_limit_1.default)({
 });
 app.use('/api', apiLimiter);
 // Base Health Check endpoint
-app.get('/api/health', (req, res) => {
+app.get('/api/health', (_req, res) => {
     res.ok({ status: 'UP', database: 'READY' }, 'Vertigo service core is online and stable.');
 });
+// Authentication Routes
+app.use('/api/auth', auth_routes_1.default);
+// User Routes
+app.use('/api/users', user_routes_1.default);
+// Stock Routes
+app.use('/api/stocks', stock_routes_1.default);
+// AI Routes
+app.use('/api/ai', ai_routes_1.default);
 // Catch unmapped routes
 app.use(notFound_1.notFoundMiddleware);
 // Centralized error parsing

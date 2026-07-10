@@ -1,13 +1,71 @@
 // Stock details view controllers
-function loadStockDetails(ticker) {
+let tvChartInstance = null;
+
+async function loadStockDetails(ticker) {
     state.activeStock = ticker;
+    
+    // Set loading placeholder state
+    document.getElementById('stock-detail-symbol').innerText = ticker + " (Syncing...)";
+
+    try {
+        const [quoteRes, profileRes] = await Promise.all([
+            apiFetch(`/api/stocks/quote?symbol=${ticker}`),
+            apiFetch(`/api/stocks/profile?symbol=${ticker}`)
+        ]);
+
+        if (quoteRes.success && profileRes.success) {
+            const q = quoteRes.data;
+            const p = profileRes.data;
+
+            if (!state.assets[ticker]) {
+                state.assets[ticker] = {};
+            }
+            const asset = state.assets[ticker];
+            
+            // Map live values
+            asset.price = q.price;
+            asset.change = q.change;
+            asset.pctChange = q.changePercent;
+            asset.volume = (q.volume / 1000000).toFixed(1) + 'M';
+            asset.open = q.open;
+            asset.high = q.high;
+            asset.low = q.low;
+            asset.range = `$${q.low.toFixed(2)} - $${q.high.toFixed(2)}`;
+
+            asset.name = p.name;
+            asset.sector = `${p.sector} | ${p.industry}`;
+            asset.symbol = p.symbol;
+            
+            // Seed placeholder metrics if not present
+            if (!asset.aiScore) asset.aiScore = Math.floor(65 + (q.price % 30));
+            if (!asset.volatility) asset.volatility = (1.1 + (q.price % 3) / 10).toFixed(2) + "σ (Moderate)";
+            if (!asset.beta) asset.beta = (0.9 + (q.price % 5) / 10).toFixed(2) + "β";
+            if (!asset.sentiment) asset.sentiment = q.changePercent >= 0 ? "Bullish" : "Bearish";
+            if (!asset.recommendation) {
+                asset.recommendation = `${p.name} exhibits positive momentum vectors above moving averages. Neural targets set to $${(q.price * 1.12).toFixed(2)}.`;
+            }
+            
+            asset.mcap = `$${(1.2 + (q.price % 10) / 10).toFixed(2)}T`;
+            asset.pe = (22 + (q.price % 20)).toFixed(1);
+            
+            if (!asset.news) {
+                asset.news = [
+                    { headline: `${p.name} sentiment indices register positive momentum`, source: "SEC AI Crawler", age: "5 mins ago", impact: "Moderate positive" },
+                    { headline: `${p.name} quarterly earnings projected parameters updated`, source: "Analyst Audit", age: "2 hours ago", impact: "Neutral" }
+                ];
+            }
+        }
+    } catch (err) {
+        console.error("Failed to sync live stock details:", err);
+    }
+
     const asset = state.assets[ticker];
     if (!asset) {
         window.location.hash = '#/dashboard';
         return;
     }
     
-    // Set text coordinates
+    // Set UI elements
     document.getElementById('stock-detail-avatar').innerText = ticker[0];
     document.getElementById('stock-detail-name').innerText = asset.name;
     document.getElementById('stock-detail-symbol').innerText = asset.symbol;
@@ -19,7 +77,6 @@ function loadStockDetails(ticker) {
     changeNode.className = `text-xs font-label-md flex items-center justify-end mt-0.5 ${isPositive ? 'text-tertiary' : 'text-error'}`;
     changeNode.innerHTML = `<span class="material-symbols-outlined text-sm mr-0.5">${isPositive ? 'trending_up' : 'trending_down'}</span>${isPositive ? '+' : ''}${asset.change.toFixed(2)} (${isPositive ? '+' : ''}${asset.pctChange.toFixed(2)}%)`;
     
-    // Watchlist state sync
     updateDetailWatchlistBtn();
 
     // AI indicators
@@ -39,21 +96,10 @@ function loadStockDetails(ticker) {
     document.getElementById('stock-detail-range').innerText = asset.range;
     document.getElementById('stock-detail-volume').innerText = asset.volume;
     
-    // Draw chart SVG path
-    const svgChart = document.getElementById('stock-detail-svg-chart');
-    const strokeColor = isPositive ? '#1FCA17' : '#ef4444';
-    svgChart.innerHTML = `
-        <path d="${asset.chartPath}" fill="none" stroke="${strokeColor}" stroke-width="3" stroke-linecap="round"></path>
-        <path d="${asset.chartPath} L500 150 L0 150 Z" fill="url(#detailGrad)" stroke="none"></path>
-        <defs>
-            <linearGradient id="detailGrad" x1="0" x2="0" y1="0" y2="1">
-                <stop offset="0%" stop-color="${strokeColor}" stop-opacity="0.3"></stop>
-                <stop offset="100%" stop-color="${strokeColor}" stop-opacity="0"></stop>
-            </linearGradient>
-        </defs>
-    `;
+    // Render TradingView interactive chart
+    renderTradingViewChart(ticker);
     
-    // Render news correlation items
+    // Render news feed
     const newsFeed = document.getElementById('stock-detail-news-feed');
     newsFeed.innerHTML = '';
     asset.news.forEach(item => {
@@ -73,6 +119,80 @@ function loadStockDetails(ticker) {
     });
     
     auditLog("Stock View", `Loaded market coordinates for ${ticker}`, "User");
+}
+
+async function renderTradingViewChart(ticker) {
+    const container = document.getElementById('stock-detail-tv-chart');
+    if (!container) return;
+
+    if (tvChartInstance) {
+        tvChartInstance.remove();
+        tvChartInstance = null;
+    }
+
+    try {
+        const res = await apiFetch(`/api/stocks/history?symbol=${ticker}&outputsize=60`);
+        if (!res.success || !res.data || res.data.length === 0) {
+            container.innerHTML = `<div class="text-on-surface-variant text-center py-20 italic">No historical price vectors available.</div>`;
+            return;
+        }
+
+        const dataPoints = res.data;
+        const isUp = dataPoints[dataPoints.length - 1].close >= dataPoints[0].close;
+        const strokeColor = isUp ? '#1FCA17' : '#ef4444';
+
+        const activeTheme = localStorage.getItem('theme') || 'dark';
+        const isDark = activeTheme === 'dark';
+
+        tvChartInstance = LightweightCharts.createChart(container, {
+            width: container.clientWidth,
+            height: container.clientHeight || 256,
+            layout: {
+                background: { type: 'solid', color: 'transparent' },
+                textColor: isDark ? '#94A3B8' : '#475569',
+            },
+            grid: {
+                vertLines: { color: isDark ? 'rgba(255, 255, 255, 0.03)' : 'rgba(15, 23, 42, 0.03)' },
+                horzLines: { color: isDark ? 'rgba(255, 255, 255, 0.03)' : 'rgba(15, 23, 42, 0.03)' },
+            },
+            crosshair: {
+                mode: LightweightCharts.CrosshairMode.Normal,
+            },
+            rightPriceScale: {
+                borderColor: isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(15, 23, 42, 0.08)',
+            },
+            timeScale: {
+                borderColor: isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(15, 23, 42, 0.08)',
+            },
+        });
+
+        const areaSeries = tvChartInstance.addAreaSeries({
+            lineColor: strokeColor,
+            topColor: strokeColor + '30',
+            bottomColor: 'rgba(0,0,0,0)',
+            lineWidth: 2,
+        });
+
+        const chartData = dataPoints.map(p => ({
+            time: p.time,
+            value: p.close
+        }));
+
+        areaSeries.setData(chartData);
+        tvChartInstance.timeScale().fitContent();
+
+        // Responsive resize
+        const resizeObserver = new ResizeObserver(() => {
+            if (tvChartInstance && container) {
+                tvChartInstance.resize(container.clientWidth, container.clientHeight);
+            }
+        });
+        resizeObserver.observe(container);
+
+    } catch (err) {
+        console.error("Failed to render TradingView chart:", err);
+        container.innerHTML = `<div class="text-error text-center py-20 italic">Failed to initialize chart engine.</div>`;
+    }
 }
 
 function updateDetailWatchlistBtn() {
@@ -103,7 +223,6 @@ function toggleWatchlist(ticker) {
         showToast("Watchlist Updated", `Added ${ticker} to surveillance targets.`, "success");
         auditLog("Watchlist Add", `Added ${ticker} to surveillance targets`, "User");
     }
-    // If in watchlist view, reload
     if (window.location.hash === '#/watchlist') {
         typeof loadWatchlistView === 'function' && loadWatchlistView();
     }

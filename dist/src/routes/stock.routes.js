@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const stock_controller_1 = require("../controllers/stock.controller");
+const auth_1 = require("../middlewares/auth");
+const asyncHandler_1 = require("../middlewares/asyncHandler");
+const router = (0, express_1.Router)();
+router.get('/quote', auth_1.authMiddleware, (0, asyncHandler_1.asyncHandler)(stock_controller_1.stockController.getQuote));
+router.get('/profile', auth_1.authMiddleware, (0, asyncHandler_1.asyncHandler)(stock_controller_1.stockController.getProfile));
+router.get('/history', auth_1.authMiddleware, (0, asyncHandler_1.asyncHandler)(stock_controller_1.stockController.getHistory));
+router.get('/search', auth_1.authMiddleware, (0, asyncHandler_1.asyncHandler)(stock_controller_1.stockController.search));
+exports.default = router;

@@ -3,9 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.errorHandlerMiddleware = void 0;
 const errors_1 = require("../utils/errors");
 const logger_1 = require("../utils/logger");
-const errorHandlerMiddleware = (err, req, res, 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-next) => {
+const errorHandlerMiddleware = (err, req, res, _next) => {
     const requestId = req.requestId || '-';
     if (err instanceof errors_1.AppError) {
         // Log operational exceptions

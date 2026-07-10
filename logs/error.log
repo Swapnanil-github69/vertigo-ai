@@ -1,0 +1,57 @@
+[2026-07-10 14:50:51:5051] [ERROR]  ❌ Failed to establish database connection on startup: 
+Invalid `prisma.$queryRaw()` invocation:
+
+
+Authentication failed against database server at `localhost`, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at `localhost`.
+PrismaClientInitializationError: 
+Invalid `prisma.$queryRaw()` invocation:
+
+
+Authentication failed against database server at `localhost`, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at `localhost`.
+    at $n.handleRequestError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:7615)
+    at $n.handleAndLogRequestError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at l (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at Server.<anonymous> (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\server.ts:12:5)
+[2026-07-10 15:10:06:106] [ERROR]  ❌ Failed to establish database connection on startup: 
+Invalid `prisma.$queryRaw()` invocation:
+
+
+Authentication failed against database server at `localhost`, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at `localhost`.
+PrismaClientInitializationError: 
+Invalid `prisma.$queryRaw()` invocation:
+
+
+Authentication failed against database server at `localhost`, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at `localhost`.
+    at $n.handleRequestError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:7615)
+    at $n.handleAndLogRequestError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at l (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at Server.<anonymous> (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\server.ts:12:5)
+[2026-07-10 15:12:07:127] [ERROR]  ❌ Failed to establish database connection on startup: 
+Invalid `prisma.$queryRaw()` invocation:
+
+
+Authentication failed against database server at `localhost`, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at `localhost`.
+PrismaClientInitializationError: 
+Invalid `prisma.$queryRaw()` invocation:
+
+
+Authentication failed against database server at `localhost`, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at `localhost`.
+    at $n.handleRequestError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:7615)
+    at $n.handleAndLogRequestError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at l (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at Server.<anonymous> (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\server.ts:12:5)

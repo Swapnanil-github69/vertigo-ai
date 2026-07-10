@@ -10,6 +10,10 @@ import { responseFormatterMiddleware } from './middlewares/responseFormatter';
 import { morganMiddleware } from './utils/logger';
 import { errorHandlerMiddleware } from './middlewares/errorHandler';
 import { notFoundMiddleware } from './middlewares/notFound';
+import authRouter from './routes/auth.routes';
+import userRouter from './routes/user.routes';
+import stockRouter from './routes/stock.routes';
+import aiRouter from './routes/ai.routes';
 
 const app = express();
 
@@ -50,6 +54,18 @@ app.use('/api', apiLimiter);
 app.get('/api/health', (_req, res) => {
   res.ok({ status: 'UP', database: 'READY' }, 'Vertigo service core is online and stable.');
 });
+
+// Authentication Routes
+app.use('/api/auth', authRouter);
+
+// User Routes
+app.use('/api/users', userRouter);
+
+// Stock Routes
+app.use('/api/stocks', stockRouter);
+
+// AI Routes
+app.use('/api/ai', aiRouter);
 
 // Catch unmapped routes
 app.use(notFoundMiddleware);
