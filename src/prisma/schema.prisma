@@ -1,0 +1,294 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum UserStatus {
+  PENDING
+  ACTIVE
+  BLOCKED
+}
+
+enum TransactionType {
+  BUY
+  SELL
+}
+
+enum ReportStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
+enum ChatRole {
+  USER
+  SYSTEM
+  ASSISTANT
+}
+
+model User {
+  id                String             @id @default(uuid()) @db.Uuid
+  email             String             @unique
+  passwordHash      String
+  name              String
+  role              Role               @default(USER)
+  status            UserStatus         @default(ACTIVE)
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  
+  // Relations
+  refreshTokens     RefreshToken[]
+  preferences       UserPreferences?
+  sessions          Session[]
+  loginHistories    LoginHistory[]
+  interactionLogs   InteractionLogs[]
+  portfolios        Portfolio[]
+  watchlists        Watchlist[]
+  alerts            Alert[]
+  reports           Report[]
+  chats             AIChat[]
+  notifications     Notification[]
+  auditLogs         AuditLogs[]
+
+  @@index([email])
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid()) @db.Uuid
+  token     String   @unique
+  userId    String   @db.Uuid
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([token])
+}
+
+model UserPreferences {
+  id                 String   @id @default(uuid()) @db.Uuid
+  userId             String   @unique @db.Uuid
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  theme              String   @default("dark")
+  enableMfa          Boolean  @default(false)
+  enableNotifications Boolean @default(true)
+  enableAuditLogs    Boolean  @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model Session {
+  id           String   @id @default(uuid()) @db.Uuid
+  userId       String   @db.Uuid
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token        String   @unique
+  ipAddress    String?
+  userAgent    String?
+  device       String?
+  active       Boolean  @default(true)
+  lastActivity DateTime @default(now())
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+
+  @@index([userId])
+  @@index([token])
+}
+
+model LoginHistory {
+  id                     String   @id @default(uuid()) @db.Uuid
+  userId                 String   @db.Uuid
+  user                   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ipAddress              String?
+  userAgent              String?
+  os                     String?
+  browser                String?
+  loginTime              DateTime @default(now())
+  logoutTime             DateTime?
+  sessionDurationSeconds Int?
+  status                 String   @default("SUCCESS") // SUCCESS, FAILED
+  createdAt              DateTime @default(now())
+
+  @@index([userId])
+}
+
+model InteractionLogs {
+  id           String   @id @default(uuid()) @db.Uuid
+  userId       String   @db.Uuid
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  actionModule String   // Viewed Stock, Viewed Portfolio, AI Prompt, Generated Report, etc.
+  details      String   @db.Text
+  ipAddress    String?
+  userAgent    String?
+  createdAt    DateTime @default(now())
+
+  @@index([userId])
+  @@index([actionModule])
+}
+
+model Portfolio {
+  id             String   @id @default(uuid()) @db.Uuid
+  userId         String   @db.Uuid
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name           String   @default("Primary Portfolio")
+  totalValuation Float    @default(0.0)
+  healthRating   Float    @default(100.0)
+  beta           Float    @default(1.0)
+  cashBalance    Float    @default(0.0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  transactions   Transaction[]
+
+  @@index([userId])
+}
+
+model Transaction {
+  id             String          @id @default(uuid()) @db.Uuid
+  portfolioId    String          @db.Uuid
+  portfolio      Portfolio       @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  symbol         String
+  type           TransactionType
+  shares         Float
+  pricePerShare  Float
+  totalValue     Float
+  timestamp      DateTime        @default(now())
+
+  @@index([portfolioId])
+  @@index([symbol])
+}
+
+model Watchlist {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @db.Uuid
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  symbol    String
+  createdAt DateTime @default(now())
+
+  @@unique([userId, symbol])
+  @@index([userId])
+}
+
+model Alert {
+  id             String   @id @default(uuid()) @db.Uuid
+  userId         String   @db.Uuid
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  symbol         String
+  triggerType    String   // Price Above, Price Below, Volatility Spike
+  thresholdValue Float
+  active         Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([userId])
+  @@index([symbol])
+}
+
+model Report {
+  id           String       @id @default(uuid()) @db.Uuid
+  userId       String       @db.Uuid
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  symbol       String
+  reportType   String       // Full Comprehensive, Technical, Sentiment
+  documentSize String?      // e.g. "1.2 MB"
+  documentPath String?      // local path or S3 URL
+  status       ReportStatus @default(PENDING)
+  createdAt    DateTime     @default(now())
+
+  @@index([userId])
+  @@index([symbol])
+}
+
+model AIChat {
+  id           String           @id @default(uuid()) @db.Uuid
+  userId       String           @db.Uuid
+  user         User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title        String           @default("New Analysis Session")
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  conversations AIConversation[]
+
+  @@index([userId])
+}
+
+model AIConversation {
+  id         String   @id @default(uuid()) @db.Uuid
+  chatId     String   @db.Uuid
+  chat       AIChat   @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  role       ChatRole
+  content    String   @db.Text
+  tokenCount Int      @default(0)
+  createdAt  DateTime @default(now())
+
+  @@index([chatId])
+}
+
+model StockCache {
+  id          String   @id @default(uuid()) @db.Uuid
+  symbol      String   @unique
+  price       Float
+  change      Float
+  pctChange   Float
+  volatility  String
+  aiScore     Int
+  name        String
+  sector      String
+  lastUpdated DateTime @default(now()) @updatedAt
+
+  @@index([symbol])
+}
+
+model NewsCache {
+  id          String   @id @default(uuid()) @db.Uuid
+  symbol      String
+  title       String
+  summary     String   @db.Text
+  url         String
+  source      String
+  sentiment   String   // Bullish, Bearish, Neutral
+  publishedAt DateTime
+  lastUpdated DateTime @default(now()) @updatedAt
+
+  @@index([symbol])
+}
+
+model Notification {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @db.Uuid
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+model Settings {
+  id          String   @id @default(uuid()) @db.Uuid
+  key         String   @unique
+  value       String   @db.Text
+  description String?
+  lastUpdated DateTime @default(now()) @updatedAt
+}
+
+model AuditLogs {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String?  @db.Uuid
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  action    String
+  details   String   @db.Text
+  ipAddress String?
+  timestamp DateTime @default(now())
+
+  @@index([userId])
+}
