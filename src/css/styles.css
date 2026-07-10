@@ -534,3 +534,25 @@ body {
     }
 }
 
+/* Force text visibility, placeholder contrast, and caret visibility for inputs */
+input, textarea, select {
+    color: var(--color-on-surface) !important;
+    caret-color: var(--color-on-surface) !important;
+}
+
+html.light input, html.light textarea, html.light select {
+    color: #080809 !important;
+    background-color: #ffffff !important;
+    caret-color: #080809 !important;
+}
+
+input::placeholder, textarea::placeholder {
+    color: #94A3B8 !important;
+    opacity: 0.8 !important;
+}
+
+html.light input::placeholder, html.light textarea::placeholder {
+    color: #64748B !important;
+    opacity: 0.8 !important;
+}
+

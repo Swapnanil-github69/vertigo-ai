@@ -35,6 +35,10 @@ export class OtpRepository {
       data: { attempts: { increment: 1 } },
     });
   }
+
+  async delete(id: string): Promise<Otp> {
+    return prisma.otp.delete({ where: { id } });
+  }
 }
 
 export const otpRepository = new OtpRepository();

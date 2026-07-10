@@ -19,17 +19,57 @@ const auth_routes_1 = __importDefault(require("./routes/auth.routes"));
 const user_routes_1 = __importDefault(require("./routes/user.routes"));
 const stock_routes_1 = __importDefault(require("./routes/stock.routes"));
 const ai_routes_1 = __importDefault(require("./routes/ai.routes"));
+const path_1 = __importDefault(require("path"));
 const app = (0, express_1.default)();
 // Standard Security and Compression Layers
-app.use((0, helmet_1.default)());
+// Configure Helmet with Content Security Policy to allow frontend CDN dependencies
+app.use((0, helmet_1.default)({
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: ["'self'"],
+            scriptSrc: [
+                "'self'",
+                "'unsafe-inline'",
+                "'unsafe-eval'",
+                "https://cdn.tailwindcss.com",
+                "https://unpkg.com",
+            ],
+            styleSrc: [
+                "'self'",
+                "'unsafe-inline'",
+                "https://fonts.googleapis.com",
+            ],
+            fontSrc: [
+                "'self'",
+                "https://fonts.gstatic.com",
+            ],
+            imgSrc: [
+                "'self'",
+                "data:",
+                "https://images.unsplash.com",
+                "https://lh3.googleusercontent.com",
+                "*",
+            ],
+            connectSrc: [
+                "'self'",
+                "http://localhost:3000",
+                "http://localhost:8000",
+                "*",
+            ],
+        },
+    },
+}));
+const corsOrigins = config_1.config.CORS_ORIGIN.split(',');
 app.use((0, cors_1.default)({
-    origin: config_1.config.CORS_ORIGIN,
+    origin: corsOrigins.length === 1 ? corsOrigins[0] : corsOrigins,
     credentials: true,
 }));
 app.use((0, compression_1.default)());
 app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
+// Serve static frontend assets from workspace root
+app.use(express_1.default.static(path_1.default.resolve(__dirname, '../')));
 // Custom Request tracing & logging
 app.use(requestId_1.requestIdMiddleware);
 app.use(logger_1.morganMiddleware);

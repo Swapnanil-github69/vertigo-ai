@@ -32,6 +32,9 @@ class OtpRepository {
             data: { attempts: { increment: 1 } },
         });
     }
+    async delete(id) {
+        return client_1.prisma.otp.delete({ where: { id } });
+    }
 }
 exports.OtpRepository = OtpRepository;
 exports.otpRepository = new OtpRepository();

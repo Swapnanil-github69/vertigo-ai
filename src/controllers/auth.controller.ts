@@ -103,7 +103,7 @@ export class AuthController {
   async verifyOtp(req: CustomRequest, res: Response): Promise<Response> {
     const { email, code, type } = verifyOtpSchema.parse(req.body);
 
-    // Verify code
+    // Verify code (deletes it upon successful validation)
     await otpService.verifyOtp(email, code, type);
 
     const user = await userRepository.findByEmail(email);
@@ -121,7 +121,7 @@ export class AuthController {
     const sessionToken = generateRefreshToken({ userId: user.id, role: user.role, email: user.email });
     const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days
 
-    await sessionRepository.create({
+    const session = await sessionRepository.create({
       user: { connect: { id: user.id } },
       token: sessionToken,
       ipAddress: req.ip,
@@ -130,16 +130,52 @@ export class AuthController {
       expiresAt,
     });
 
-    await prisma.loginHistory.create({
-      data: {
-        user: { connect: { id: user.id } },
-        ipAddress: req.ip,
-        userAgent: req.headers['user-agent'],
-        os: uaParsed.os,
-        browser: uaParsed.browser,
-        status: 'SUCCESS',
-      },
+    // Determine provider type
+    const provider = user.provider || 'credentials';
+
+    await userRepository.update(user.id, {
+      lastLoginAt: new Date(),
+      provider,
     });
+
+    // Update latest PENDING login history to SUCCESS
+    const pendingLog = await prisma.loginHistory.findFirst({
+      where: {
+        userId: user.id,
+        status: 'PENDING',
+        provider,
+      },
+      orderBy: { createdAt: 'desc' },
+    });
+
+    if (pendingLog) {
+      await prisma.loginHistory.update({
+        where: { id: pendingLog.id },
+        data: {
+          status: 'SUCCESS',
+          sessionId: session.id,
+          otpVerifiedAt: new Date(),
+          loginTime: new Date(),
+        },
+      });
+    } else {
+      await prisma.loginHistory.create({
+        data: {
+          user: { connect: { id: user.id } },
+          ipAddress: req.ip,
+          userAgent: req.headers['user-agent'],
+          os: uaParsed.os,
+          browser: uaParsed.browser,
+          device: uaParsed.device,
+          sessionId: session.id,
+          provider,
+          otpGeneratedAt: new Date(), // fallback
+          otpVerifiedAt: new Date(),
+          loginTime: new Date(),
+          status: 'SUCCESS',
+        },
+      });
+    }
 
     // Generate access token
     const accessToken = generateAccessToken({ userId: user.id, role: user.role, email: user.email });
@@ -174,7 +210,7 @@ export class AuthController {
 
     const user = await userRepository.findByEmail(email);
     if (!user || !user.passwordHash) {
-      throw new UnauthorizedError('Invalid credentials.');
+      throw new UnauthorizedError('Account not found.');
     }
 
     const passwordMatch = await bcrypt.compare(password, user.passwordHash);
@@ -186,47 +222,27 @@ export class AuthController {
           ipAddress: req.ip,
           userAgent: req.headers['user-agent'],
           status: 'FAILED',
+          provider: 'credentials',
         },
       });
-      throw new UnauthorizedError('Invalid credentials.');
+      throw new UnauthorizedError('Incorrect password.');
     }
 
-    // Check if OTP verification is required (e.g. login from new device/IP combination)
+    if (user.status !== 'ACTIVE') {
+      throw new UnauthorizedError('Account is currently deactivated.');
+    }
+
+    if (!user.emailVerified) {
+      throw new UnauthorizedError('Account is not verified. Please verify your email.');
+    }
+
+    // Generate and send OTP (always required in the redesigned flow)
+    await otpService.sendVerificationOtp(email, 'LOGIN');
+
+    // Parse User-Agent details
     const uaParsed = parseUserAgent(req.headers['user-agent']);
-    const existingLog = await prisma.loginHistory.findFirst({
-      where: {
-        userId: user.id,
-        ipAddress: req.ip,
-        userAgent: req.headers['user-agent'],
-        status: 'SUCCESS',
-      },
-    });
 
-    if (!existingLog) {
-      // New device/IP detected, require OTP login flow
-      await otpService.sendVerificationOtp(email, 'LOGIN');
-      return res.status(200).json({
-        success: true,
-        message: 'New login vector detected. Verification OTP sent to your email.',
-        data: { otpRequired: true, email },
-        timestamp: new Date().toISOString(),
-        requestId: req.requestId || '-',
-      });
-    }
-
-    // Create session directly
-    const sessionToken = generateRefreshToken({ userId: user.id, role: user.role, email: user.email });
-    const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-
-    await sessionRepository.create({
-      user: { connect: { id: user.id } },
-      token: sessionToken,
-      ipAddress: req.ip,
-      userAgent: req.headers['user-agent'],
-      device: uaParsed.device,
-      expiresAt,
-    });
-
+    // Record PENDING login event
     await prisma.loginHistory.create({
       data: {
         user: { connect: { id: user.id } },
@@ -234,31 +250,17 @@ export class AuthController {
         userAgent: req.headers['user-agent'],
         os: uaParsed.os,
         browser: uaParsed.browser,
-        status: 'SUCCESS',
+        device: uaParsed.device,
+        provider: 'credentials',
+        otpGeneratedAt: new Date(),
+        status: 'PENDING',
       },
-    });
-
-    const accessToken = generateAccessToken({ userId: user.id, role: user.role, email: user.email });
-
-    res.cookie('refreshToken', sessionToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
-      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
     return res.status(200).json({
       success: true,
-      message: 'Authentication successful.',
-      data: {
-        accessToken,
-        user: {
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          role: user.role,
-        },
-      },
+      message: 'Verification OTP sent to your email.',
+      data: { otpRequired: true, email },
       timestamp: new Date().toISOString(),
       requestId: req.requestId || '-',
     });
@@ -376,6 +378,7 @@ export class AuthController {
 
   async googleLogin(req: CustomRequest, res: Response): Promise<void> {
     const rootUrl = 'https://accounts.google.com/o/oauth2/v2/auth';
+    const clientState = req.query.state as string || '';
     const options = {
       redirect_uri: `${req.protocol}://${req.get('host')}/api/auth/google/callback`,
       client_id: process.env.GOOGLE_CLIENT_ID || 'dummy_client_id',
@@ -386,14 +389,23 @@ export class AuthController {
         'https://www.googleapis.com/auth/userinfo.profile',
         'https://www.googleapis.com/auth/userinfo.email',
       ].join(' '),
+      state: clientState,
     };
     const qs = new URLSearchParams(options);
     res.redirect(`${rootUrl}?${qs.toString()}`);
   }
 
   async googleCallback(req: CustomRequest, res: Response): Promise<void> {
-    const { code } = req.query;
-    const targetOrigin = process.env.CORS_ORIGIN || 'http://localhost:8000';
+    const { code, state } = req.query;
+    const corsOrigins = (process.env.CORS_ORIGIN || 'http://localhost:8000').split(',');
+    let targetOrigin = corsOrigins[0];
+
+    // If state contains a valid origin from our allowed origins, use it
+    if (state && typeof state === 'string' && state.startsWith('http')) {
+      if (corsOrigins.includes(state)) {
+        targetOrigin = state;
+      }
+    }
 
     if (!code) {
       return res.redirect(`${targetOrigin}/#/auth?error=CodeMissing`);
@@ -474,16 +486,61 @@ export class AuthController {
       }
 
       const uaParsed = parseUserAgent(req.headers['user-agent']);
+
+      // Perform Risk Assessment: Check if successful history exists for this IP/UA
+      const existingLog = await prisma.loginHistory.findFirst({
+        where: {
+          userId: user.id,
+          ipAddress: req.ip,
+          userAgent: req.headers['user-agent'],
+          status: 'SUCCESS',
+        },
+      });
+
+      if (!existingLog) {
+        // Unrecognized device/location -> Require OTP!
+        await otpService.sendVerificationOtp(user.email, 'LOGIN');
+
+        // Create PENDING login log
+        await prisma.loginHistory.create({
+          data: {
+            user: { connect: { id: user.id } },
+            ipAddress: req.ip,
+            userAgent: req.headers['user-agent'],
+            os: uaParsed.os,
+            browser: uaParsed.browser,
+            device: uaParsed.device,
+            provider: 'google',
+            otpGeneratedAt: new Date(),
+            status: 'PENDING',
+          },
+        });
+
+        // Set provider info on user record
+        await userRepository.update(user.id, {
+          provider: 'google',
+        });
+
+        // Redirect to OTP verification page
+        return res.redirect(`${targetOrigin}/#/auth?otpRequired=true&email=${encodeURIComponent(user.email)}&provider=google`);
+      }
+
+      // Recognized device -> Log in immediately!
       const sessionToken = generateRefreshToken({ userId: user.id, role: user.role, email: user.email });
       const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
 
-      await sessionRepository.create({
+      const session = await sessionRepository.create({
         user: { connect: { id: user.id } },
         token: sessionToken,
         ipAddress: req.ip,
         userAgent: req.headers['user-agent'],
         device: uaParsed.device,
         expiresAt,
+      });
+
+      await userRepository.update(user.id, {
+        lastLoginAt: new Date(),
+        provider: 'google',
       });
 
       await prisma.loginHistory.create({
@@ -493,6 +550,9 @@ export class AuthController {
           userAgent: req.headers['user-agent'],
           os: uaParsed.os,
           browser: uaParsed.browser,
+          device: uaParsed.device,
+          sessionId: session.id,
+          provider: 'google',
           status: 'SUCCESS',
         },
       });
