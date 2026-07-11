@@ -584,7 +584,24 @@ html.light input::placeholder, html.light textarea::placeholder {
     }
 }
 
+
 #view-auth > div > div > div:not(.hidden) {
     animation: pane-fade-slide 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* User menu dropdown animation */
+#user-menu-dropdown {
+    transform-origin: top right;
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+#user-menu-dropdown.hidden-state {
+    opacity: 0;
+    transform: scale(0.95);
+    pointer-events: none;
+}
+#user-menu-dropdown.show-state {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
 }
 

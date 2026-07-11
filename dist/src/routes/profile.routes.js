@@ -1,0 +1,21 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const profile_controller_1 = require("../controllers/profile.controller");
+const auth_1 = require("../middlewares/auth");
+const asyncHandler_1 = require("../middlewares/asyncHandler");
+const image_upload_service_1 = require("../services/image-upload.service");
+const router = (0, express_1.Router)();
+// Protect all profile endpoints with JWT Authentication middleware
+router.use(auth_1.authMiddleware);
+router.get('/', (0, asyncHandler_1.asyncHandler)(profile_controller_1.profileController.getProfile));
+router.put('/', (0, asyncHandler_1.asyncHandler)(profile_controller_1.profileController.updateProfile));
+router.post('/avatar', image_upload_service_1.upload.single('avatar'), (0, asyncHandler_1.asyncHandler)(profile_controller_1.profileController.uploadAvatar));
+router.delete('/avatar', (0, asyncHandler_1.asyncHandler)(profile_controller_1.profileController.deleteAvatar));
+router.post('/avatar/revert', (0, asyncHandler_1.asyncHandler)(profile_controller_1.profileController.revertAvatar));
+router.post('/sync', (0, asyncHandler_1.asyncHandler)(profile_controller_1.profileController.syncGoogleProfile));
+router.get('/sessions', (0, asyncHandler_1.asyncHandler)(profile_controller_1.profileController.getActiveSessions));
+router.post('/sessions/logout', (0, asyncHandler_1.asyncHandler)(profile_controller_1.profileController.logoutSession));
+router.post('/sessions/logout-all', (0, asyncHandler_1.asyncHandler)(profile_controller_1.profileController.logoutAllSessions));
+router.delete('/delete-account', (0, asyncHandler_1.asyncHandler)(profile_controller_1.profileController.deleteAccount));
+exports.default = router;

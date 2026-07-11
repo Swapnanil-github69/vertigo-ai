@@ -1,8 +1,21 @@
 // Portfolio holds and rebalancing controllers
-function loadPortfolioView() {
+async function loadPortfolioView() {
     const body = document.getElementById('portfolio-holdings-body');
-    body.innerHTML = '';
+    if (!body) return;
     
+    // Show spinner or skeleton in body
+    body.innerHTML = `
+        <tr>
+            <td colspan="7" class="px-4 py-8 text-center text-on-surface-variant animate-pulse font-label-sm">
+                Synchronizing portfolio metrics with live quotes...
+            </td>
+        </tr>
+    `;
+
+    // Fetch real backend quotes and update state
+    await fetchLiveQuotesForAssets();
+    
+    body.innerHTML = '';
     state.portfolio.holdings.forEach(hold => {
         const asset = state.assets[hold.ticker];
         if (!asset) return;

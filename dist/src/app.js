@@ -19,6 +19,7 @@ const auth_routes_1 = __importDefault(require("./routes/auth.routes"));
 const user_routes_1 = __importDefault(require("./routes/user.routes"));
 const stock_routes_1 = __importDefault(require("./routes/stock.routes"));
 const ai_routes_1 = __importDefault(require("./routes/ai.routes"));
+const profile_routes_1 = __importDefault(require("./routes/profile.routes"));
 const path_1 = __importDefault(require("path"));
 const app = (0, express_1.default)();
 // Standard Security and Compression Layers
@@ -100,6 +101,8 @@ app.use('/api/users', user_routes_1.default);
 app.use('/api/stocks', stock_routes_1.default);
 // AI Routes
 app.use('/api/ai', ai_routes_1.default);
+// Profile Routes
+app.use('/api/profile', profile_routes_1.default);
 // Catch unmapped routes
 app.use(notFound_1.notFoundMiddleware);
 // Centralized error parsing

@@ -12,6 +12,7 @@ import { generateAccessToken, generateRefreshToken } from '../utils/jwt';
 import { parseUserAgent } from '../helpers/userAgent';
 import { BadRequestError, UnauthorizedError, ConflictError } from '../utils/errors';
 import { prisma } from '../database/client';
+import { googleSyncService } from '../services/google-sync.service';
 
 // Input Validations
 const signupSchema = z.object({
@@ -423,6 +424,8 @@ export class AuthController {
       }
     }
 
+    logger.info(`[Google Auth] Callback received. code: ${code ? 'present' : 'missing'}, state: ${state}`);
+
     const clientId = process.env.GOOGLE_CLIENT_ID;
     const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
 
@@ -483,50 +486,21 @@ export class AuthController {
         return res.redirect(`${targetOrigin}/#/auth?error=FetchUserInfoFailed`);
       }
 
-      const googleUser = (await userRes.json()) as { sub: string; name: string; email: string; picture: string };
+      const googleUser = (await userRes.json()) as {
+        sub: string;
+        name: string;
+        given_name?: string;
+        family_name?: string;
+        email: string;
+        picture?: string;
+        email_verified?: boolean | string;
+        locale?: string;
+      };
 
-      let user = await userRepository.findByGoogleId(googleUser.sub);
-      if (!user) {
-        user = await userRepository.findByEmail(googleUser.email);
-        if (user) {
-          user = await userRepository.update(user.id, {
-            googleId: googleUser.sub,
-            avatarUrl: googleUser.picture,
-            emailVerified: true,
-            provider: 'google',
-          });
-        } else {
-          user = await prisma.$transaction(async (tx) => {
-            const newUser = await tx.user.create({
-              data: {
-                email: googleUser.email,
-                name: googleUser.name,
-                googleId: googleUser.sub,
-                avatarUrl: googleUser.picture,
-                emailVerified: true,
-                provider: 'google',
-              },
-            });
+      logger.info(`[Google Auth] Google identity token verified successfully for: ${googleUser.email}`);
 
-            await tx.userPreferences.create({
-              data: {
-                userId: newUser.id,
-                theme: 'dark',
-              },
-            });
-
-            await tx.portfolio.create({
-              data: {
-                userId: newUser.id,
-                name: 'Primary Portfolio',
-                cashBalance: 100000,
-              },
-            });
-
-            return newUser;
-          });
-        }
-      }
+      const user = await googleSyncService.syncGoogleUser(googleUser);
+      logger.info(`[Google Auth] Database sync completed for user: ${user.email} (ID: ${user.id})`);
 
       const uaParsed = parseUserAgent(req.headers['user-agent']);
 
@@ -543,11 +517,6 @@ export class AuthController {
         expiresAt,
       });
 
-      await userRepository.update(user.id, {
-        lastLoginAt: new Date(),
-        provider: 'google',
-      });
-
       await prisma.loginHistory.create({
         data: {
           user: { connect: { id: user.id } },
@@ -559,16 +528,27 @@ export class AuthController {
           sessionId: session.id,
           provider: 'google',
           status: 'SUCCESS',
+          loginTime: new Date(),
+          otpVerifiedAt: new Date()
         },
       });
 
       const accessToken = generateAccessToken({ userId: user.id, role: user.role, email: user.email });
+      logger.info(`[Google Auth] JWT Access Token successfully generated for user: ${user.email}`);
 
       res.cookie('refreshToken', sessionToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'strict',
         maxAge: 7 * 24 * 60 * 60 * 1000,
+      });
+      logger.info(`[Google Auth] Secure HTTP-only refresh cookie set for user: ${user.email}`);
+
+      await auditLogsRepository.create({
+        user: { connect: { id: user.id } },
+        action: 'Google Login',
+        details: `User logged in using Google OAuth (IP: ${req.ip})`,
+        ipAddress: req.ip,
       });
 
       logger.info(`✅ [Google Auth] Session successfully initialized for [${user.email}]`);
@@ -587,16 +567,35 @@ export class AuthController {
     // If auth middleware succeeds, user is already attached to req
     const user = (req as any).user;
     const userRecord = await userRepository.findById(user.userId);
+    if (!userRecord) {
+      throw new BadRequestError('User not found.');
+    }
+
     return res.status(200).json({
       success: true,
       message: 'Session is active and valid.',
       data: {
         user: {
-          id: user.userId,
-          name: userRecord?.name || user.email.split('@')[0],
-          email: user.email,
-          role: user.role,
-          avatarUrl: userRecord?.avatarUrl || null,
+          id: userRecord.id,
+          email: userRecord.email,
+          name: userRecord.name,
+          avatarUrl: userRecord.avatarUrl,
+          googleAvatarUrl: userRecord.googleAvatarUrl,
+          emailVerified: userRecord.emailVerified,
+          provider: userRecord.provider,
+          firstName: userRecord.firstName,
+          lastName: userRecord.lastName,
+          phoneNumber: userRecord.phoneNumber,
+          dateOfBirth: userRecord.dateOfBirth,
+          country: userRecord.country,
+          timezone: userRecord.timezone,
+          language: userRecord.language,
+          locale: userRecord.locale,
+          loginCount: userRecord.loginCount,
+          lastLoginAt: userRecord.lastLoginAt,
+          createdAt: userRecord.createdAt,
+          profileCompletion: userRecord.profileCompletion,
+          role: userRecord.role
         },
       },
       timestamp: new Date().toISOString(),
@@ -660,6 +659,9 @@ export class AuthController {
       email_verified: string | boolean;
       name: string;
       picture?: string;
+      given_name?: string;
+      family_name?: string;
+      locale?: string;
     };
 
     // Validate audience and issuer
@@ -671,53 +673,16 @@ export class AuthController {
       throw new UnauthorizedError('Google Identity Token issuer is invalid.');
     }
 
-    const emailVerified = payload.email_verified === true || payload.email_verified === 'true';
-
-    // Find or create user
-    let user = await userRepository.findByGoogleId(payload.sub);
-    if (!user) {
-      user = await userRepository.findByEmail(payload.email);
-      if (user) {
-        // Link existing email account to Google ID
-        user = await userRepository.update(user.id, {
-          googleId: payload.sub,
-          avatarUrl: payload.picture || user.avatarUrl,
-          emailVerified: true,
-          provider: 'google'
-        });
-      } else {
-        // Create new account
-        user = await prisma.$transaction(async (tx) => {
-          const newUser = await tx.user.create({
-            data: {
-              email: payload.email,
-              name: payload.name,
-              googleId: payload.sub,
-              avatarUrl: payload.picture || null,
-              emailVerified: emailVerified,
-              provider: 'google'
-            }
-          });
-
-          await tx.userPreferences.create({
-            data: {
-              userId: newUser.id,
-              theme: 'dark'
-            }
-          });
-
-          await tx.portfolio.create({
-            data: {
-              userId: newUser.id,
-              name: 'Primary Portfolio',
-              cashBalance: 100000
-            }
-          });
-
-          return newUser;
-        });
-      }
-    }
+    const user = await googleSyncService.syncGoogleUser({
+      sub: payload.sub,
+      email: payload.email,
+      email_verified: payload.email_verified,
+      name: payload.name,
+      picture: payload.picture,
+      given_name: payload.given_name,
+      family_name: payload.family_name,
+      locale: payload.locale,
+    });
 
     const uaParsed = parseUserAgent(req.headers['user-agent']);
     const sessionToken = generateRefreshToken({ userId: user.id, role: user.role, email: user.email });
@@ -730,11 +695,6 @@ export class AuthController {
       userAgent: req.headers['user-agent'],
       device: uaParsed.device,
       expiresAt,
-    });
-
-    await userRepository.update(user.id, {
-      lastLoginAt: new Date(),
-      provider: 'google'
     });
 
     // Store login history

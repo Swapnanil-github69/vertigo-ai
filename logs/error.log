@@ -179,3 +179,21 @@ Error: Invalid login: 535 5.7.0 Invalid credentials
 [2026-07-11 01:40:44:4044] [ERROR]  [Resend] Internal API failure details: Name=validation_error, Message=The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
 [2026-07-11 01:42:53:4253] [ERROR]  [Resend] Delivery attempt 3/3 encountered error: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
 [2026-07-11 01:42:53:4253] [ERROR]  [Resend] Internal API failure details: Name=validation_error, Message=The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 09:46:26:4626] [ERROR]  [Resend] Delivery attempt 3/3 encountered error: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 09:46:26:4626] [ERROR]  [Resend] Internal API failure details: Name=validation_error, Message=The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 09:46:26:4626] [ERROR] [ReqID: e9822b02-e8d3-4dd3-b1a4-41da5f1d5762] AppError: Email delivery is misconfigured on the server (invalid sender domain). Please contact system admin.
+Error: Email delivery is misconfigured on the server (invalid sender domain). Please contact system admin.
+    at EmailService.handleResendError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\services\email.service.ts:127:14)
+    at EmailService.sendOtp (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\services\email.service.ts:76:18)
+    at processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at OtpService.sendVerificationOtp (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\services\otp.service.ts:54:7)
+    at signup (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\controllers\auth.controller.ts:98:5)
+[2026-07-11 09:47:35:4735] [ERROR]  [Resend] Delivery attempt 3/3 encountered error: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 09:48:00:480] [ERROR]  [Resend] Delivery attempt 3/3 encountered error: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 09:48:00:480] [ERROR]  [EmailService] Failed to send Welcome email to [alex.test@vertigo.ai]: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 09:48:13:4813] [ERROR]  [Resend] Delivery attempt 3/3 encountered error: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 09:53:27:5327] [ERROR]  ❌ [Google Auth Error] Token exchange failed with status 400. Details: {
+  "error": "invalid_grant",
+  "error_description": "Bad Request"
+}
+[2026-07-11 09:53:27:5327] [ERROR]  ❌ [Google Auth Hint] Authorization code has expired or was already used.

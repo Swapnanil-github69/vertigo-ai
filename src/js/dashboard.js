@@ -1,9 +1,79 @@
 // Dashboard rendering controllers
-function loadDashboard() {
+async function loadDashboard() {
     const grid = document.getElementById('dashboard-trending-grid');
-    grid.innerHTML = '';
+    if (!grid) return;
     
-    // Load default trending tickers
+    // Display skeleton loading panels in trending list while loading quotes
+    grid.innerHTML = Array(4).fill(0).map(() => `
+        <div class="glass-panel p-5 rounded-xl border border-white/5 animate-pulse space-y-4">
+            <div class="flex justify-between items-start">
+                <div class="space-y-2">
+                    <div class="h-4 w-12 bg-white/10 rounded"></div>
+                    <div class="h-3 w-20 bg-white/10 rounded"></div>
+                </div>
+                <div class="h-5 w-16 bg-white/10 rounded"></div>
+            </div>
+            <div class="flex justify-between items-end pt-4">
+                <div class="space-y-2">
+                    <div class="h-3 w-8 bg-white/10 rounded"></div>
+                    <div class="h-5 w-16 bg-white/10 rounded"></div>
+                </div>
+                <div class="space-y-2 text-right">
+                    <div class="h-3 w-16 bg-white/10 rounded"></div>
+                    <div class="h-4 w-12 bg-white/10 rounded"></div>
+                </div>
+            </div>
+        </div>
+    `).join('');
+
+    // Fetch real backend quotes and update state
+    await fetchLiveQuotesForAssets();
+
+    // Dynamically calculate and update Portfolio Stats
+    let totalPortfolioValuation = 0;
+    let totalCostBasis = 0;
+    state.portfolio.holdings.forEach(hold => {
+        const asset = state.assets[hold.ticker];
+        if (asset) {
+            hold.value = hold.shares * asset.price;
+            hold.pnl = hold.value - (hold.shares * hold.avgCost);
+            totalPortfolioValuation += hold.value;
+            totalCostBasis += hold.shares * hold.avgCost;
+        }
+    });
+
+    const portfolioValuationEl = document.getElementById('dashboard-portfolio-value');
+    if (portfolioValuationEl) {
+        portfolioValuationEl.innerText = `$${totalPortfolioValuation.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    }
+
+    const portfolioChangeEl = document.getElementById('dashboard-portfolio-change');
+    if (portfolioChangeEl) {
+        const totalPnL = totalPortfolioValuation - totalCostBasis;
+        const pctPnL = totalCostBasis > 0 ? (totalPnL / totalCostBasis) * 100 : 0;
+        const isUp = totalPnL >= 0;
+        portfolioChangeEl.className = `text-xs flex items-center mt-1 ${isUp ? 'text-tertiary' : 'text-error'}`;
+        portfolioChangeEl.innerHTML = `<span class="material-symbols-outlined text-sm mr-1">${isUp ? 'trending_up' : 'trending_down'}</span>${isUp ? '+' : ''}$${totalPnL.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} (${isUp ? '+' : ''}${pctPnL.toFixed(2)}%) All-Time`;
+    }
+
+    // Dynamically calculate and update AI Health Rating
+    let weightedAIScore = 0;
+    let totalWeight = 0;
+    state.portfolio.holdings.forEach(hold => {
+        const asset = state.assets[hold.ticker];
+        if (asset) {
+            weightedAIScore += asset.aiScore * hold.value;
+            totalWeight += hold.value;
+        }
+    });
+    const finalAIScore = totalWeight > 0 ? Math.round(weightedAIScore / totalWeight) : 88;
+    const aiRatingEl = document.getElementById('dashboard-ai-rating-value');
+    if (aiRatingEl) {
+        aiRatingEl.innerText = `${finalAIScore}/100`;
+    }
+
+    // Render live trending cards
+    grid.innerHTML = '';
     const tickers = ["NVDA", "AAPL", "MSFT", "TSLA"];
     tickers.forEach(ticker => {
         const asset = state.assets[ticker];
@@ -38,5 +108,8 @@ function loadDashboard() {
         grid.appendChild(card);
     });
     
-    document.getElementById('dashboard-active-alerts-count').innerText = `${state.alerts.length} Alerts`;
+    const activeAlertsEl = document.getElementById('dashboard-active-alerts-count');
+    if (activeAlertsEl) {
+        activeAlertsEl.innerText = `${state.alerts.length} Alerts`;
+    }
 }

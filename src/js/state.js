@@ -217,14 +217,86 @@ async function apiFetch(url, options = {}) {
 
     try {
         const response = await fetch(BACKEND_URL + url, options);
-        const json = await response.json();
+        
+        let json = {};
+        try {
+            json = await response.json();
+        } catch (e) {
+            // response was empty or not JSON
+        }
         
         if (!response.ok) {
-            throw new Error(json.message || 'API request failed');
+            if (response.status === 401 || response.status === 403) {
+                if (state.loggedIn) {
+                    accessToken = null;
+                    localStorage.removeItem('accessToken');
+                    state.loggedIn = false;
+                    showToast("Session Expired", "Please log in again to continue.", "error");
+                    window.location.hash = '#/auth';
+                }
+            }
+            const errMsg = json.message || `API request failed with status ${response.status}`;
+            throw new Error(errMsg);
         }
         return json;
     } catch (err) {
+        if (err.message === 'Failed to fetch') {
+            showToast("Network Error", "Connection to server failed. Please check your connection.", "error");
+        }
         throw err;
+    }
+}
+
+// Retrying fetch utility with exponential backoff
+async function apiFetchWithRetry(url, options = {}, retries = 3, delay = 1000) {
+    try {
+        return await apiFetch(url, options);
+    } catch (err) {
+        if (retries > 0) {
+            console.warn(`⚠️ [API Retry] Failed to connect to ${url}. Retrying in ${delay}ms... (${retries} left)`);
+            await new Promise(resolve => setTimeout(resolve, delay));
+            return apiFetchWithRetry(url, options, retries - 1, delay * 2);
+        }
+        throw err;
+    }
+}
+
+async function fetchLiveQuotesForAssets() {
+    const symbols = Object.keys(state.assets);
+    try {
+        const promises = symbols.map(async (ticker) => {
+            try {
+                const res = await apiFetch(`/api/stocks/quote?symbol=${ticker}`);
+                if (res.success && res.data) {
+                    const quote = res.data;
+                    const asset = state.assets[ticker];
+                    if (asset) {
+                        asset.price = Number(quote.price);
+                        asset.change = Number(quote.change);
+                        asset.pctChange = Number(quote.changePercent);
+                        asset.high = Number(quote.high);
+                        asset.low = Number(quote.low);
+                        asset.open = Number(quote.open);
+                        asset.previousClose = Number(quote.previousClose);
+                        if (quote.volume) {
+                            const vol = Number(quote.volume);
+                            if (vol >= 1000000000) {
+                                asset.volume = (vol / 1000000000).toFixed(1) + 'B';
+                            } else if (vol >= 1000000) {
+                                asset.volume = (vol / 1000000).toFixed(1) + 'M';
+                            } else {
+                                asset.volume = vol.toLocaleString();
+                            }
+                        }
+                    }
+                }
+            } catch (err) {
+                console.error(`Failed to fetch quote for ${ticker}:`, err);
+            }
+        });
+        await Promise.all(promises);
+    } catch (e) {
+        console.error("fetchLiveQuotesForAssets global error:", e);
     }
 }
 

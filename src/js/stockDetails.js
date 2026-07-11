@@ -130,12 +130,24 @@ async function renderTradingViewChart(ticker) {
         tvChartInstance = null;
     }
 
+    // Immediately display animated skeleton loader
+    container.innerHTML = `
+        <div class="flex flex-col items-center justify-center h-full w-full py-16 space-y-4 animate-pulse">
+            <div class="w-12 h-12 rounded-full border-2 border-t-secondary border-r-transparent border-b-transparent border-l-transparent animate-spin"></div>
+            <p class="text-xs text-on-surface-variant font-label-sm">Initializing chart engine...</p>
+        </div>
+    `;
+
     try {
-        const res = await apiFetch(`/api/stocks/history?symbol=${ticker}&outputsize=60`);
+        // Fetch historical data with retries
+        const res = await apiFetchWithRetry(`/api/stocks/history?symbol=${ticker}&outputsize=60`);
         if (!res.success || !res.data || res.data.length === 0) {
             container.innerHTML = `<div class="text-on-surface-variant text-center py-20 italic">No historical price vectors available.</div>`;
             return;
         }
+
+        // Clear loading state
+        container.innerHTML = '';
 
         const dataPoints = res.data;
         const isUp = dataPoints[dataPoints.length - 1].close >= dataPoints[0].close;
@@ -191,7 +203,15 @@ async function renderTradingViewChart(ticker) {
 
     } catch (err) {
         console.error("Failed to render TradingView chart:", err);
-        container.innerHTML = `<div class="text-error text-center py-20 italic">Failed to initialize chart engine.</div>`;
+        container.innerHTML = `
+            <div class="flex flex-col items-center justify-center h-full w-full py-20 space-y-3">
+                <span class="material-symbols-outlined text-3xl text-error">warning</span>
+                <p class="text-xs text-on-surface-variant font-label-sm">Failed to initialize chart engine.</p>
+                <button onclick="renderTradingViewChart('${ticker}')" class="px-3 py-1.5 bg-white/5 hover:bg-white/10 text-white text-[11px] font-semibold rounded border border-white/10 transition-all active:scale-95">
+                    Retry Rendering
+                </button>
+            </div>
+        `;
     }
 }
 
