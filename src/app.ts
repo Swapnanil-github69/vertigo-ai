@@ -14,6 +14,7 @@ import authRouter from './routes/auth.routes';
 import userRouter from './routes/user.routes';
 import stockRouter from './routes/stock.routes';
 import aiRouter from './routes/ai.routes';
+import profileRouter from './routes/profile.routes';
 
 import path from 'path';
 
@@ -111,6 +112,9 @@ app.use('/api/stocks', stockRouter);
 
 // AI Routes
 app.use('/api/ai', aiRouter);
+
+// Profile Routes
+app.use('/api/profile', profileRouter);
 
 // Catch unmapped routes
 app.use(notFoundMiddleware);

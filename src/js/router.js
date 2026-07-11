@@ -16,6 +16,8 @@ function updateActiveLinks(hash) {
     else if (hash === '#/reports') activeId = 'sidebar-reports';
     else if (hash === '#/alerts') activeId = 'sidebar-alerts';
     else if (hash === '#/logs') activeId = 'sidebar-logs';
+    else if (hash === '#/profile' || hash === '#/profile/complete' || hash === '#/profile/manage') activeId = 'sidebar-profile';
+    else if (hash === '#/security' || (hash === '#/settings' && window.location.hash.includes('tab=security'))) activeId = 'sidebar-security';
     else if (hash === '#/settings') activeId = 'sidebar-settings';
     
     const activeLink = document.getElementById(activeId);
@@ -29,7 +31,7 @@ function updateActiveLinks(hash) {
     });
     let publicNavHref = '#/';
     if (hash === '#/about') publicNavHref = '#/about';
-    else if (hash === '#/auth') publicNavHref = '#/auth';
+    else if (hash === '#/auth' || hash === '#/login' || hash === '#/register') publicNavHref = '#/auth';
     
     const activePublicLink = document.querySelector(`.nav-link[href="${publicNavHref}"]`);
     if (activePublicLink) {
@@ -40,15 +42,40 @@ function updateActiveLinks(hash) {
 function router() {
     const rawHash = window.location.hash || '#/';
     const hash = rawHash.split('?')[0];
-    const publicRoutes = ['#/', '#/about', '#/auth'];
+    const publicRoutes = ['#/', '#/about', '#/auth', '#/login', '#/register'];
     const isPublic = publicRoutes.includes(hash);
+    
+    console.log(`🔍 [Router] Navigation Event: hash="${hash}" raw="${rawHash}"`);
+
+    // Auth Guard redirection (during session validation check)
+    if (state.authChecking) {
+        console.log(`🔍 [Router Guard] Session validation in progress. Holding navigation.`);
+        return;
+    }
+    
+    // Support route mapping for /security and /market
+    if (hash === '#/security') {
+        console.log(`🔍 [Router] Mapping #/security -> #/settings?tab=security`);
+        window.location.hash = '#/settings?tab=security';
+        return;
+    }
+    if (hash === '#/market') {
+        console.log(`🔍 [Router] Mapping #/market -> #/markets`);
+        window.location.hash = '#/markets';
+        return;
+    }
+    if (hash === '#/login' || hash === '#/register') {
+        console.log(`🔍 [Router] Mapping ${hash} -> #/auth`);
+    }
     
     // Auth Guard redirection
     if (!state.loggedIn && !isPublic) {
+        console.warn(`🔍 [Router Guard] Unauthorized access to protected route: redirection to #/auth`);
         window.location.hash = '#/auth';
         return;
     }
-    if (state.loggedIn && hash === '#/auth') {
+    if (state.loggedIn && (hash === '#/auth' || hash === '#/login' || hash === '#/register')) {
+        console.log(`🔍 [Router Guard] Authenticated user on auth route: redirection to #/dashboard`);
         window.location.hash = '#/dashboard';
         return;
     }
@@ -58,7 +85,7 @@ function router() {
     
     let viewId = 'view-landing';
     if (hash === '#/about') viewId = 'view-about';
-    else if (hash === '#/auth') viewId = 'view-auth';
+    else if (hash === '#/auth' || hash === '#/login' || hash === '#/register') viewId = 'view-auth';
     else if (hash === '#/dashboard') viewId = 'view-dashboard';
     else if (hash === '#/markets') viewId = 'view-markets';
     else if (hash.startsWith('#/stock')) viewId = 'view-stock-details';
@@ -71,15 +98,22 @@ function router() {
     else if (hash === '#/alerts') viewId = 'view-alerts';
     else if (hash === '#/logs') viewId = 'view-logs';
     else if (hash === '#/settings') viewId = 'view-settings';
+    else if (hash === '#/profile' || hash === '#/profile/complete' || hash === '#/profile/manage') viewId = 'view-profile';
     
+    console.log(`🔍 [Router] Rendering view: ${viewId}`);
     const view = document.getElementById(viewId);
     if (view) view.classList.remove('hidden');
     
     // Switch auth tab if on auth page
-    if (hash === '#/auth') {
-        const urlParams = new URLSearchParams(rawHash.split('?')[1] || '');
-        const tab = urlParams.get('tab') || 'login';
+    if (hash === '#/auth' || hash === '#/login' || hash === '#/register') {
+        let tab = 'login';
+        if (hash === '#/register') tab = 'signup';
+        else {
+            const urlParams = new URLSearchParams(rawHash.split('?')[1] || '');
+            tab = urlParams.get('tab') || 'login';
+        }
         if (typeof showAuthTab === 'function') {
+            console.log(`🔍 [Router] Activating auth tab: ${tab}`);
             showAuthTab(tab);
         }
     }
@@ -100,6 +134,7 @@ function router() {
     }
     
     // Trigger View Load initializations
+    console.log(`🔍 [Router] Initializing controller for hash: ${hash}`);
     if (hash === '#/dashboard') typeof loadDashboard === 'function' && loadDashboard();
     else if (hash === '#/markets') typeof filterMarketsTable === 'function' && filterMarketsTable();
     else if (hash.startsWith('#/stock')) {
@@ -116,6 +151,18 @@ function router() {
     else if (hash === '#/alerts') typeof loadAlertsView === 'function' && loadAlertsView();
     else if (hash === '#/logs') typeof loadLogsTable === 'function' && loadLogsTable();
     else if (hash === '#/settings') typeof loadSettingsView === 'function' && loadSettingsView();
+    else if (hash === '#/profile' || hash === '#/profile/complete' || hash === '#/profile/manage') {
+        if (typeof loadProfileView === 'function') {
+            loadProfileView();
+        }
+        if (hash === '#/profile/complete' || hash === '#/profile/manage') {
+            setTimeout(() => {
+                if (typeof openEditProfileModal === 'function') {
+                    openEditProfileModal();
+                }
+            }, 100);
+        }
+    }
     
     updateActiveLinks(hash);
 }

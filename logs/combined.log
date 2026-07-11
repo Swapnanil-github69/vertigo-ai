@@ -408,3 +408,306 @@ Error: Invalid login: 535 5.7.0 Invalid credentials
 [2026-07-11 02:06:52:652] [INFO]  ✅ [Google Auth] Session successfully initialized for [swapnanilbanerjee695@gmail.com]
 [2026-07-11 02:06:52:652] [HTTP]  GET /api/auth/google/callback?state=http%3A%2F%2Flocalhost%3A8000&iss=https%3A%2F%2Faccounts.google.com&code=4%2F0AXEQxIB7XLtp681V8ZMxYnvWI2XHZ6ok-6wCW-yC-KAXIGiMOyJ47CmdNG5GaAdzMPSgCg&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=2&prompt=consent 302 329 - 3455.659 ms [ReqID: 42f96f5d-a90f-49f6-b9dc-086ed4331332]
 [2026-07-11 02:06:52:652] [HTTP]  GET /api/auth/google/config 304 - - 0.417 ms [ReqID: 33a88d5d-1f28-47f4-84f8-3d682a9d2ee7]
+[2026-07-11 09:30:01:301] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 09:30:01:301] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 09:30:03:303] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 09:39:33:3933] [WARN] [ReqID: 53ca892f-4173-47e3-b4b1-801f8aaf2763] AppError (401): Authentication token required.
+[2026-07-11 09:39:33:3933] [HTTP]  GET /api/auth/session 401 176 - 9.747 ms [ReqID: 53ca892f-4173-47e3-b4b1-801f8aaf2763]
+[2026-07-11 09:39:33:3933] [HTTP]  GET /api/auth/google/config 304 - - 0.652 ms [ReqID: 114eabcf-8625-4cf5-b2fb-e40859f6e27f]
+[2026-07-11 09:39:33:3933] [WARN] [ReqID: 05d2a700-a2a7-4db3-8b2f-759a2e609ac8] AppError (404): Requested API route [GET] /favicon.ico was not found
+[2026-07-11 09:39:33:3933] [HTTP]  GET /favicon.ico 404 198 - 1.213 ms [ReqID: 05d2a700-a2a7-4db3-8b2f-759a2e609ac8]
+[2026-07-11 09:40:40:4040] [WARN] [ReqID: a4057266-f1a8-4411-a058-24b75bebd86d] AppError (401): Authentication token required.
+[2026-07-11 09:40:40:4040] [HTTP]  GET /api/auth/session 401 176 - 1.918 ms [ReqID: a4057266-f1a8-4411-a058-24b75bebd86d]
+[2026-07-11 09:40:40:4040] [HTTP]  GET /api/auth/google/config 304 - - 0.600 ms [ReqID: 5576459c-e7dc-4232-a39d-8c3f35aa74a9]
+[2026-07-11 09:41:04:414] [WARN] [ReqID: 1e8a7e49-9ccc-4dfb-b2e4-50bc0ac52b80] AppError (401): Authentication token required.
+[2026-07-11 09:41:04:414] [HTTP]  GET /api/auth/session 401 176 - 0.784 ms [ReqID: 1e8a7e49-9ccc-4dfb-b2e4-50bc0ac52b80]
+[2026-07-11 09:41:04:414] [HTTP]  GET /api/auth/google/config 304 - - 0.525 ms [ReqID: 7c9b4a09-7880-4897-9069-3de90c6795f5]
+[2026-07-11 09:41:41:4141] [WARN] [ReqID: eb7d5dbe-6b81-4058-87bb-da183bfbbc28] AppError (401): Authentication token required.
+[2026-07-11 09:41:41:4141] [HTTP]  GET /api/auth/session 401 176 - 0.904 ms [ReqID: eb7d5dbe-6b81-4058-87bb-da183bfbbc28]
+[2026-07-11 09:41:41:4141] [HTTP]  GET /api/auth/google/config 304 - - 0.354 ms [ReqID: d735928d-4c5c-4873-8876-688e353d6918]
+[2026-07-11 09:42:10:4210] [WARN] [ReqID: 976819ec-7485-4b8c-af8e-e2f991c02029] AppError (401): Authentication token required.
+[2026-07-11 09:42:10:4210] [HTTP]  GET /api/auth/session 401 176 - 0.903 ms [ReqID: 976819ec-7485-4b8c-af8e-e2f991c02029]
+[2026-07-11 09:42:10:4210] [HTTP]  GET /api/auth/google/config 304 - - 0.528 ms [ReqID: d6e81d71-3402-46f0-a08e-baa99095b022]
+[2026-07-11 09:43:11:4311] [WARN] [ReqID: 3de4bb3b-2d69-4400-a58c-f339bf1c560c] AppError (401): Authentication token required.
+[2026-07-11 09:43:11:4311] [HTTP]  GET /api/auth/session 401 176 - 0.739 ms [ReqID: 3de4bb3b-2d69-4400-a58c-f339bf1c560c]
+[2026-07-11 09:43:11:4311] [HTTP]  GET /api/auth/google/config 304 - - 0.354 ms [ReqID: d7710ad8-3e28-44e0-9469-16a06428af37]
+[2026-07-11 09:43:24:4324] [WARN] [ReqID: c9c291cc-5da9-4e9d-a75e-69cbc5d3c4cd] AppError (404): Requested API route [GET] /api/auth/register was not found
+[2026-07-11 09:43:24:4324] [HTTP]  GET /api/auth/register 404 204 - 1.585 ms [ReqID: c9c291cc-5da9-4e9d-a75e-69cbc5d3c4cd]
+[2026-07-11 09:43:40:4340] [WARN] [ReqID: 61d1e49a-3461-48d9-aaac-204a6dae441b] AppError (401): Authentication token required.
+[2026-07-11 09:43:40:4340] [HTTP]  GET /api/auth/session 401 176 - 0.704 ms [ReqID: 61d1e49a-3461-48d9-aaac-204a6dae441b]
+[2026-07-11 09:43:40:4340] [HTTP]  GET /api/auth/google/config 304 - - 0.341 ms [ReqID: 98c504e3-3128-47ff-8870-50f5edfe1cf4]
+[2026-07-11 09:45:01:451] [WARN] [ReqID: e88875d6-2203-4970-9daf-e705e7ab6fbc] AppError (401): Authentication token required.
+[2026-07-11 09:45:01:451] [HTTP]  GET /api/auth/session 401 176 - 1.026 ms [ReqID: e88875d6-2203-4970-9daf-e705e7ab6fbc]
+[2026-07-11 09:45:01:451] [HTTP]  GET /api/auth/google/config 304 - - 0.545 ms [ReqID: b0be3b9f-ab29-40e2-ad67-341a17b2f23a]
+[2026-07-11 09:45:50:4550] [WARN] [ReqID: 1b271edd-8a83-4bdf-9c1d-c3dbc2c74fe5] AppError (401): Authentication token required.
+[2026-07-11 09:45:50:4550] [HTTP]  GET /api/auth/session 401 176 - 2.497 ms [ReqID: 1b271edd-8a83-4bdf-9c1d-c3dbc2c74fe5]
+[2026-07-11 09:45:50:4550] [HTTP]  GET /api/auth/google/config 304 - - 0.326 ms [ReqID: 59ae7776-7f2b-4c81-be55-b7a626e01331]
+[2026-07-11 09:46:23:4623] [WARN]  [Resend] Delivery attempt 1/3 failed: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 09:46:24:4624] [INFO]  [Resend] Retrying email delivery (Attempt 2/3)...
+[2026-07-11 09:46:24:4624] [WARN]  [Resend] Delivery attempt 2/3 failed: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 09:46:26:4626] [INFO]  [Resend] Retrying email delivery (Attempt 3/3)...
+[2026-07-11 09:46:26:4626] [WARN]  [Resend] Delivery attempt 3/3 failed: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 09:46:26:4626] [ERROR]  [Resend] Delivery attempt 3/3 encountered error: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 09:46:26:4626] [ERROR]  [Resend] Internal API failure details: Name=validation_error, Message=The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 09:46:26:4626] [ERROR] [ReqID: e9822b02-e8d3-4dd3-b1a4-41da5f1d5762] AppError: Email delivery is misconfigured on the server (invalid sender domain). Please contact system admin.
+Error: Email delivery is misconfigured on the server (invalid sender domain). Please contact system admin.
+    at EmailService.handleResendError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\services\email.service.ts:127:14)
+    at EmailService.sendOtp (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\services\email.service.ts:76:18)
+    at processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at OtpService.sendVerificationOtp (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\services\otp.service.ts:54:7)
+    at signup (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\controllers\auth.controller.ts:98:5)
+[2026-07-11 09:46:26:4626] [HTTP]  POST /api/auth/signup 500 245 - 10772.860 ms [ReqID: e9822b02-e8d3-4dd3-b1a4-41da5f1d5762]
+[2026-07-11 09:46:44:4644] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 09:46:44:4644] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 09:46:46:4646] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 09:46:51:4651] [WARN] [ReqID: e061c4d2-fd65-44bf-8359-d568375d7036] AppError (409): Email address is already registered
+[2026-07-11 09:46:51:4651] [HTTP]  POST /api/auth/signup 409 181 - 487.286 ms [ReqID: e061c4d2-fd65-44bf-8359-d568375d7036]
+[2026-07-11 09:46:58:4658] [WARN] [ReqID: e42604c1-79d7-4928-8dc8-40cac5e0df31] AppError (401): Account is not verified. Please verify your email.
+[2026-07-11 09:46:58:4658] [HTTP]  POST /api/auth/login 401 196 - 295.322 ms [ReqID: e42604c1-79d7-4928-8dc8-40cac5e0df31]
+[2026-07-11 09:47:31:4731] [WARN]  [Resend] Delivery attempt 1/3 failed: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 09:47:32:4732] [INFO]  [Resend] Retrying email delivery (Attempt 2/3)...
+[2026-07-11 09:47:33:4733] [WARN]  [Resend] Delivery attempt 2/3 failed: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 09:47:35:4735] [INFO]  [Resend] Retrying email delivery (Attempt 3/3)...
+[2026-07-11 09:47:35:4735] [WARN]  [Resend] Delivery attempt 3/3 failed: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 09:47:35:4735] [ERROR]  [Resend] Delivery attempt 3/3 encountered error: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 09:47:35:4735] [WARN]  ⚠️ [EmailService] sendOtp to alex.test@vertigo.ai failed: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains. Continuing with local console fallback.
+[2026-07-11 09:47:35:4735] [INFO]  🔑 [SECURITY/DEV] Generated OTP for alex.test@vertigo.ai (REGISTRATION): 415836
+[2026-07-11 09:47:35:4735] [HTTP]  POST /api/auth/resend-otp 200 164 - 5794.418 ms [ReqID: 436ee7a7-96ea-4e5c-bf06-a4d64e7cb8db]
+[2026-07-11 09:47:56:4756] [WARN]  [Resend] Delivery attempt 1/3 failed: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 09:47:57:4757] [INFO]  [Resend] Retrying email delivery (Attempt 2/3)...
+[2026-07-11 09:47:57:4757] [WARN]  [Resend] Delivery attempt 2/3 failed: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 09:48:00:480] [INFO]  [Resend] Retrying email delivery (Attempt 3/3)...
+[2026-07-11 09:48:00:480] [WARN]  [Resend] Delivery attempt 3/3 failed: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 09:48:00:480] [ERROR]  [Resend] Delivery attempt 3/3 encountered error: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 09:48:00:480] [ERROR]  [EmailService] Failed to send Welcome email to [alex.test@vertigo.ai]: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 09:48:00:480] [HTTP]  POST /api/auth/verify-otp 200 560 - 6306.693 ms [ReqID: 273faa42-c217-4d61-9fe3-7772284ec07d]
+[2026-07-11 09:48:09:489] [WARN]  [Resend] Delivery attempt 1/3 failed: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 09:48:10:4810] [INFO]  [Resend] Retrying email delivery (Attempt 2/3)...
+[2026-07-11 09:48:10:4810] [WARN]  [Resend] Delivery attempt 2/3 failed: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 09:48:12:4812] [INFO]  [Resend] Retrying email delivery (Attempt 3/3)...
+[2026-07-11 09:48:13:4813] [WARN]  [Resend] Delivery attempt 3/3 failed: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 09:48:13:4813] [ERROR]  [Resend] Delivery attempt 3/3 encountered error: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+[2026-07-11 09:48:13:4813] [WARN]  ⚠️ [EmailService] sendOtp to alex.test@vertigo.ai failed: The gmail.com domain is not verified. Please, add and verify your domain on https://resend.com/domains. Continuing with local console fallback.
+[2026-07-11 09:48:13:4813] [INFO]  🔑 [SECURITY/DEV] Generated OTP for alex.test@vertigo.ai (LOGIN): 807260
+[2026-07-11 09:48:14:4814] [HTTP]  POST /api/auth/login 200 214 - 6800.788 ms [ReqID: 0b70c049-deb5-48fd-ae61-89014710dddc]
+[2026-07-11 09:48:15:4815] [HTTP]  GET /api/auth/google?state=http%3A%2F%2Flocalhost%3A8000 302 468 - 4.253 ms [ReqID: f87724c8-0a84-495e-a29c-ca2e48fa5d8a]
+[2026-07-11 09:48:36:4836] [HTTP]  POST /api/auth/verify-otp 200 560 - 3137.979 ms [ReqID: c3e6fce5-aaa2-4db4-b872-42db9d1369b3]
+[2026-07-11 09:48:46:4846] [HTTP]  GET /api/profile 200 768 - 966.400 ms [ReqID: 4fc24e78-c331-44a2-b8e3-dc60ccb035b0]
+[2026-07-11 09:49:00:490] [WARN] [ReqID: 2588d61b-74d5-4487-80e1-cca9f930cd7e] AppError (401): Authentication token required.
+[2026-07-11 09:49:00:490] [HTTP]  PUT /api/profile 401 176 - 0.653 ms [ReqID: 2588d61b-74d5-4487-80e1-cca9f930cd7e]
+[2026-07-11 09:49:04:494] [INFO]  [Google Auth] Attempting token exchange. Redirect URI: "http://localhost:8000/api/auth/google/callback"
+[2026-07-11 09:49:08:498] [INFO]  ✅ [Google Auth] Session successfully initialized for [swapnanilrick10@gmail.com]
+[2026-07-11 09:49:08:498] [HTTP]  GET /api/auth/google/callback?state=http%3A%2F%2Flocalhost%3A8000&iss=https%3A%2F%2Faccounts.google.com&code=4%2F0AdkVLPz3vRakDfbhMnHMvaX7JE8Rp0h4vVYDDdr2sg1OUw3PAkNUihig2ElnPx6SFHzd1w&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent 302 323 - 4598.096 ms [ReqID: 86a4de34-712c-4f78-a55e-4472d52e794e]
+[2026-07-11 09:49:09:499] [HTTP]  GET /api/auth/google/config 304 - - 0.762 ms [ReqID: e552e06b-577e-4fc8-92a3-499eee5d3097]
+[2026-07-11 09:49:09:499] [HTTP]  PUT /api/profile 200 846 - 967.802 ms [ReqID: a6ef3352-4f65-4ccc-8f9a-f0272cc11a5f]
+[2026-07-11 09:49:18:4918] [HTTP]  GET /api/profile/sessions 200 693 - 966.524 ms [ReqID: 1cf395bf-2392-417e-8621-4eb03ee9ecf7]
+[2026-07-11 09:49:27:4927] [HTTP]  POST /api/profile/sessions/logout 200 163 - 2176.551 ms [ReqID: 8fe18f6e-3585-4438-9db6-0fcf7643b4da]
+[2026-07-11 09:49:43:4943] [HTTP]  POST /api/profile/avatar 200 265 - 1212.499 ms [ReqID: 9df9baa2-6389-42e9-bc7e-c840d9c28d1b]
+[2026-07-11 09:49:57:4957] [HTTP]  DELETE /api/profile/avatar 200 205 - 770.218 ms [ReqID: 99d6ed2e-e263-4ba8-aeac-c2861fd2d172]
+[2026-07-11 09:50:11:5011] [HTTP]  DELETE /api/profile/delete-account 200 192 - 1008.223 ms [ReqID: 3a1bbbb9-a107-48a4-b3ff-a3ff6b307cb9]
+[2026-07-11 09:53:10:5310] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 09:53:10:5310] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 09:53:12:5312] [WARN] [ReqID: 75a8ee13-5e78-44d9-9e2f-6521bbe1a6cb] AppError (401): Invalid or expired authentication token.
+[2026-07-11 09:53:12:5312] [HTTP]  GET /api/auth/session 401 186 - 11.461 ms [ReqID: 75a8ee13-5e78-44d9-9e2f-6521bbe1a6cb]
+[2026-07-11 09:53:12:5312] [HTTP]  GET /api/auth/google/config 304 - - 1.087 ms [ReqID: 593f6ec4-7142-4807-8703-60c18343bb75]
+[2026-07-11 09:53:12:5312] [WARN] [ReqID: 892c2951-2937-42ed-8a68-d2b8d3b4a06d] AppError (404): Requested API route [GET] /favicon.ico was not found
+[2026-07-11 09:53:12:5312] [HTTP]  GET /favicon.ico 404 198 - 1.044 ms [ReqID: 892c2951-2937-42ed-8a68-d2b8d3b4a06d]
+[2026-07-11 09:53:12:5312] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 09:53:18:5318] [HTTP]  GET /api/auth/google?state=http%3A%2F%2Flocalhost%3A8000 302 468 - 3.987 ms [ReqID: 1a829cac-a2ca-4863-b423-dbfedf2752d0]
+[2026-07-11 09:53:25:5325] [INFO]  [Google Auth] Attempting token exchange. Redirect URI: "http://localhost:8000/api/auth/google/callback"
+[2026-07-11 09:53:26:5326] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 09:53:26:5326] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 09:53:27:5327] [INFO]  [Google Auth] Attempting token exchange. Redirect URI: "http://localhost:8000/api/auth/google/callback"
+[2026-07-11 09:53:27:5327] [ERROR]  ❌ [Google Auth Error] Token exchange failed with status 400. Details: {
+  "error": "invalid_grant",
+  "error_description": "Bad Request"
+}
+[2026-07-11 09:53:27:5327] [ERROR]  ❌ [Google Auth Hint] Authorization code has expired or was already used.
+[2026-07-11 09:53:27:5327] [HTTP]  GET /api/auth/google/callback?state=http%3A%2F%2Flocalhost%3A8000&iss=https%3A%2F%2Faccounts.google.com&code=4%2F0AXEQxIDH7IWebY_qSpIUuaOUKopSxz1nMYHZqvMRuoYkYDpwBlt8EgvR3zEBhFCe-hGubg&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent 302 79 - 326.846 ms [ReqID: 8b1eb5bc-429c-4daf-91e8-62b3b9e6ecf7]
+[2026-07-11 09:53:28:5328] [HTTP]  GET /api/auth/google/config 304 - - 2.808 ms [ReqID: ba7365e9-80bb-41f2-b6d9-7ffdd1b72b2c]
+[2026-07-11 09:53:29:5329] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 09:53:34:5334] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 09:53:34:5334] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 09:53:36:5336] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 09:53:38:5338] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 09:53:38:5338] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 09:53:41:5341] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 09:53:48:5348] [WARN] [ReqID: 8873dfdf-1b65-46f0-9e85-76448ab74fcb] AppError (401): Authentication token required.
+[2026-07-11 09:53:48:5348] [HTTP]  GET /api/auth/session 401 176 - 9.354 ms [ReqID: 8873dfdf-1b65-46f0-9e85-76448ab74fcb]
+[2026-07-11 09:53:48:5348] [HTTP]  GET /api/auth/google/config 304 - - 0.787 ms [ReqID: 684ee8ef-5c42-4005-b239-fd4bd22bf8da]
+[2026-07-11 09:53:50:5350] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 09:53:50:5350] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 09:53:52:5352] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 09:54:17:5417] [HTTP]  GET /api/auth/google?state=http%3A%2F%2Flocalhost%3A8000 302 468 - 10.543 ms [ReqID: 1ec748e0-8dab-43de-8924-d47211c554d5]
+[2026-07-11 09:54:22:5422] [INFO]  [Google Auth] Attempting token exchange. Redirect URI: "http://localhost:8000/api/auth/google/callback"
+[2026-07-11 09:54:28:5428] [INFO]  ✅ [Google Auth] Session successfully initialized for [swapnanilrick10@gmail.com]
+[2026-07-11 09:54:28:5428] [HTTP]  GET /api/auth/google/callback?state=http%3A%2F%2Flocalhost%3A8000&iss=https%3A%2F%2Faccounts.google.com&code=4%2F0AdkVLPyHbqt7JkpsEDgnF29q2tkHu8jxbKuOGGt21gAYAn8TxV9t_SPJ2PqmpOioHdZyMA&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent 302 323 - 6060.916 ms [ReqID: 9aa606df-5e56-45d2-98ba-83ca4281b28e]
+[2026-07-11 09:54:29:5429] [HTTP]  GET /api/auth/google/config 304 - - 2.715 ms [ReqID: de368374-1978-4bef-aacb-ecd15b82450c]
+[2026-07-11 09:58:59:5859] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 09:58:59:5859] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 09:59:02:592] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 10:01:52:152] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 10:01:52:152] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 10:01:52:152] [HTTP]  GET /api/auth/google/config 304 - - 2.291 ms [ReqID: a044ea5a-8d03-4973-9cf0-9ab2406b245a]
+[2026-07-11 10:01:53:153] [WARN] [ReqID: 8487dd0a-67d2-446f-a846-bf41869c82de] AppError (404): Requested API route [GET] /favicon.ico was not found
+[2026-07-11 10:01:53:153] [HTTP]  GET /favicon.ico 404 198 - 2.156 ms [ReqID: 8487dd0a-67d2-446f-a846-bf41869c82de]
+[2026-07-11 10:01:54:154] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 10:01:56:156] [HTTP]  GET /api/auth/session 200 827 - 3383.123 ms [ReqID: 544ab4d4-7576-4f41-bc56-d9e5f29400ea]
+[2026-07-11 10:02:34:234] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 10:02:34:234] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 10:02:36:236] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 10:02:43:243] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 10:02:43:243] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 10:02:45:245] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 10:03:14:314] [HTTP]  GET /api/stocks/quote?symbol=NVDA 200 328 - 16.505 ms [ReqID: 4766895d-1dbf-42dd-9a6a-6495007e6b33]
+[2026-07-11 10:03:14:314] [HTTP]  GET /api/stocks/profile?symbol=NVDA 200 496 - 2.623 ms [ReqID: a3d1ee7e-3028-4543-990c-f1008494801f]
+[2026-07-11 10:03:14:314] [HTTP]  GET /api/stocks/history?symbol=NVDA&outputsize=60 200 - - 6.057 ms [ReqID: 9d69b0db-9b03-42ba-bfc6-70c077efaf6b]
+[2026-07-11 10:06:36:636] [WARN] [ReqID: d848ccbd-cbf3-481b-b3ab-fac770e0786a] AppError (401): Invalid or expired authentication token.
+[2026-07-11 10:06:36:636] [HTTP]  GET /api/stocks/profile?symbol=NVDA 401 186 - 4.367 ms [ReqID: d848ccbd-cbf3-481b-b3ab-fac770e0786a]
+[2026-07-11 10:06:36:636] [WARN] [ReqID: a0e8b0fd-cd8b-4922-b8a4-a314824c6251] AppError (401): Invalid or expired authentication token.
+[2026-07-11 10:06:36:636] [HTTP]  GET /api/stocks/quote?symbol=NVDA 401 186 - 4.976 ms [ReqID: a0e8b0fd-cd8b-4922-b8a4-a314824c6251]
+[2026-07-11 10:06:36:636] [WARN] [ReqID: 0b63a463-94e5-442b-bbfd-f305cf82f40d] AppError (401): Invalid or expired authentication token.
+[2026-07-11 10:06:36:636] [HTTP]  GET /api/stocks/history?symbol=NVDA&outputsize=60 401 186 - 2.550 ms [ReqID: 0b63a463-94e5-442b-bbfd-f305cf82f40d]
+[2026-07-11 10:06:52:652] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 10:06:52:652] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 10:06:54:654] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 10:08:02:82] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 10:08:02:82] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 10:08:04:84] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 13:20:28:2028] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 13:20:28:2028] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 13:20:30:2030] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 13:20:33:2033] [WARN] [ReqID: 95ada1eb-5d3b-4d8c-b834-6bd259e864b8] AppError (401): Invalid or expired authentication token.
+[2026-07-11 13:20:33:2033] [HTTP]  GET /api/auth/session 401 186 - 8.549 ms [ReqID: 95ada1eb-5d3b-4d8c-b834-6bd259e864b8]
+[2026-07-11 13:20:33:2033] [HTTP]  GET /api/auth/google/config 304 - - 0.938 ms [ReqID: d5c495d4-8522-4053-b3d5-f6de055caff3]
+[2026-07-11 13:20:33:2033] [WARN] [ReqID: 00b81916-1add-4064-b999-01777e8ee32f] AppError (404): Requested API route [GET] /favicon.ico was not found
+[2026-07-11 13:20:33:2033] [HTTP]  GET /favicon.ico 404 198 - 1.227 ms [ReqID: 00b81916-1add-4064-b999-01777e8ee32f]
+[2026-07-11 13:20:37:2037] [HTTP]  GET /api/auth/google?state=http%3A%2F%2Flocalhost%3A8000 302 468 - 3.475 ms [ReqID: 556d7411-c96a-4b96-afe9-a12d5886fd9b]
+[2026-07-11 13:20:43:2043] [INFO]  [Google Auth] Callback received. code: present, state: http://localhost:8000
+[2026-07-11 13:20:43:2043] [INFO]  [Google Auth] Attempting token exchange. Redirect URI: "http://localhost:8000/api/auth/google/callback"
+[2026-07-11 13:20:43:2043] [INFO]  [Google Auth] Google identity token verified successfully for: swapnanilrick10@gmail.com
+[2026-07-11 13:20:44:2044] [INFO]  [Google Sync] User found for email: swapnanilrick10@gmail.com. Syncing user fields (Login Count: 3).
+[2026-07-11 13:20:45:2045] [INFO]  [Google Auth] Database sync completed for user: swapnanilrick10@gmail.com (ID: 2ff34fa5-c433-45ea-90ec-5b7f881c33ae)
+[2026-07-11 13:20:48:2048] [INFO]  [Google Auth] JWT Access Token successfully generated for user: swapnanilrick10@gmail.com
+[2026-07-11 13:20:48:2048] [INFO]  [Google Auth] Secure HTTP-only refresh cookie set for user: swapnanilrick10@gmail.com
+[2026-07-11 13:20:50:2050] [INFO]  ✅ [Google Auth] Session successfully initialized for [swapnanilrick10@gmail.com]
+[2026-07-11 13:20:50:2050] [HTTP]  GET /api/auth/google/callback?state=http%3A%2F%2Flocalhost%3A8000&iss=https%3A%2F%2Faccounts.google.com&code=4%2F0AdkVLPwlK3wVE-l43_gYoWmGjptIXnZ9aFrtLNkkoKs02OndcRvIcWrGbHPVhJmUz35WTw&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent 302 323 - 7399.101 ms [ReqID: 2956ac7f-6cf9-4a33-8e17-78581b089638]
+[2026-07-11 13:20:50:2050] [HTTP]  GET /api/auth/google/config 304 - - 0.488 ms [ReqID: 24d8383d-8c44-4e46-8dc8-92e83cbebeb9]
+[2026-07-11 13:20:51:2051] [HTTP]  GET /api/auth/session 200 827 - 467.772 ms [ReqID: d0af703c-8415-48f4-9c2c-f9a2b84c9e88]
+[2026-07-11 13:21:16:2116] [HTTP]  GET /api/stocks/quote?symbol=BTC.X 200 340 - 1.528 ms [ReqID: 2c4f2d8c-07e8-407d-9d70-e6f1c3d4b725]
+[2026-07-11 13:21:16:2116] [HTTP]  GET /api/stocks/profile?symbol=BTC.X 200 535 - 1.354 ms [ReqID: b7922b0f-a35f-4b7d-8597-345ba87c09d8]
+[2026-07-11 13:21:16:2116] [HTTP]  GET /api/stocks/history?symbol=BTC.X&outputsize=60 200 - - 2.928 ms [ReqID: 8d89ac2d-3b13-42f1-97a6-56948af6ca34]
+[2026-07-11 13:25:22:2522] [HTTP]  GET /api/auth/google/config 304 - - 0.419 ms [ReqID: d996a59b-6540-44be-967d-6de0e46135fd]
+[2026-07-11 13:25:23:2523] [HTTP]  GET /api/auth/session 200 827 - 466.986 ms [ReqID: 9335760f-a02f-45c6-856f-a8a1a1f17600]
+[2026-07-11 13:30:24:3024] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 13:30:24:3024] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 13:30:26:3026] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 13:30:26:3026] [HTTP]  GET /api/auth/google/config 304 - - 2.186 ms [ReqID: 6a3601fd-d556-4a20-9ca3-a18ef9e69983]
+[2026-07-11 13:30:28:3028] [HTTP]  GET /api/auth/session 200 827 - 2130.215 ms [ReqID: c8898d64-a169-4971-af59-3e824fd89812]
+[2026-07-11 13:30:29:3029] [HTTP]  GET /api/profile 200 1005 - 238.534 ms [ReqID: 26804b5e-4b49-4702-a055-30ebece65c61]
+[2026-07-11 13:30:43:3043] [HTTP]  GET /api/stocks/profile?symbol=NVDA 200 496 - 1.856 ms [ReqID: 394aef75-1c03-4897-bed5-469bcf40e2b9]
+[2026-07-11 13:30:43:3043] [HTTP]  GET /api/stocks/quote?symbol=NVDA 200 331 - 1.810 ms [ReqID: f7520299-b630-4977-a966-7857cc4a0ec8]
+[2026-07-11 13:30:43:3043] [HTTP]  GET /api/stocks/history?symbol=NVDA&outputsize=60 200 - - 2.980 ms [ReqID: 3e86398c-78e7-4d50-b29f-8ea57f9b1047]
+[2026-07-11 13:31:00:310] [HTTP]  GET /api/auth/google/config 304 - - 0.322 ms [ReqID: 8044469d-972d-4a0b-b382-052acc3b3df0]
+[2026-07-11 13:31:00:310] [HTTP]  GET /api/auth/session 200 827 - 472.354 ms [ReqID: 1c59cc1e-4164-4f87-9ced-d097dbe2ea8f]
+[2026-07-11 13:31:01:311] [HTTP]  GET /api/profile 200 1005 - 236.358 ms [ReqID: d10e9251-0937-4950-8cd0-9c91c92a8c7d]
+[2026-07-11 13:31:16:3116] [HTTP]  GET /api/auth/google/config 304 - - 0.398 ms [ReqID: 53a6024c-d8fb-4202-87c6-81e3c0fb2262]
+[2026-07-11 13:31:16:3116] [HTTP]  GET /api/auth/session 200 827 - 472.417 ms [ReqID: 7b464c5e-4c79-4780-9965-bba85d2057a3]
+[2026-07-11 13:31:17:3117] [HTTP]  GET /api/profile 200 1005 - 235.894 ms [ReqID: c7d203bc-b548-4e7b-825a-68c8850f9e04]
+[2026-07-11 13:31:31:3131] [HTTP]  GET /api/stocks/profile?symbol=AAPL 200 486 - 0.939 ms [ReqID: 2edd85e6-8d10-4a11-9227-918836e0cd73]
+[2026-07-11 13:31:31:3131] [HTTP]  GET /api/stocks/quote?symbol=AAPL 200 328 - 1.004 ms [ReqID: c2f8a424-03b2-471c-8c32-b24f911b1d18]
+[2026-07-11 13:31:31:3131] [HTTP]  GET /api/stocks/history?symbol=AAPL&outputsize=60 200 - - 1.268 ms [ReqID: 1d6d45f2-2d40-4a67-a082-5b60f890dc16]
+[2026-07-11 13:40:08:408] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 13:40:08:408] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 13:40:11:4011] [WARN] [ReqID: f01eff01-aafd-4483-8f60-8eae66f6d10a] AppError (401): Invalid or expired authentication token.
+[2026-07-11 13:40:11:4011] [HTTP]  GET /api/auth/session 401 186 - 9.547 ms [ReqID: f01eff01-aafd-4483-8f60-8eae66f6d10a]
+[2026-07-11 13:40:11:4011] [HTTP]  GET /api/auth/google/config 304 - - 0.968 ms [ReqID: b985e234-fac1-41cc-a849-8bbe40b70870]
+[2026-07-11 13:40:11:4011] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 13:40:24:4024] [HTTP]  GET /api/auth/google?state=http%3A%2F%2Flocalhost%3A8000 302 468 - 2.621 ms [ReqID: c7d3bb96-0bd5-4bf7-861f-4b2965a620b9]
+[2026-07-11 13:40:31:4031] [INFO]  [Google Auth] Callback received. code: present, state: http://localhost:8000
+[2026-07-11 13:40:31:4031] [INFO]  [Google Auth] Attempting token exchange. Redirect URI: "http://localhost:8000/api/auth/google/callback"
+[2026-07-11 13:40:31:4031] [INFO]  [Google Auth] Google identity token verified successfully for: swapnanilrick10@gmail.com
+[2026-07-11 13:40:32:4032] [INFO]  [Google Sync] User found for email: swapnanilrick10@gmail.com. Syncing user fields (Login Count: 4).
+[2026-07-11 13:40:33:4033] [INFO]  [Google Auth] Database sync completed for user: swapnanilrick10@gmail.com (ID: 2ff34fa5-c433-45ea-90ec-5b7f881c33ae)
+[2026-07-11 13:40:36:4036] [INFO]  [Google Auth] JWT Access Token successfully generated for user: swapnanilrick10@gmail.com
+[2026-07-11 13:40:36:4036] [INFO]  [Google Auth] Secure HTTP-only refresh cookie set for user: swapnanilrick10@gmail.com
+[2026-07-11 13:40:38:4038] [INFO]  ✅ [Google Auth] Session successfully initialized for [swapnanilrick10@gmail.com]
+[2026-07-11 13:40:38:4038] [HTTP]  GET /api/auth/google/callback?state=http%3A%2F%2Flocalhost%3A8000&iss=https%3A%2F%2Faccounts.google.com&code=4%2F0AXEQxIBmkku8tCj2t2VqCPn7dxOIcQFNweSGTYkSf7TIa99iMRnlhr0_3gLRQdCukaTLrQ&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent 302 323 - 7372.402 ms [ReqID: 39c4fdb7-91fc-457c-9586-8dec5a1f055a]
+[2026-07-11 13:40:39:4039] [HTTP]  GET /api/auth/google/config 304 - - 0.420 ms [ReqID: 47a815df-2714-4a00-8e52-0611622bb988]
+[2026-07-11 13:40:39:4039] [HTTP]  GET /api/auth/session 200 827 - 467.219 ms [ReqID: de99dff7-0802-44c8-a74b-fb5dfbe7236d]
+[2026-07-11 13:40:40:4040] [HTTP]  GET /api/profile 200 1005 - 234.840 ms [ReqID: 710a9e43-61f8-47d6-915d-0e79b777f4fe]
+[2026-07-11 13:40:40:4040] [HTTP]  GET /api/stocks/quote?symbol=NVDA 200 329 - 1.343 ms [ReqID: 1f060897-f3cb-4344-9498-b0535873b856]
+[2026-07-11 13:40:40:4040] [HTTP]  GET /api/stocks/quote?symbol=AAPL 200 330 - 0.662 ms [ReqID: 89e8bce0-bfe3-4cf0-8be0-ce3d1ff6ff14]
+[2026-07-11 13:40:40:4040] [HTTP]  GET /api/stocks/quote?symbol=MSFT 200 327 - 0.631 ms [ReqID: 1be3c1d4-01b8-4400-b969-dd891fec0c4d]
+[2026-07-11 13:40:40:4040] [HTTP]  GET /api/stocks/quote?symbol=TSLA 200 327 - 1.974 ms [ReqID: 358d46e7-6025-48f1-b3ce-fce5768f853b]
+[2026-07-11 13:40:40:4040] [HTTP]  GET /api/stocks/quote?symbol=BTC.X 200 340 - 1.327 ms [ReqID: bb4393c2-e29d-4571-90f7-e848923a7219]
+[2026-07-11 13:40:42:4042] [HTTP]  GET /api/stocks/quote?symbol=NVDA 200 329 - 1.131 ms [ReqID: 0c373d7c-1fa3-441f-9c43-58e6cd8ea523]
+[2026-07-11 13:40:42:4042] [HTTP]  GET /api/stocks/quote?symbol=AAPL 200 330 - 0.741 ms [ReqID: 0f078b4f-87c6-46d7-8591-59c8cf0979a4]
+[2026-07-11 13:40:42:4042] [HTTP]  GET /api/stocks/quote?symbol=MSFT 200 327 - 1.085 ms [ReqID: 8e72a1f7-c932-46f6-a164-e819a75a65be]
+[2026-07-11 13:40:42:4042] [HTTP]  GET /api/stocks/quote?symbol=TSLA 200 327 - 1.116 ms [ReqID: 4ecc467e-b664-47c5-ada2-8277645b2994]
+[2026-07-11 13:40:42:4042] [HTTP]  GET /api/stocks/quote?symbol=BTC.X 200 340 - 1.034 ms [ReqID: d99638fe-cc68-432a-bdaf-bf471e5b746b]
+[2026-07-11 13:40:52:4052] [HTTP]  GET /api/stocks/quote?symbol=NVDA 200 329 - 0.870 ms [ReqID: 1f0b5e76-f15e-48c3-8ce2-7fa2aaa77b5e]
+[2026-07-11 13:40:52:4052] [HTTP]  GET /api/stocks/quote?symbol=AAPL 200 330 - 1.030 ms [ReqID: 4f179502-fe10-426b-b241-b30b2184567c]
+[2026-07-11 13:40:52:4052] [HTTP]  GET /api/stocks/quote?symbol=MSFT 200 327 - 1.033 ms [ReqID: e36724f0-1e85-4993-a09d-bab92d375ca8]
+[2026-07-11 13:40:52:4052] [HTTP]  GET /api/stocks/quote?symbol=TSLA 200 327 - 1.381 ms [ReqID: 59e477da-9533-4a5a-a38f-8cbf088f550e]
+[2026-07-11 13:40:52:4052] [HTTP]  GET /api/stocks/quote?symbol=BTC.X 200 340 - 1.430 ms [ReqID: 6f0db890-7ba1-486b-859e-71f7b60d5536]
+[2026-07-11 13:40:53:4053] [HTTP]  GET /api/stocks/quote?symbol=NVDA 200 329 - 0.973 ms [ReqID: 10d82e17-d946-4230-8432-f3bd7684120d]
+[2026-07-11 13:40:53:4053] [HTTP]  GET /api/stocks/profile?symbol=NVDA 200 496 - 1.131 ms [ReqID: 10d57d98-3cb2-47c9-806f-e3a56abff264]
+[2026-07-11 13:40:53:4053] [HTTP]  GET /api/stocks/history?symbol=NVDA&outputsize=60 200 - - 2.503 ms [ReqID: 9193c3a2-f5c5-4de4-865a-534bb8c169b0]
+[2026-07-11 13:40:56:4056] [HTTP]  GET /api/stocks/quote?symbol=NVDA 200 329 - 0.699 ms [ReqID: 37539d4e-3a7b-4b20-b837-a42b863fe7e5]
+[2026-07-11 13:40:56:4056] [HTTP]  GET /api/stocks/quote?symbol=AAPL 200 330 - 1.083 ms [ReqID: 490bb56c-4d8e-467c-81fb-90f372f39477]
+[2026-07-11 13:40:56:4056] [HTTP]  GET /api/stocks/quote?symbol=MSFT 200 327 - 1.440 ms [ReqID: 715ad8ab-d6de-410c-ad74-0a06ba535817]
+[2026-07-11 13:40:56:4056] [HTTP]  GET /api/stocks/quote?symbol=TSLA 200 327 - 1.882 ms [ReqID: 50379da8-ad6e-4c9e-987e-47f7e76d0079]
+[2026-07-11 13:40:56:4056] [HTTP]  GET /api/stocks/quote?symbol=BTC.X 200 340 - 0.819 ms [ReqID: 0aeef051-0270-410e-a7ac-53773ead7fd7]
+[2026-07-11 13:40:58:4058] [HTTP]  GET /api/stocks/quote?symbol=NVDA 200 329 - 1.255 ms [ReqID: c36205a3-2cfe-41fa-8969-1e25ce59c106]
+[2026-07-11 13:40:58:4058] [HTTP]  GET /api/stocks/quote?symbol=AAPL 200 330 - 0.935 ms [ReqID: 0a29e537-a2af-4c77-885d-7b12ff6c494c]
+[2026-07-11 13:40:58:4058] [HTTP]  GET /api/stocks/quote?symbol=MSFT 200 327 - 1.505 ms [ReqID: f7a0b4d6-4b37-46a2-8bd1-961b96fd350b]
+[2026-07-11 13:40:58:4058] [HTTP]  GET /api/stocks/quote?symbol=TSLA 200 327 - 1.363 ms [ReqID: 62a139d9-cbb0-49c1-97e7-07a71a0a4b61]
+[2026-07-11 13:40:58:4058] [HTTP]  GET /api/stocks/quote?symbol=BTC.X 200 340 - 1.029 ms [ReqID: 65764053-7f78-4dfd-b4e8-fdb9e1b1b297]
+[2026-07-11 13:40:58:4058] [HTTP]  GET /api/stocks/quote?symbol=NVDA 200 329 - 1.063 ms [ReqID: ac2fe6e4-f6d9-4de7-a917-5897f8cc3f8e]
+[2026-07-11 13:40:58:4058] [HTTP]  GET /api/stocks/quote?symbol=AAPL 200 330 - 0.852 ms [ReqID: 47906695-ffac-4a0c-a95e-39bb3b695396]
+[2026-07-11 13:40:58:4058] [HTTP]  GET /api/stocks/quote?symbol=MSFT 200 327 - 0.958 ms [ReqID: 37a65cb5-b181-445b-ae7d-336c74b0a617]
+[2026-07-11 13:40:58:4058] [HTTP]  GET /api/stocks/quote?symbol=TSLA 200 327 - 0.972 ms [ReqID: 86309ef8-4935-4607-bec4-6bacde7a9f6b]
+[2026-07-11 13:40:58:4058] [HTTP]  GET /api/stocks/quote?symbol=BTC.X 200 340 - 1.171 ms [ReqID: 841d1cf2-21e2-4aab-bc64-678a35f6f905]
+[2026-07-11 13:41:21:4121] [HTTP]  GET /api/auth/google/config 304 - - 0.385 ms [ReqID: 5a9b1dac-a670-45b6-a80e-b3c3dee5f9d7]
+[2026-07-11 13:41:22:4122] [HTTP]  GET /api/auth/session 200 827 - 471.522 ms [ReqID: 9e1785a8-27c4-4705-b947-bfcefacd48db]
+[2026-07-11 13:41:22:4122] [HTTP]  GET /api/profile 200 1005 - 238.688 ms [ReqID: fce52988-1d34-4a50-a1af-60639cf31fd7]
+[2026-07-11 13:41:23:4123] [HTTP]  GET /api/stocks/quote?symbol=NVDA 200 329 - 0.989 ms [ReqID: cfaac81f-0f1a-4f8f-b96f-52ab4f98c5bd]
+[2026-07-11 13:41:23:4123] [HTTP]  GET /api/stocks/quote?symbol=AAPL 200 330 - 0.842 ms [ReqID: fb97094c-b4d3-46f9-bc04-672cfd848035]
+[2026-07-11 13:41:23:4123] [HTTP]  GET /api/stocks/quote?symbol=MSFT 200 327 - 1.416 ms [ReqID: fd0e0a09-6bfd-47a5-bd53-38bfc03a0b00]
+[2026-07-11 13:41:23:4123] [HTTP]  GET /api/stocks/quote?symbol=TSLA 200 327 - 2.030 ms [ReqID: f77cd89a-c0ae-4fb9-942d-422b55776107]
+[2026-07-11 13:41:23:4123] [HTTP]  GET /api/stocks/quote?symbol=BTC.X 200 340 - 1.290 ms [ReqID: ea4970c1-5593-4cde-bfd3-8c78b22721a1]
+[2026-07-11 13:41:25:4125] [HTTP]  GET /api/stocks/quote?symbol=NVDA 200 329 - 0.800 ms [ReqID: 5060c88e-2a94-48a6-932e-8603738b6da9]
+[2026-07-11 13:41:25:4125] [HTTP]  GET /api/stocks/quote?symbol=AAPL 200 330 - 0.643 ms [ReqID: 3b4734c5-34a9-4a96-994e-98fcb211f0b5]
+[2026-07-11 13:41:25:4125] [HTTP]  GET /api/stocks/quote?symbol=MSFT 200 327 - 0.720 ms [ReqID: 8bb7cc97-dea8-4600-988a-1f816a8853cf]
+[2026-07-11 13:41:25:4125] [HTTP]  GET /api/stocks/quote?symbol=TSLA 200 327 - 1.697 ms [ReqID: 2abfee88-4968-4095-b491-1d49a7e27847]
+[2026-07-11 13:41:25:4125] [HTTP]  GET /api/stocks/quote?symbol=BTC.X 200 340 - 2.186 ms [ReqID: 031cb65d-7484-4dd5-8697-3b7fd7448b55]
+[2026-07-11 13:50:07:507] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 13:50:07:507] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 13:50:10:5010] [HTTP]  GET /api/auth/google/config 304 - - 2.612 ms [ReqID: c07fd565-5870-4260-810c-4ddf9419b7a2]
+[2026-07-11 13:50:10:5010] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 13:50:12:5012] [HTTP]  GET /api/auth/session 200 827 - 2285.755 ms [ReqID: 24a4670d-cc3f-41d3-b8a0-67558a599cf1]
+[2026-07-11 13:50:13:5013] [HTTP]  GET /api/profile 200 1005 - 237.346 ms [ReqID: d2c1e950-bb3a-4dbe-b361-3638bcbbe13d]
+[2026-07-11 13:50:13:5013] [HTTP]  GET /api/stocks/quote?symbol=NVDA 200 329 - 1.561 ms [ReqID: c4339cfa-56a0-4cbd-b734-e28c4fcfcce7]
+[2026-07-11 13:50:13:5013] [HTTP]  GET /api/stocks/quote?symbol=AAPL 200 329 - 1.349 ms [ReqID: 4f53cd9d-dc57-41f6-b22d-9f742a41d129]
+[2026-07-11 13:50:13:5013] [HTTP]  GET /api/stocks/quote?symbol=MSFT 200 329 - 1.280 ms [ReqID: 77c0e686-6941-4a36-aecb-3c3677c57876]
+[2026-07-11 13:50:13:5013] [HTTP]  GET /api/stocks/quote?symbol=TSLA 200 326 - 2.342 ms [ReqID: 4eccf893-cd67-4a51-8002-0a5f7c6dbc84]
+[2026-07-11 13:50:13:5013] [HTTP]  GET /api/stocks/quote?symbol=BTC.X 200 339 - 1.402 ms [ReqID: 933845b6-fcac-4852-947e-b2e2842085c0]
+[2026-07-11 13:50:15:5015] [HTTP]  GET /api/stocks/quote?symbol=NVDA 200 329 - 1.331 ms [ReqID: 9a320805-4494-41b3-beef-08bb3a7478ac]
+[2026-07-11 13:50:15:5015] [HTTP]  GET /api/stocks/quote?symbol=AAPL 200 329 - 0.596 ms [ReqID: 4c5d830d-7756-4c58-8daa-2f5106b1d559]
+[2026-07-11 13:50:15:5015] [HTTP]  GET /api/stocks/quote?symbol=MSFT 200 329 - 1.216 ms [ReqID: d23165f6-153e-4a02-aaa0-71d1e06ebf2c]
+[2026-07-11 13:50:15:5015] [HTTP]  GET /api/stocks/quote?symbol=TSLA 200 326 - 1.052 ms [ReqID: 79d11b26-da40-45f7-8c06-513da04f5dd0]
+[2026-07-11 13:50:15:5015] [HTTP]  GET /api/stocks/quote?symbol=BTC.X 200 339 - 1.111 ms [ReqID: fa18c896-3d72-4af3-ae3f-a2d224a89be3]
+[2026-07-11 13:50:26:5026] [HTTP]  GET /api/stocks/quote?symbol=NVDA 200 329 - 1.432 ms [ReqID: 6dd1d62f-59dc-4a01-90e2-3f04b44123c0]
+[2026-07-11 13:50:26:5026] [HTTP]  GET /api/stocks/quote?symbol=AAPL 200 329 - 0.698 ms [ReqID: 747616e7-2bef-41e8-9a9f-5a7e4112fc3b]
+[2026-07-11 13:50:26:5026] [HTTP]  GET /api/stocks/quote?symbol=MSFT 200 329 - 0.783 ms [ReqID: 7c844355-d06c-44ab-bcc8-7a68380d9e5c]
+[2026-07-11 13:50:26:5026] [HTTP]  GET /api/stocks/quote?symbol=TSLA 200 326 - 0.781 ms [ReqID: 25bb3949-9dda-48b4-bf40-adca86be88a6]
+[2026-07-11 13:50:26:5026] [HTTP]  GET /api/stocks/quote?symbol=BTC.X 200 339 - 0.867 ms [ReqID: bc2287e0-9492-48c5-b343-18781b10a458]
+[2026-07-11 13:50:28:5028] [HTTP]  GET /api/stocks/quote?symbol=NVDA 200 329 - 1.244 ms [ReqID: f946fcbf-ccbf-484a-b433-4f143281ad90]
+[2026-07-11 13:50:28:5028] [HTTP]  GET /api/stocks/quote?symbol=AAPL 200 329 - 0.936 ms [ReqID: 85eeb0d1-b24c-4ae3-95c6-f3afc4e02deb]
+[2026-07-11 13:50:28:5028] [HTTP]  GET /api/stocks/quote?symbol=MSFT 200 329 - 1.921 ms [ReqID: b00874a0-cd9e-4458-aa67-86e06f735c4d]
+[2026-07-11 13:50:28:5028] [HTTP]  GET /api/stocks/quote?symbol=TSLA 200 326 - 1.304 ms [ReqID: 55e9f19f-7b1e-439e-822b-4bc1f2c18efd]
+[2026-07-11 13:50:28:5028] [HTTP]  GET /api/stocks/quote?symbol=BTC.X 200 339 - 0.915 ms [ReqID: 4dc7c9c6-dbf6-4715-98cf-4f5e721c2e40]
+[2026-07-11 13:50:28:5028] [HTTP]  GET /api/stocks/quote?symbol=AAPL 200 329 - 0.894 ms [ReqID: d7a01bb6-2420-4dce-84af-68a052eb56cd]
+[2026-07-11 13:50:28:5028] [HTTP]  GET /api/stocks/profile?symbol=AAPL 200 486 - 1.279 ms [ReqID: 4f60c8b7-27a1-49df-acdf-0e06855bd369]
+[2026-07-11 13:50:28:5028] [HTTP]  GET /api/stocks/history?symbol=AAPL&outputsize=60 200 - - 2.384 ms [ReqID: 0c996482-090a-47ab-b3cc-81e0e605d4a5]

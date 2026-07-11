@@ -91,8 +91,37 @@ function getBezierPath(points) {
     return d;
 }
 
-function loadWatchlistView() {
+async function loadWatchlistView() {
     const grid = document.getElementById('watchlist-grid');
+    if (!grid) return;
+    
+    // Render skeleton pulses while syncing quotes
+    grid.innerHTML = Array(state.watchlist.length || 3).fill(0).map(() => `
+        <div class="glass-panel p-5 rounded-xl border border-white/5 animate-pulse space-y-4">
+            <div class="flex justify-between items-start">
+                <div class="space-y-2">
+                    <div class="h-4 w-12 bg-white/10 rounded"></div>
+                    <div class="h-3 w-20 bg-white/10 rounded"></div>
+                </div>
+                <div class="h-8 w-8 bg-white/10 rounded-full"></div>
+            </div>
+            <div class="h-12 w-full bg-white/5 rounded my-3"></div>
+            <div class="flex justify-between items-end">
+                <div class="space-y-2">
+                    <div class="h-3 w-8 bg-white/10 rounded"></div>
+                    <div class="h-4 w-16 bg-white/10 rounded"></div>
+                </div>
+                <div class="space-y-2 text-right">
+                    <div class="h-3 w-16 bg-white/10 rounded"></div>
+                    <div class="h-4 w-12 bg-white/10 rounded"></div>
+                </div>
+            </div>
+        </div>
+    `).join('');
+
+    // Fetch real backend quotes and update state
+    await fetchLiveQuotesForAssets();
+
     grid.innerHTML = '';
     
     if (window.watchlistInterval) {
@@ -220,6 +249,17 @@ function loadWatchlistView() {
             if (dotGlow) dotGlow.setAttribute('cy', newY);
         });
     }, 5000);
+
+    // Bind Enter key on watchlist add input
+    const addInput = document.getElementById('watchlist-add-input');
+    if (addInput && !addInput.dataset.listenerBound) {
+        addInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                addToWatchlistFromInput();
+            }
+        });
+        addInput.dataset.listenerBound = "true";
+    }
 }
 
 function addToWatchlistFromInput() {
