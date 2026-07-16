@@ -35,7 +35,7 @@ export class UserController {
   }
 
   async logoutSession(req: CustomRequest, res: Response): Promise<Response> {
-    const { sessionId } = z.object({ sessionId: z.string().uuid() }).parse(req.body);
+    const { sessionId } = z.object({ sessionId: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid session ID format') }).parse(req.body);
     const user = (req as any).user;
 
     const session = await sessionRepository.findById(sessionId);

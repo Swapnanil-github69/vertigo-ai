@@ -1,5 +1,5 @@
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
@@ -36,7 +36,7 @@ enum ChatRole {
 }
 
 model User {
-  id                String             @id @default(uuid()) @db.Uuid
+  id                String             @id @default(auto()) @map("_id") @db.ObjectId
   email             String             @unique
   passwordHash      String?
   name              String
@@ -75,27 +75,23 @@ model User {
   chats             AIChat[]
   notifications     Notification[]
   auditLogs         AuditLogs[]
-
-  @@index([email])
-  @@index([googleId])
 }
 
 model RefreshToken {
-  id        String   @id @default(uuid()) @db.Uuid
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
   token     String   @unique
-  userId    String   @db.Uuid
+  userId    String   @db.ObjectId
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   expiresAt DateTime
   revokedAt DateTime?
   createdAt DateTime @default(now())
 
   @@index([userId])
-  @@index([token])
 }
 
 model UserPreferences {
-  id                 String   @id @default(uuid()) @db.Uuid
-  userId             String   @unique @db.Uuid
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId             String   @unique @db.ObjectId
   user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   theme              String   @default("dark")
   enableMfa          Boolean  @default(false)
@@ -106,8 +102,8 @@ model UserPreferences {
 }
 
 model Session {
-  id           String   @id @default(uuid()) @db.Uuid
-  userId       String   @db.Uuid
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId       String   @db.ObjectId
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   token        String   @unique
   ipAddress    String?
@@ -119,12 +115,11 @@ model Session {
   createdAt    DateTime @default(now())
 
   @@index([userId])
-  @@index([token])
 }
 
 model LoginHistory {
-  id                     String   @id @default(uuid()) @db.Uuid
-  userId                 String   @db.Uuid
+  id                     String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId                 String   @db.ObjectId
   user                   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   ipAddress              String?
   userAgent              String?
@@ -145,11 +140,11 @@ model LoginHistory {
 }
 
 model InteractionLogs {
-  id           String   @id @default(uuid()) @db.Uuid
-  userId       String   @db.Uuid
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId       String   @db.ObjectId
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   actionModule String   // Viewed Stock, Viewed Portfolio, AI Prompt, Generated Report, etc.
-  details      String   @db.Text
+  details      String   
   ipAddress    String?
   userAgent    String?
   createdAt    DateTime @default(now())
@@ -159,8 +154,8 @@ model InteractionLogs {
 }
 
 model Portfolio {
-  id             String   @id @default(uuid()) @db.Uuid
-  userId         String   @db.Uuid
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId         String   @db.ObjectId
   user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   name           String   @default("Primary Portfolio")
   totalValuation Float    @default(0.0)
@@ -176,8 +171,8 @@ model Portfolio {
 }
 
 model Transaction {
-  id             String          @id @default(uuid()) @db.Uuid
-  portfolioId    String          @db.Uuid
+  id             String          @id @default(auto()) @map("_id") @db.ObjectId
+  portfolioId    String          @db.ObjectId
   portfolio      Portfolio       @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
   symbol         String
   type           TransactionType
@@ -191,8 +186,8 @@ model Transaction {
 }
 
 model Watchlist {
-  id        String   @id @default(uuid()) @db.Uuid
-  userId    String   @db.Uuid
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   symbol    String
   createdAt DateTime @default(now())
@@ -202,8 +197,8 @@ model Watchlist {
 }
 
 model Alert {
-  id             String   @id @default(uuid()) @db.Uuid
-  userId         String   @db.Uuid
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId         String   @db.ObjectId
   user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   symbol         String
   triggerType    String   // Price Above, Price Below, Volatility Spike
@@ -217,8 +212,8 @@ model Alert {
 }
 
 model Report {
-  id           String       @id @default(uuid()) @db.Uuid
-  userId       String       @db.Uuid
+  id           String       @id @default(auto()) @map("_id") @db.ObjectId
+  userId       String       @db.ObjectId
   user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   symbol       String
   reportType   String       // Full Comprehensive, Technical, Sentiment
@@ -232,8 +227,8 @@ model Report {
 }
 
 model AIChat {
-  id           String           @id @default(uuid()) @db.Uuid
-  userId       String           @db.Uuid
+  id           String           @id @default(auto()) @map("_id") @db.ObjectId
+  userId       String           @db.ObjectId
   user         User             @relation(fields: [userId], references: [id], onDelete: Cascade)
   title        String           @default("New Analysis Session")
   createdAt    DateTime         @default(now())
@@ -244,11 +239,11 @@ model AIChat {
 }
 
 model AIConversation {
-  id         String   @id @default(uuid()) @db.Uuid
-  chatId     String   @db.Uuid
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  chatId     String   @db.ObjectId
   chat       AIChat   @relation(fields: [chatId], references: [id], onDelete: Cascade)
   role       ChatRole
-  content    String   @db.Text
+  content    String   
   tokenCount Int      @default(0)
   createdAt  DateTime @default(now())
 
@@ -256,7 +251,7 @@ model AIConversation {
 }
 
 model StockCache {
-  id          String   @id @default(uuid()) @db.Uuid
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
   symbol      String   @unique
   price       Float
   change      Float
@@ -266,15 +261,13 @@ model StockCache {
   name        String
   sector      String
   lastUpdated DateTime @default(now()) @updatedAt
-
-  @@index([symbol])
 }
 
 model NewsCache {
-  id          String   @id @default(uuid()) @db.Uuid
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
   symbol      String
   title       String
-  summary     String   @db.Text
+  summary     String   
   url         String
   source      String
   sentiment   String   // Bullish, Bearish, Neutral
@@ -285,8 +278,8 @@ model NewsCache {
 }
 
 model Notification {
-  id        String   @id @default(uuid()) @db.Uuid
-  userId    String   @db.Uuid
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   title     String
   message   String
@@ -297,19 +290,19 @@ model Notification {
 }
 
 model Settings {
-  id          String   @id @default(uuid()) @db.Uuid
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
   key         String   @unique
-  value       String   @db.Text
+  value       String   
   description String?
   lastUpdated DateTime @default(now()) @updatedAt
 }
 
 model AuditLogs {
-  id        String   @id @default(uuid()) @db.Uuid
-  userId    String?  @db.Uuid
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String?  @db.ObjectId
   user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
   action    String
-  details   String   @db.Text
+  details   String   
   ipAddress String?
   timestamp DateTime @default(now())
 
@@ -317,7 +310,7 @@ model AuditLogs {
 }
 
 model Otp {
-  id          String    @id @default(uuid()) @db.Uuid
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
   email       String
   code        String
   type        String    // e.g. REGISTRATION, LOGIN, PASSWORD_RESET, SENSITIVE_ACTION

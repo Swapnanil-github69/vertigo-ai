@@ -711,3 +711,299 @@ Error: Email delivery is misconfigured on the server (invalid sender domain). Pl
 [2026-07-11 13:50:28:5028] [HTTP]  GET /api/stocks/quote?symbol=AAPL 200 329 - 0.894 ms [ReqID: d7a01bb6-2420-4dce-84af-68a052eb56cd]
 [2026-07-11 13:50:28:5028] [HTTP]  GET /api/stocks/profile?symbol=AAPL 200 486 - 1.279 ms [ReqID: 4f60c8b7-27a1-49df-acdf-0e06855bd369]
 [2026-07-11 13:50:28:5028] [HTTP]  GET /api/stocks/history?symbol=AAPL&outputsize=60 200 - - 2.384 ms [ReqID: 0c996482-090a-47ab-b3cc-81e0e605d4a5]
+[2026-07-11 13:57:20:5720] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 13:57:20:5720] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 13:57:22:5722] [WARN] [ReqID: 3cc94bdc-317f-4811-b2b9-defe2aef06d1] AppError (401): Invalid or expired authentication token.
+[2026-07-11 13:57:22:5722] [HTTP]  GET /api/auth/session 401 186 - 11.361 ms [ReqID: 3cc94bdc-317f-4811-b2b9-defe2aef06d1]
+[2026-07-11 13:57:22:5722] [HTTP]  GET /api/auth/google/config 304 - - 0.558 ms [ReqID: a1887508-799b-444b-a499-512597096516]
+[2026-07-11 13:57:23:5723] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 13:57:30:5730] [HTTP]  GET /api/auth/google?state=http%3A%2F%2Flocalhost%3A8000 302 468 - 3.296 ms [ReqID: 2191e47b-75ea-4f86-a70c-cff34c60bf01]
+[2026-07-11 13:57:35:5735] [INFO]  [Google Auth] Callback received. code: present, state: http://localhost:8000
+[2026-07-11 13:57:35:5735] [INFO]  [Google Auth] Attempting token exchange. Redirect URI: "http://localhost:8000/api/auth/google/callback"
+[2026-07-11 13:57:36:5736] [INFO]  [Google Auth] Google identity token verified successfully for: swapnanilrick10@gmail.com
+[2026-07-11 13:57:36:5736] [INFO]  [Google Sync] User found for email: swapnanilrick10@gmail.com. Syncing user fields (Login Count: 5).
+[2026-07-11 13:57:37:5737] [INFO]  [Google Auth] Database sync completed for user: swapnanilrick10@gmail.com (ID: 2ff34fa5-c433-45ea-90ec-5b7f881c33ae)
+[2026-07-11 13:57:41:5741] [INFO]  [Google Auth] JWT Access Token successfully generated for user: swapnanilrick10@gmail.com
+[2026-07-11 13:57:41:5741] [INFO]  [Google Auth] Secure HTTP-only refresh cookie set for user: swapnanilrick10@gmail.com
+[2026-07-11 13:57:43:5743] [INFO]  ✅ [Google Auth] Session successfully initialized for [swapnanilrick10@gmail.com]
+[2026-07-11 13:57:43:5743] [HTTP]  GET /api/auth/google/callback?state=http%3A%2F%2Flocalhost%3A8000&iss=https%3A%2F%2Faccounts.google.com&code=4%2F0AXEQxIBq2g8_tnEg0jhcW0QnVlyWCqDzfzLnKxO0qSWNhOrb6jcppQbbL2PUa1l_JCEPbg&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent 302 323 - 7654.001 ms [ReqID: 74b4391f-2a54-4a6f-b777-e8718a44bbfe]
+[2026-07-11 13:57:44:5744] [HTTP]  GET /api/auth/google/config 304 - - 0.322 ms [ReqID: 888d285f-9aab-4610-9a0e-d04fe18fa37e]
+[2026-07-11 13:57:44:5744] [HTTP]  GET /api/auth/session 200 827 - 484.304 ms [ReqID: b4f22bf6-918e-4b7e-a5d4-a48d7b26e44e]
+[2026-07-11 13:57:46:5746] [HTTP]  GET /api/profile 200 1005 - 242.710 ms [ReqID: e6b2b1d4-6f74-4dc3-91ce-1d22396ff4cc]
+[2026-07-11 13:57:47:5747] [HTTP]  GET /api/stocks/quote?symbol=NVDA 200 330 - 1.295 ms [ReqID: 9c8ba7e7-7169-4872-b951-4f82e59177de]
+[2026-07-11 13:57:47:5747] [HTTP]  GET /api/stocks/quote?symbol=AAPL 200 329 - 1.086 ms [ReqID: 3c3c39cc-e403-461a-a1cb-669817893496]
+[2026-07-11 13:57:47:5747] [HTTP]  GET /api/stocks/quote?symbol=MSFT 200 329 - 1.116 ms [ReqID: 854b99ee-3928-484c-9daf-8e3719b50c3d]
+[2026-07-11 13:57:47:5747] [HTTP]  GET /api/stocks/quote?symbol=TSLA 200 327 - 0.938 ms [ReqID: 922447b2-a84b-4be3-add2-5102af8d36cb]
+[2026-07-11 13:57:47:5747] [HTTP]  GET /api/stocks/quote?symbol=BTC.X 200 340 - 1.349 ms [ReqID: 7831438e-5671-4f3c-8c38-99518813134b]
+[2026-07-11 13:57:50:5750] [HTTP]  GET /api/stocks/quote?symbol=NVDA 200 330 - 1.153 ms [ReqID: 09f7d3eb-5a37-4c47-aabc-61f5770186cc]
+[2026-07-11 13:57:50:5750] [HTTP]  GET /api/stocks/quote?symbol=AAPL 200 329 - 1.141 ms [ReqID: 40b76450-83f4-4bd5-8fee-779ebe704e67]
+[2026-07-11 13:57:50:5750] [HTTP]  GET /api/stocks/quote?symbol=MSFT 200 329 - 1.407 ms [ReqID: c5cc745b-3759-4529-a569-d9f366cac3f4]
+[2026-07-11 13:57:50:5750] [HTTP]  GET /api/stocks/quote?symbol=TSLA 200 327 - 1.625 ms [ReqID: 38d8408e-d15f-453b-bc6c-36ef118c2498]
+[2026-07-11 13:57:50:5750] [HTTP]  GET /api/stocks/quote?symbol=BTC.X 200 340 - 1.248 ms [ReqID: 7a4f1924-6b00-41dc-b298-d636da81cb37]
+[2026-07-11 13:57:57:5757] [HTTP]  GET /api/stocks/quote?symbol=MSFT 200 329 - 0.931 ms [ReqID: 8d8aac3a-27e7-494b-96c8-009d333d1bcd]
+[2026-07-11 13:57:57:5757] [HTTP]  GET /api/stocks/profile?symbol=MSFT 200 493 - 1.483 ms [ReqID: 5daad2f1-28fc-488d-8dfb-3dca9e974c00]
+[2026-07-11 13:57:57:5757] [HTTP]  GET /api/stocks/history?symbol=MSFT&outputsize=60 200 - - 3.170 ms [ReqID: 231c1c61-e9c8-4935-a3a8-b1845b46289a]
+[2026-07-11 14:58:32:5832] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 14:58:32:5832] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 14:58:35:5835] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 14:58:41:5841] [WARN] [ReqID: fb5849b0-9f38-4dd5-8474-72b6d79b8272] AppError (401): Invalid or expired authentication token.
+[2026-07-11 14:58:41:5841] [HTTP]  GET /api/auth/session 401 186 - 16.909 ms [ReqID: fb5849b0-9f38-4dd5-8474-72b6d79b8272]
+[2026-07-11 14:58:41:5841] [HTTP]  GET /api/auth/google/config 304 - - 1.107 ms [ReqID: f381b45d-7a57-4c52-a73a-5b6b86e8c219]
+[2026-07-11 14:58:41:5841] [HTTP]  GET /api/auth/google/config 304 - - 0.615 ms [ReqID: 034ece4e-992a-43da-a073-31834c694ea5]
+[2026-07-11 14:58:54:5854] [HTTP]  GET /api/auth/google?state=http%3A%2F%2Flocalhost%3A8000 302 468 - 2.828 ms [ReqID: 1c87e19a-ad93-4678-9299-d95ee0aad9bc]
+[2026-07-11 14:59:01:591] [INFO]  [Google Auth] Callback received. code: present, state: http://localhost:8000
+[2026-07-11 14:59:01:591] [INFO]  [Google Auth] Attempting token exchange. Redirect URI: "http://localhost:8000/api/auth/google/callback"
+[2026-07-11 14:59:01:591] [INFO]  [Google Auth] Google identity token verified successfully for: swapnanilrick10@gmail.com
+[2026-07-11 14:59:02:592] [INFO]  [Google Sync] User found for email: swapnanilrick10@gmail.com. Syncing user fields (Login Count: 6).
+[2026-07-11 14:59:03:593] [INFO]  [Google Auth] Database sync completed for user: swapnanilrick10@gmail.com (ID: 2ff34fa5-c433-45ea-90ec-5b7f881c33ae)
+[2026-07-11 14:59:06:596] [INFO]  [Google Auth] JWT Access Token successfully generated for user: swapnanilrick10@gmail.com
+[2026-07-11 14:59:06:596] [INFO]  [Google Auth] Secure HTTP-only refresh cookie set for user: swapnanilrick10@gmail.com
+[2026-07-11 14:59:08:598] [INFO]  ✅ [Google Auth] Session successfully initialized for [swapnanilrick10@gmail.com]
+[2026-07-11 14:59:08:598] [HTTP]  GET /api/auth/google/callback?state=http%3A%2F%2Flocalhost%3A8000&iss=https%3A%2F%2Faccounts.google.com&code=4%2F0AdkVLPwmLlEp6vASONj7cVGiRLJvA9Mt0gDUYmeE6Joux4BT60glyu5IpKnek-GBYodZbw&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent 302 323 - 7476.291 ms [ReqID: b7a71c09-2b6b-4ff0-9f46-80ec8abe4b5b]
+[2026-07-11 14:59:09:599] [HTTP]  GET /api/auth/google/config 304 - - 0.405 ms [ReqID: dd7893d9-e858-4f6a-9c20-e3354fde9f37]
+[2026-07-11 14:59:09:599] [HTTP]  GET /api/auth/session 200 827 - 466.354 ms [ReqID: cff43691-c47d-477e-bb09-c2463e6af5ec]
+[2026-07-11 14:59:10:5910] [HTTP]  GET /api/profile 200 1005 - 235.066 ms [ReqID: 9715ef12-2778-4ab6-9a49-df8f4b822471]
+[2026-07-11 14:59:10:5910] [HTTP]  GET /api/stocks/quote?symbol=NVDA 200 328 - 1.496 ms [ReqID: cc234c0a-bbc7-4b25-ac42-7e2999e4a9b0]
+[2026-07-11 14:59:10:5910] [HTTP]  GET /api/stocks/quote?symbol=AAPL 200 330 - 1.239 ms [ReqID: 336ae343-134b-4370-890b-b35a45e9c2e1]
+[2026-07-11 14:59:10:5910] [HTTP]  GET /api/stocks/quote?symbol=MSFT 200 328 - 0.813 ms [ReqID: d082159d-f87e-4877-b89e-c4ecdfa87f44]
+[2026-07-11 14:59:10:5910] [HTTP]  GET /api/stocks/quote?symbol=TSLA 200 327 - 1.774 ms [ReqID: c43c2606-9c4a-4a91-a09c-9425d78574ee]
+[2026-07-11 14:59:10:5910] [HTTP]  GET /api/stocks/quote?symbol=BTC.X 200 334 - 1.627 ms [ReqID: 9df9856e-2c17-4d7d-8eb8-1c4b4faf2571]
+[2026-07-11 14:59:12:5912] [HTTP]  GET /api/stocks/quote?symbol=NVDA 200 328 - 0.982 ms [ReqID: 79d8eef3-124e-4277-965e-a850c20d21da]
+[2026-07-11 14:59:12:5912] [HTTP]  GET /api/stocks/quote?symbol=AAPL 200 330 - 0.785 ms [ReqID: 5352192f-89ba-4dd6-a77a-572aa7f29619]
+[2026-07-11 14:59:12:5912] [HTTP]  GET /api/stocks/quote?symbol=MSFT 200 328 - 0.643 ms [ReqID: adb62f36-b192-4061-a98e-b7961f74173f]
+[2026-07-11 14:59:12:5912] [HTTP]  GET /api/stocks/quote?symbol=TSLA 200 327 - 0.594 ms [ReqID: 012af151-1af5-4d1a-9cae-fab411e0557e]
+[2026-07-11 14:59:12:5912] [HTTP]  GET /api/stocks/quote?symbol=BTC.X 200 334 - 0.850 ms [ReqID: 7049dc4b-25c9-41dc-bb96-f562ef37a51c]
+[2026-07-11 14:59:24:5924] [HTTP]  GET /api/stocks/quote?symbol=NVDA 200 328 - 1.086 ms [ReqID: 1410567a-688c-4a00-b005-4c133c056f64]
+[2026-07-11 14:59:24:5924] [HTTP]  GET /api/stocks/quote?symbol=AAPL 200 330 - 0.711 ms [ReqID: 7ade071a-daf9-4e68-990d-a96813822a46]
+[2026-07-11 14:59:24:5924] [HTTP]  GET /api/stocks/quote?symbol=MSFT 200 328 - 0.839 ms [ReqID: ed39fd70-f3ea-4677-8f38-0f10dc902350]
+[2026-07-11 14:59:24:5924] [HTTP]  GET /api/stocks/quote?symbol=TSLA 200 327 - 0.828 ms [ReqID: 2221d191-4f5a-4904-8fe1-b3aabdbe2e9b]
+[2026-07-11 14:59:24:5924] [HTTP]  GET /api/stocks/quote?symbol=BTC.X 200 334 - 1.346 ms [ReqID: a8098891-52f2-4489-9970-a095faf2b82a]
+[2026-07-11 14:59:28:5928] [WARN] [ReqID: ad463647-e429-452f-909f-4a748b58cac0] AppError (404): Requested API route [GET] /.well-known/appspecific/com.chrome.devtools.json was not found
+[2026-07-11 14:59:28:5928] [HTTP]  GET /.well-known/appspecific/com.chrome.devtools.json 404 235 - 0.953 ms [ReqID: ad463647-e429-452f-909f-4a748b58cac0]
+[2026-07-11 15:00:11:011] [HTTP]  GET /api/stocks/quote?symbol=NVDA 200 330 - 1.102 ms [ReqID: 3885e454-8f4f-4784-9e65-cf28dce3bf70]
+[2026-07-11 15:00:11:011] [HTTP]  GET /api/stocks/quote?symbol=AAPL 200 330 - 1.183 ms [ReqID: 15561825-5db0-4cf0-aaec-c801c5fd22c7]
+[2026-07-11 15:00:11:011] [HTTP]  GET /api/stocks/quote?symbol=MSFT 200 329 - 1.273 ms [ReqID: 50ffeb09-bdf6-4e7e-ae66-612722100a30]
+[2026-07-11 15:00:11:011] [HTTP]  GET /api/stocks/quote?symbol=TSLA 200 326 - 1.904 ms [ReqID: 14cf1fd9-c5b4-4677-9719-892c242697fa]
+[2026-07-11 15:00:11:011] [HTTP]  GET /api/stocks/quote?symbol=BTC.X 200 340 - 2.316 ms [ReqID: ccf92828-c2c9-4d8b-b468-8d199185460f]
+[2026-07-11 15:00:35:035] [HTTP]  GET /api/stocks/quote?symbol=NVDA 200 330 - 0.692 ms [ReqID: 88ffc230-12dc-4c94-ba2e-4fb1844bdf52]
+[2026-07-11 15:00:35:035] [HTTP]  GET /api/stocks/quote?symbol=AAPL 200 330 - 0.549 ms [ReqID: abee8ea6-6624-45e4-a8d5-c6fc8bad79a7]
+[2026-07-11 15:00:35:035] [HTTP]  GET /api/stocks/quote?symbol=MSFT 200 329 - 1.180 ms [ReqID: cd96f098-99ca-4542-9f3a-9d4d81342e65]
+[2026-07-11 15:00:35:035] [HTTP]  GET /api/stocks/quote?symbol=TSLA 200 326 - 1.518 ms [ReqID: a7b1e8e2-c103-44d0-953a-8939d7e13fef]
+[2026-07-11 15:00:35:035] [HTTP]  GET /api/stocks/quote?symbol=BTC.X 200 340 - 6.562 ms [ReqID: e8d9dd3b-66c4-48cb-b885-bb6e6de355cf]
+[2026-07-11 15:00:40:040] [HTTP]  GET /api/stocks/quote?symbol=NVDA 200 330 - 0.858 ms [ReqID: 59e54ae1-d63d-4bde-990d-af01af703f31]
+[2026-07-11 15:00:40:040] [HTTP]  GET /api/stocks/profile?symbol=NVDA 200 496 - 1.019 ms [ReqID: 739519d3-bac9-4079-825e-59197ed2a88f]
+[2026-07-11 15:00:40:040] [HTTP]  GET /api/stocks/history?symbol=NVDA&outputsize=60 200 - - 1.955 ms [ReqID: 6c567567-fb34-4f27-acaa-b69c9eb68fd1]
+[2026-07-11 15:00:47:047] [HTTP]  GET /api/stocks/quote?symbol=NVDA 200 330 - 1.104 ms [ReqID: 34e3689d-0ea0-46ac-8df5-a252c83c8715]
+[2026-07-11 15:00:47:047] [HTTP]  GET /api/stocks/quote?symbol=AAPL 200 330 - 0.690 ms [ReqID: 45a1acab-a19b-41ca-ba76-36e2fcb9c2dd]
+[2026-07-11 15:00:47:047] [HTTP]  GET /api/stocks/quote?symbol=TSLA 200 326 - 0.616 ms [ReqID: df81a3d2-f5d5-4528-96d8-6887c181030c]
+[2026-07-11 15:00:47:047] [HTTP]  GET /api/stocks/quote?symbol=MSFT 200 329 - 0.904 ms [ReqID: ee5843d8-00d8-47fd-8189-62f15168b3dd]
+[2026-07-11 15:00:47:047] [HTTP]  GET /api/stocks/quote?symbol=BTC.X 200 340 - 1.001 ms [ReqID: e5e920f6-4f38-4195-a058-2083a202f8ab]
+[2026-07-11 21:09:42:942] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-11 21:09:42:942] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-11 21:09:45:945] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-11 21:11:12:1112] [WARN] [ReqID: 57fee188-80a3-440d-ab99-d12efbf9b635] AppError (401): Invalid or expired authentication token.
+[2026-07-11 21:11:12:1112] [HTTP]  GET /api/auth/session 401 186 - 10.742 ms [ReqID: 57fee188-80a3-440d-ab99-d12efbf9b635]
+[2026-07-11 21:11:12:1112] [HTTP]  GET /api/auth/google/config 304 - - 1.076 ms [ReqID: 2e92d901-8bd9-4a80-be12-5ac685ff2cc8]
+[2026-07-11 21:11:12:1112] [WARN] [ReqID: 535b8d1e-9adb-4ae9-a046-b76a53687ceb] AppError (404): Requested API route [GET] /favicon.ico was not found
+[2026-07-11 21:11:12:1112] [HTTP]  GET /favicon.ico 404 198 - 2.482 ms [ReqID: 535b8d1e-9adb-4ae9-a046-b76a53687ceb]
+[2026-07-11 21:12:15:1215] [HTTP]  GET /api/auth/google/config 304 - - 1.905 ms [ReqID: d41643f7-6f29-42d2-9cd0-16af569846ab]
+[2026-07-11 21:12:41:1241] [HTTP]  GET /api/auth/google/config 304 - - 0.804 ms [ReqID: 8a159df0-e205-4b52-b441-3df76847e693]
+[2026-07-11 21:13:21:1321] [HTTP]  GET /api/auth/google/config 304 - - 3.069 ms [ReqID: e4a695f3-61ff-40d4-a504-e680a8f2522e]
+[2026-07-11 21:13:34:1334] [HTTP]  GET /api/auth/google/config 304 - - 4.876 ms [ReqID: 71862358-7bc3-4072-b330-28055e49ba11]
+[2026-07-11 21:13:45:1345] [HTTP]  GET /api/auth/google/config 304 - - 1.779 ms [ReqID: 38ccc356-9726-44d6-a386-065217556e4a]
+[2026-07-11 21:14:40:1440] [HTTP]  GET /api/auth/google/config 304 - - 2.940 ms [ReqID: af85ecc6-2510-401a-a986-a0a8dab425da]
+[2026-07-11 21:15:04:154] [HTTP]  GET /api/auth/google/config 304 - - 1.433 ms [ReqID: fa8489c8-ac08-4494-a191-0aa283bddb3a]
+[2026-07-15 23:51:38:5138] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-15 23:51:38:5138] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-15 23:51:41:5141] [INFO]  🔑 Database surveillance channel established successfully.
+[2026-07-15 23:51:42:5142] [WARN] [ReqID: 68ed361a-576a-4a9b-82b5-161202b9a9b1] AppError (401): Invalid or expired authentication token.
+[2026-07-15 23:51:42:5142] [HTTP]  GET /api/auth/session 401 186 - 11.090 ms [ReqID: 68ed361a-576a-4a9b-82b5-161202b9a9b1]
+[2026-07-15 23:51:42:5142] [HTTP]  GET /api/auth/google/config 304 - - 0.612 ms [ReqID: 6a5feb09-5403-49b8-aeff-66530abe54f2]
+[2026-07-15 23:51:42:5142] [WARN] [ReqID: d31a5258-c43f-4093-b455-f483f0b4223d] AppError (404): Requested API route [GET] /favicon.ico was not found
+[2026-07-15 23:51:42:5142] [HTTP]  GET /favicon.ico 404 198 - 0.844 ms [ReqID: d31a5258-c43f-4093-b455-f483f0b4223d]
+[2026-07-15 23:51:50:5150] [HTTP]  GET /api/auth/google?state=http%3A%2F%2Flocalhost%3A8000 302 468 - 2.790 ms [ReqID: 6ecad2d5-c4d1-42b0-a29a-b1f1957cf686]
+[2026-07-15 23:51:55:5155] [INFO]  [Google Auth] Callback received. code: present, state: http://localhost:8000
+[2026-07-15 23:51:55:5155] [INFO]  [Google Auth] Attempting token exchange. Redirect URI: "http://localhost:8000/api/auth/google/callback"
+[2026-07-15 23:51:56:5156] [INFO]  [Google Auth] Google identity token verified successfully for: swapnanilrick10@gmail.com
+[2026-07-15 23:51:56:5156] [INFO]  [Google Sync] User found for email: swapnanilrick10@gmail.com. Syncing user fields (Login Count: 7).
+[2026-07-15 23:51:57:5157] [INFO]  [Google Auth] Database sync completed for user: swapnanilrick10@gmail.com (ID: 2ff34fa5-c433-45ea-90ec-5b7f881c33ae)
+[2026-07-15 23:52:01:521] [INFO]  [Google Auth] JWT Access Token successfully generated for user: swapnanilrick10@gmail.com
+[2026-07-15 23:52:01:521] [INFO]  [Google Auth] Secure HTTP-only refresh cookie set for user: swapnanilrick10@gmail.com
+[2026-07-15 23:52:03:523] [INFO]  ✅ [Google Auth] Session successfully initialized for [swapnanilrick10@gmail.com]
+[2026-07-15 23:52:03:523] [HTTP]  GET /api/auth/google/callback?state=http%3A%2F%2Flocalhost%3A8000&iss=https%3A%2F%2Faccounts.google.com&code=4%2F0AXEQxIDl7wwFLEzzSy7YFPI-ma2TEJnBeGZ7pVS_VwNDxy-fne_-qIx_O5AexzH5oRCOPQ&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent 302 323 - 7523.602 ms [ReqID: 8975e77c-fcef-4c12-b93f-a4b0e98613a9]
+[2026-07-15 23:52:03:523] [HTTP]  GET /api/auth/google/config 304 - - 0.403 ms [ReqID: 188651f5-aa9f-4855-a05b-4bee195d530d]
+[2026-07-15 23:52:04:524] [HTTP]  GET /api/auth/session 200 827 - 469.621 ms [ReqID: 22459bac-3057-4e75-b40d-8c95e1fe44b7]
+[2026-07-15 23:52:04:524] [HTTP]  GET /api/stocks/quote?symbol=MSFT 200 329 - 2.713 ms [ReqID: df0b2a79-5876-4d27-9430-3832c0d81b49]
+[2026-07-15 23:52:04:524] [HTTP]  GET /api/stocks/quote?symbol=NVDA 200 330 - 1.462 ms [ReqID: f00455cb-7462-4e37-8a6c-d4160695401f]
+[2026-07-15 23:52:04:524] [HTTP]  GET /api/stocks/quote?symbol=AAPL 200 329 - 1.466 ms [ReqID: 4d37ba10-7bd4-4e33-8dea-5efee8e1e3a2]
+[2026-07-15 23:52:04:524] [HTTP]  GET /api/stocks/quote?symbol=BTC.X 200 340 - 1.090 ms [ReqID: 532de340-e3a6-4c0e-9360-247b0046d194]
+[2026-07-15 23:52:04:524] [HTTP]  GET /api/stocks/quote?symbol=TSLA 200 327 - 0.949 ms [ReqID: 3153d00a-0afb-413f-b4b0-b370bcd6972f]
+[2026-07-15 23:52:05:525] [HTTP]  GET /api/profile 200 1005 - 238.565 ms [ReqID: 5d05f7d4-defd-45e8-8128-97543dc6bdee]
+[2026-07-15 23:52:05:525] [HTTP]  GET /api/stocks/quote?symbol=NVDA 200 330 - 1.002 ms [ReqID: 6beb8f68-0c7f-4edc-903d-02ade5ffa23e]
+[2026-07-15 23:52:05:525] [HTTP]  GET /api/stocks/quote?symbol=AAPL 200 329 - 0.750 ms [ReqID: d6725ffc-1b6a-4c4e-8d43-9718ec8fb805]
+[2026-07-15 23:52:05:525] [HTTP]  GET /api/stocks/quote?symbol=MSFT 200 329 - 0.714 ms [ReqID: 525354ba-e7d4-4f9a-a2df-96c01c2cf3d9]
+[2026-07-15 23:52:05:525] [HTTP]  GET /api/stocks/quote?symbol=TSLA 200 327 - 0.851 ms [ReqID: 5be8a7c2-cbc5-4fae-95ef-a275518ac89f]
+[2026-07-15 23:52:05:525] [HTTP]  GET /api/stocks/quote?symbol=BTC.X 200 340 - 1.161 ms [ReqID: 70786853-f3e9-452b-9221-c765fa848672]
+[2026-07-15 23:52:07:527] [HTTP]  GET /api/stocks/quote?symbol=NVDA 200 330 - 0.627 ms [ReqID: 5a3c452c-61d8-4922-a0c6-ae80a1b4d1d0]
+[2026-07-15 23:52:07:527] [HTTP]  GET /api/stocks/quote?symbol=AAPL 200 329 - 0.402 ms [ReqID: e5ab028f-2c77-4ab9-afac-dd2adc3c041b]
+[2026-07-15 23:52:07:527] [HTTP]  GET /api/stocks/quote?symbol=MSFT 200 329 - 0.541 ms [ReqID: ff828031-4e65-4c7e-add1-ae906b334a3f]
+[2026-07-15 23:52:07:527] [HTTP]  GET /api/stocks/quote?symbol=TSLA 200 327 - 0.603 ms [ReqID: 6fe553ca-c783-441d-872c-699b66c5cfa3]
+[2026-07-15 23:52:07:527] [HTTP]  GET /api/stocks/quote?symbol=BTC.X 200 340 - 0.429 ms [ReqID: 5d96bba8-3793-40ca-b585-3b2f8d02dfbc]
+[2026-07-15 23:52:15:5215] [HTTP]  GET /api/stocks/quote?symbol=NVDA 200 330 - 0.679 ms [ReqID: c46a3b0a-8811-467e-bc38-c1c932e3f756]
+[2026-07-15 23:52:15:5215] [HTTP]  GET /api/stocks/quote?symbol=TSLA 200 327 - 0.625 ms [ReqID: 9561fa6e-ccb2-43a8-87cc-72370dde82a1]
+[2026-07-15 23:52:15:5215] [HTTP]  GET /api/stocks/quote?symbol=BTC.X 200 340 - 0.512 ms [ReqID: 416a519a-e8fa-42e6-b995-261c0298ab89]
+[2026-07-15 23:52:15:5215] [HTTP]  GET /api/stocks/quote?symbol=AAPL 200 329 - 0.741 ms [ReqID: dd5970c6-c5ad-4f75-9b3e-799d6643b5b2]
+[2026-07-15 23:52:15:5215] [HTTP]  GET /api/stocks/quote?symbol=MSFT 200 329 - 0.939 ms [ReqID: 2ffdf7b5-a526-49d3-b42c-22b6b7d01410]
+[2026-07-15 23:52:18:5218] [HTTP]  GET /api/stocks/quote?symbol=NVDA 200 330 - 0.702 ms [ReqID: cfa16f8a-64be-478b-8942-93598b52c412]
+[2026-07-15 23:52:18:5218] [HTTP]  GET /api/stocks/quote?symbol=AAPL 200 329 - 0.734 ms [ReqID: 8f42676d-1a5b-4dc3-87f9-41bf5e17404c]
+[2026-07-15 23:52:18:5218] [HTTP]  GET /api/stocks/quote?symbol=MSFT 200 329 - 0.886 ms [ReqID: 8dd87414-4bfe-4aa8-acce-e3c29a9da54b]
+[2026-07-15 23:52:18:5218] [HTTP]  GET /api/stocks/quote?symbol=TSLA 200 327 - 1.098 ms [ReqID: 50c503dd-f186-4a3f-8803-625e43e37fb7]
+[2026-07-15 23:52:18:5218] [HTTP]  GET /api/stocks/quote?symbol=BTC.X 200 340 - 0.950 ms [ReqID: c0d5ee6e-f9d5-40e1-878f-fccd27bb5ffe]
+[2026-07-15 23:52:19:5219] [HTTP]  GET /api/stocks/quote?symbol=NVDA 200 330 - 0.887 ms [ReqID: a3135f5f-c8e0-4759-8cf6-368b73d3d031]
+[2026-07-15 23:52:19:5219] [HTTP]  GET /api/stocks/profile?symbol=NVDA 200 496 - 1.282 ms [ReqID: 9e4eab2e-6c86-452a-bfdf-27fccf14a442]
+[2026-07-15 23:52:19:5219] [HTTP]  GET /api/stocks/history?symbol=NVDA&outputsize=60 200 - - 3.026 ms [ReqID: 2eb14c23-fd06-4884-a2fd-8a204f8fbb77]
+[2026-07-15 23:52:22:5222] [HTTP]  GET /api/stocks/quote?symbol=NVDA 200 330 - 0.645 ms [ReqID: 714a9823-0b69-43cc-b9ef-9d7d153fda1b]
+[2026-07-15 23:52:22:5222] [HTTP]  GET /api/stocks/quote?symbol=AAPL 200 329 - 1.106 ms [ReqID: c5430e58-b25b-4892-a82a-2132bc6d1801]
+[2026-07-15 23:52:22:5222] [HTTP]  GET /api/stocks/quote?symbol=MSFT 200 329 - 0.974 ms [ReqID: 479dff3b-5600-41e6-a6fb-3f8521a86ef7]
+[2026-07-15 23:52:22:5222] [HTTP]  GET /api/stocks/quote?symbol=TSLA 200 327 - 0.756 ms [ReqID: b95b5496-fd0a-4467-855e-1bc03fea8c60]
+[2026-07-15 23:52:22:5222] [HTTP]  GET /api/stocks/quote?symbol=BTC.X 200 340 - 0.948 ms [ReqID: 211994f6-31c8-4a7b-b91f-8a0389e4e970]
+[2026-07-15 23:52:30:5230] [HTTP]  GET /api/stocks/quote?symbol=NVDA 200 330 - 1.411 ms [ReqID: 796c527f-c8e8-42c0-b3c8-17c46780f461]
+[2026-07-15 23:52:30:5230] [HTTP]  GET /api/stocks/quote?symbol=AAPL 200 329 - 0.759 ms [ReqID: ba53ebb6-57aa-4bb5-9983-d4eeb8ca55b1]
+[2026-07-15 23:52:30:5230] [HTTP]  GET /api/stocks/quote?symbol=MSFT 200 329 - 0.956 ms [ReqID: 87e9577a-8df6-4a10-b7bf-968346ab1dc5]
+[2026-07-15 23:52:30:5230] [HTTP]  GET /api/stocks/quote?symbol=TSLA 200 327 - 0.927 ms [ReqID: 04fc123a-1850-43e9-a5f6-3eec178457b1]
+[2026-07-15 23:52:30:5230] [HTTP]  GET /api/stocks/quote?symbol=BTC.X 200 340 - 0.805 ms [ReqID: 450b141e-ab6e-4060-922b-c3dd5bbbcb8e]
+[2026-07-16 00:19:16:1916] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-16 00:19:16:1916] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-16 00:19:17:1917] [ERROR]  ❌ Failed to establish database connection on startup: 
+Invalid `prisma.$runCommandRaw()` invocation:
+
+
+Error occurred during query execution:
+ConnectorError(ConnectorError { user_facing_error: None, kind: AuthenticationFailed { user: "SCRAM failure: bad auth : authentication failed" }, transient: false })
+PrismaClientUnknownRequestError: 
+Invalid `prisma.$runCommandRaw()` invocation:
+
+
+Error occurred during query execution:
+ConnectorError(ConnectorError { user_facing_error: None, kind: AuthenticationFailed { user: "SCRAM failure: bad auth : authentication failed" }, transient: false })
+    at $n.handleRequestError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:7505)
+    at $n.handleAndLogRequestError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at l (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at Server.<anonymous> (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\server.ts:12:5)
+[2026-07-16 00:24:44:2444] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-16 00:24:44:2444] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-16 00:24:45:2445] [ERROR]  ❌ Failed to establish database connection on startup: 
+Invalid `prisma.$runCommandRaw()` invocation:
+
+
+Raw query failed. Code: `unknown`. Message: `Kind: Command failed: Error code 8000 (AtlasError): empty database name not allowed
+	at 67396bde973c5aaa03fd2f26af47032c/atlasproxy/session_proxy.go:728
+	at 67396bde973c5aaa03fd2f26af47032c/atlasproxy/session_proxy.go:1598
+	at 67396bde973c5aaa03fd2f26af47032c/atlasproxy/session_proxy.go:1199
+	at 67396bde973c5aaa03fd2f26af47032c/atlasproxy/session_proxy.go:1089
+	at 10gen/mongonet@v0.0.0-20260618173014-b3cc872431aa/proxy_session.go:394
+	at 10gen/mongonet@v0.0.0-20260618173014-b3cc872431aa/proxy_session.go:105
+	at 10gen/mongonet@v0.0.0-20260618173014-b3cc872431aa/session.go:223
+	at 10gen/mongonet@v0.0.0-20260618173014-b3cc872431aa/server.go:529
+	at src/runtime/asm_arm64.s:1268, labels: {}`
+PrismaClientKnownRequestError: 
+Invalid `prisma.$runCommandRaw()` invocation:
+
+
+Raw query failed. Code: `unknown`. Message: `Kind: Command failed: Error code 8000 (AtlasError): empty database name not allowed
+	at 67396bde973c5aaa03fd2f26af47032c/atlasproxy/session_proxy.go:728
+	at 67396bde973c5aaa03fd2f26af47032c/atlasproxy/session_proxy.go:1598
+	at 67396bde973c5aaa03fd2f26af47032c/atlasproxy/session_proxy.go:1199
+	at 67396bde973c5aaa03fd2f26af47032c/atlasproxy/session_proxy.go:1089
+	at 10gen/mongonet@v0.0.0-20260618173014-b3cc872431aa/proxy_session.go:394
+	at 10gen/mongonet@v0.0.0-20260618173014-b3cc872431aa/proxy_session.go:105
+	at 10gen/mongonet@v0.0.0-20260618173014-b3cc872431aa/session.go:223
+	at 10gen/mongonet@v0.0.0-20260618173014-b3cc872431aa/server.go:529
+	at src/runtime/asm_arm64.s:1268, labels: {}`
+    at $n.handleRequestError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:7315)
+    at $n.handleAndLogRequestError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at l (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at Server.<anonymous> (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\server.ts:12:5)
+[2026-07-16 18:21:32:2132] [INFO]  🚀 Vertigo Core Engine initialized in [development] mode
+[2026-07-16 18:21:32:2132] [INFO]  📡 Port active at: http://localhost:8000
+[2026-07-16 18:21:49:2149] [HTTP]  GET /api/auth/google/config 304 - - 14.710 ms [ReqID: 3f3fd32f-b3d7-491c-88ca-548255f98821]
+[2026-07-16 18:21:49:2149] [WARN] [ReqID: 7fe34acd-de05-4b57-b986-9b8ea9a93f10] AppError (404): Requested API route [GET] /favicon.ico was not found
+[2026-07-16 18:21:49:2149] [HTTP]  GET /favicon.ico 404 198 - 3.471 ms [ReqID: 7fe34acd-de05-4b57-b986-9b8ea9a93f10]
+[2026-07-16 18:22:02:222] [ERROR]  ❌ Failed to establish database connection on startup: 
+Invalid `prisma.$runCommandRaw()` invocation:
+
+
+Raw query failed. Code: `unknown`. Message: `Kind: Server selection timeout: No available servers. Topology: { Type: ReplicaSetNoPrimary, Set Name: atlas-zofrxs-shard-0, Servers: [ { Address: ac-y5uam2e-shard-00-00.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} }, { Address: ac-y5uam2e-shard-00-01.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} }, { Address: ac-y5uam2e-shard-00-02.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} } ] }, labels: {}`
+PrismaClientKnownRequestError: 
+Invalid `prisma.$runCommandRaw()` invocation:
+
+
+Raw query failed. Code: `unknown`. Message: `Kind: Server selection timeout: No available servers. Topology: { Type: ReplicaSetNoPrimary, Set Name: atlas-zofrxs-shard-0, Servers: [ { Address: ac-y5uam2e-shard-00-00.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} }, { Address: ac-y5uam2e-shard-00-01.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} }, { Address: ac-y5uam2e-shard-00-02.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} } ] }, labels: {}`
+    at $n.handleRequestError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:7315)
+    at $n.handleAndLogRequestError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at l (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at Server.<anonymous> (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\server.ts:12:5)
+[2026-07-16 18:22:56:2256] [HTTP]  GET /api/auth/google/config 304 - - 0.733 ms [ReqID: 6a490fb6-d1c0-4fc3-bd1c-d51f6fccde69]
+[2026-07-16 18:23:10:2310] [HTTP]  GET /api/auth/google?state=http%3A%2F%2Flocalhost%3A8000 302 468 - 2.839 ms [ReqID: 3241579b-f03e-4a90-a73d-477751cfb83d]
+[2026-07-16 18:23:16:2316] [INFO]  [Google Auth] Callback received. code: present, state: http://localhost:8000
+[2026-07-16 18:23:16:2316] [INFO]  [Google Auth] Attempting token exchange. Redirect URI: "http://localhost:8000/api/auth/google/callback"
+[2026-07-16 18:23:17:2317] [INFO]  [Google Auth] Google identity token verified successfully for: swapnanilrick10@gmail.com
+[2026-07-16 18:23:47:2347] [ERROR]  ❌ [Google Auth Error] Unexpected failure during Google OAuth process: 
+Invalid `prisma.user.findUnique()` invocation in
+C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\repositories\user.repository.ts:14:24
+
+  11 }
+  12 
+  13 async findByGoogleId(googleId: string): Promise<User | null> {
+→ 14   return prisma.user.findUnique(
+Raw query failed. Code: `unknown`. Message: `Kind: Server selection timeout: No available servers. Topology: { Type: ReplicaSetNoPrimary, Set Name: atlas-zofrxs-shard-0, Servers: [ { Address: ac-y5uam2e-shard-00-00.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} }, { Address: ac-y5uam2e-shard-00-01.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} }, { Address: ac-y5uam2e-shard-00-02.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} } ] }, labels: {}`
+PrismaClientKnownRequestError: 
+Invalid `prisma.user.findUnique()` invocation in
+C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\repositories\user.repository.ts:14:24
+
+  11 }
+  12 
+  13 async findByGoogleId(googleId: string): Promise<User | null> {
+→ 14   return prisma.user.findUnique(
+Raw query failed. Code: `unknown`. Message: `Kind: Server selection timeout: No available servers. Topology: { Type: ReplicaSetNoPrimary, Set Name: atlas-zofrxs-shard-0, Servers: [ { Address: ac-y5uam2e-shard-00-00.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} }, { Address: ac-y5uam2e-shard-00-01.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} }, { Address: ac-y5uam2e-shard-00-02.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} } ] }, labels: {}`
+    at $n.handleRequestError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:7315)
+    at $n.handleAndLogRequestError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at l (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at GoogleSyncService.syncGoogleUser (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\services\google-sync.service.ts:32:24)
+    at googleCallback (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\controllers\auth.controller.ts:502:20)
+[2026-07-16 18:23:47:2347] [HTTP]  GET /api/auth/google/callback?state=http%3A%2F%2Flocalhost%3A8000&iss=https%3A%2F%2Faccounts.google.com&code=4%2F0AXEQxIB2ZWsaUV5H2MTpwOqKqtWFRRrIbt18RVJxYEpaY5VPrP8Ns-Nw_3beaORmiOcdQw&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent 302 82 - 30686.042 ms [ReqID: 7a55b4ce-a814-4f0e-a83f-8d6980ca7a40]
+[2026-07-16 18:23:47:2347] [HTTP]  GET /api/auth/google/config 304 - - 0.591 ms [ReqID: 3264bb22-40e0-40f5-af9f-beaec53b2c47]
+[2026-07-16 18:23:56:2356] [HTTP]  GET /api/auth/google?state=http%3A%2F%2Flocalhost%3A8000 302 468 - 0.624 ms [ReqID: 0fd2c15f-67a9-4dd9-92a2-b50fdc97593c]
+[2026-07-16 18:24:02:242] [INFO]  [Google Auth] Callback received. code: present, state: http://localhost:8000
+[2026-07-16 18:24:02:242] [INFO]  [Google Auth] Attempting token exchange. Redirect URI: "http://localhost:8000/api/auth/google/callback"
+[2026-07-16 18:24:03:243] [INFO]  [Google Auth] Google identity token verified successfully for: swapnanilrick10@gmail.com
+[2026-07-16 18:24:33:2433] [ERROR]  ❌ [Google Auth Error] Unexpected failure during Google OAuth process: 
+Invalid `prisma.user.findUnique()` invocation in
+C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\repositories\user.repository.ts:14:24
+
+  11 }
+  12 
+  13 async findByGoogleId(googleId: string): Promise<User | null> {
+→ 14   return prisma.user.findUnique(
+Raw query failed. Code: `unknown`. Message: `Kind: Server selection timeout: No available servers. Topology: { Type: ReplicaSetNoPrimary, Set Name: atlas-zofrxs-shard-0, Servers: [ { Address: ac-y5uam2e-shard-00-00.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} }, { Address: ac-y5uam2e-shard-00-01.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} }, { Address: ac-y5uam2e-shard-00-02.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} } ] }, labels: {}`
+PrismaClientKnownRequestError: 
+Invalid `prisma.user.findUnique()` invocation in
+C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\repositories\user.repository.ts:14:24
+
+  11 }
+  12 
+  13 async findByGoogleId(googleId: string): Promise<User | null> {
+→ 14   return prisma.user.findUnique(
+Raw query failed. Code: `unknown`. Message: `Kind: Server selection timeout: No available servers. Topology: { Type: ReplicaSetNoPrimary, Set Name: atlas-zofrxs-shard-0, Servers: [ { Address: ac-y5uam2e-shard-00-00.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} }, { Address: ac-y5uam2e-shard-00-01.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} }, { Address: ac-y5uam2e-shard-00-02.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} } ] }, labels: {}`
+    at $n.handleRequestError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:7315)
+    at $n.handleAndLogRequestError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at l (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at GoogleSyncService.syncGoogleUser (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\services\google-sync.service.ts:32:24)
+    at googleCallback (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\controllers\auth.controller.ts:502:20)
+[2026-07-16 18:24:33:2433] [HTTP]  GET /api/auth/google/callback?state=http%3A%2F%2Flocalhost%3A8000&iss=https%3A%2F%2Faccounts.google.com&code=4%2F0AXEQxIDquYdE1Lb0tv0veOTgG8J3Ii7i5fXshExaGjsmcIgXk24baFJgCehHDvwblJ6ZwA&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent 302 82 - 30561.454 ms [ReqID: 06dd755a-45ee-4ed1-8e38-993b8d313598]
+[2026-07-16 18:24:33:2433] [HTTP]  GET /api/auth/google/config 304 - - 0.289 ms [ReqID: 36e17733-fe36-4a6e-80ba-6adf9045f1da]

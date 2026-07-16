@@ -99,7 +99,7 @@ class ProfileController {
     }
     async logoutSession(req, res) {
         const userContext = req.user;
-        const { sessionId } = zod_1.z.object({ sessionId: zod_1.z.string().uuid() }).parse(req.body);
+        const { sessionId } = zod_1.z.object({ sessionId: zod_1.z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid session ID format') }).parse(req.body);
         const success = await session_service_1.sessionService.logoutSession(userContext.userId, sessionId);
         if (!success) {
             throw new errors_1.BadRequestError('Session not found or authorization denied.');

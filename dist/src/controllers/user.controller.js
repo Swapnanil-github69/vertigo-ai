@@ -32,7 +32,7 @@ class UserController {
         });
     }
     async logoutSession(req, res) {
-        const { sessionId } = zod_1.z.object({ sessionId: zod_1.z.string().uuid() }).parse(req.body);
+        const { sessionId } = zod_1.z.object({ sessionId: zod_1.z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid session ID format') }).parse(req.body);
         const user = req.user;
         const session = await session_repository_1.sessionRepository.findById(sessionId);
         if (!session || session.userId !== user.userId) {

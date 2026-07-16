@@ -11,8 +11,8 @@ const server = app_1.default.listen(config_1.config.PORT, async () => {
     logger_1.logger.info(`🚀 Vertigo Core Engine initialized in [${config_1.config.NODE_ENV}] mode`);
     logger_1.logger.info(`📡 Port active at: http://localhost:${config_1.config.PORT}`);
     try {
-        // Quick ping to check PostgreSQL connection
-        await client_1.prisma.$queryRaw `SELECT 1`;
+        // Quick ping to check MongoDB connection
+        await client_1.prisma.$runCommandRaw({ ping: 1 });
         logger_1.logger.info('🔑 Database surveillance channel established successfully.');
     }
     catch (error) {
