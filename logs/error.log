@@ -197,3 +197,116 @@ Error: Email delivery is misconfigured on the server (invalid sender domain). Pl
   "error_description": "Bad Request"
 }
 [2026-07-11 09:53:27:5327] [ERROR]  ❌ [Google Auth Hint] Authorization code has expired or was already used.
+[2026-07-16 00:19:17:1917] [ERROR]  ❌ Failed to establish database connection on startup: 
+Invalid `prisma.$runCommandRaw()` invocation:
+
+
+Error occurred during query execution:
+ConnectorError(ConnectorError { user_facing_error: None, kind: AuthenticationFailed { user: "SCRAM failure: bad auth : authentication failed" }, transient: false })
+PrismaClientUnknownRequestError: 
+Invalid `prisma.$runCommandRaw()` invocation:
+
+
+Error occurred during query execution:
+ConnectorError(ConnectorError { user_facing_error: None, kind: AuthenticationFailed { user: "SCRAM failure: bad auth : authentication failed" }, transient: false })
+    at $n.handleRequestError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:7505)
+    at $n.handleAndLogRequestError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at l (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at Server.<anonymous> (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\server.ts:12:5)
+[2026-07-16 00:24:45:2445] [ERROR]  ❌ Failed to establish database connection on startup: 
+Invalid `prisma.$runCommandRaw()` invocation:
+
+
+Raw query failed. Code: `unknown`. Message: `Kind: Command failed: Error code 8000 (AtlasError): empty database name not allowed
+	at 67396bde973c5aaa03fd2f26af47032c/atlasproxy/session_proxy.go:728
+	at 67396bde973c5aaa03fd2f26af47032c/atlasproxy/session_proxy.go:1598
+	at 67396bde973c5aaa03fd2f26af47032c/atlasproxy/session_proxy.go:1199
+	at 67396bde973c5aaa03fd2f26af47032c/atlasproxy/session_proxy.go:1089
+	at 10gen/mongonet@v0.0.0-20260618173014-b3cc872431aa/proxy_session.go:394
+	at 10gen/mongonet@v0.0.0-20260618173014-b3cc872431aa/proxy_session.go:105
+	at 10gen/mongonet@v0.0.0-20260618173014-b3cc872431aa/session.go:223
+	at 10gen/mongonet@v0.0.0-20260618173014-b3cc872431aa/server.go:529
+	at src/runtime/asm_arm64.s:1268, labels: {}`
+PrismaClientKnownRequestError: 
+Invalid `prisma.$runCommandRaw()` invocation:
+
+
+Raw query failed. Code: `unknown`. Message: `Kind: Command failed: Error code 8000 (AtlasError): empty database name not allowed
+	at 67396bde973c5aaa03fd2f26af47032c/atlasproxy/session_proxy.go:728
+	at 67396bde973c5aaa03fd2f26af47032c/atlasproxy/session_proxy.go:1598
+	at 67396bde973c5aaa03fd2f26af47032c/atlasproxy/session_proxy.go:1199
+	at 67396bde973c5aaa03fd2f26af47032c/atlasproxy/session_proxy.go:1089
+	at 10gen/mongonet@v0.0.0-20260618173014-b3cc872431aa/proxy_session.go:394
+	at 10gen/mongonet@v0.0.0-20260618173014-b3cc872431aa/proxy_session.go:105
+	at 10gen/mongonet@v0.0.0-20260618173014-b3cc872431aa/session.go:223
+	at 10gen/mongonet@v0.0.0-20260618173014-b3cc872431aa/server.go:529
+	at src/runtime/asm_arm64.s:1268, labels: {}`
+    at $n.handleRequestError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:7315)
+    at $n.handleAndLogRequestError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at l (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at Server.<anonymous> (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\server.ts:12:5)
+[2026-07-16 18:22:02:222] [ERROR]  ❌ Failed to establish database connection on startup: 
+Invalid `prisma.$runCommandRaw()` invocation:
+
+
+Raw query failed. Code: `unknown`. Message: `Kind: Server selection timeout: No available servers. Topology: { Type: ReplicaSetNoPrimary, Set Name: atlas-zofrxs-shard-0, Servers: [ { Address: ac-y5uam2e-shard-00-00.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} }, { Address: ac-y5uam2e-shard-00-01.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} }, { Address: ac-y5uam2e-shard-00-02.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} } ] }, labels: {}`
+PrismaClientKnownRequestError: 
+Invalid `prisma.$runCommandRaw()` invocation:
+
+
+Raw query failed. Code: `unknown`. Message: `Kind: Server selection timeout: No available servers. Topology: { Type: ReplicaSetNoPrimary, Set Name: atlas-zofrxs-shard-0, Servers: [ { Address: ac-y5uam2e-shard-00-00.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} }, { Address: ac-y5uam2e-shard-00-01.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} }, { Address: ac-y5uam2e-shard-00-02.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} } ] }, labels: {}`
+    at $n.handleRequestError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:7315)
+    at $n.handleAndLogRequestError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at l (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at Server.<anonymous> (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\server.ts:12:5)
+[2026-07-16 18:23:47:2347] [ERROR]  ❌ [Google Auth Error] Unexpected failure during Google OAuth process: 
+Invalid `prisma.user.findUnique()` invocation in
+C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\repositories\user.repository.ts:14:24
+
+  11 }
+  12 
+  13 async findByGoogleId(googleId: string): Promise<User | null> {
+→ 14   return prisma.user.findUnique(
+Raw query failed. Code: `unknown`. Message: `Kind: Server selection timeout: No available servers. Topology: { Type: ReplicaSetNoPrimary, Set Name: atlas-zofrxs-shard-0, Servers: [ { Address: ac-y5uam2e-shard-00-00.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} }, { Address: ac-y5uam2e-shard-00-01.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} }, { Address: ac-y5uam2e-shard-00-02.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} } ] }, labels: {}`
+PrismaClientKnownRequestError: 
+Invalid `prisma.user.findUnique()` invocation in
+C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\repositories\user.repository.ts:14:24
+
+  11 }
+  12 
+  13 async findByGoogleId(googleId: string): Promise<User | null> {
+→ 14   return prisma.user.findUnique(
+Raw query failed. Code: `unknown`. Message: `Kind: Server selection timeout: No available servers. Topology: { Type: ReplicaSetNoPrimary, Set Name: atlas-zofrxs-shard-0, Servers: [ { Address: ac-y5uam2e-shard-00-00.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} }, { Address: ac-y5uam2e-shard-00-01.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} }, { Address: ac-y5uam2e-shard-00-02.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} } ] }, labels: {}`
+    at $n.handleRequestError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:7315)
+    at $n.handleAndLogRequestError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at l (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at GoogleSyncService.syncGoogleUser (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\services\google-sync.service.ts:32:24)
+    at googleCallback (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\controllers\auth.controller.ts:502:20)
+[2026-07-16 18:24:33:2433] [ERROR]  ❌ [Google Auth Error] Unexpected failure during Google OAuth process: 
+Invalid `prisma.user.findUnique()` invocation in
+C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\repositories\user.repository.ts:14:24
+
+  11 }
+  12 
+  13 async findByGoogleId(googleId: string): Promise<User | null> {
+→ 14   return prisma.user.findUnique(
+Raw query failed. Code: `unknown`. Message: `Kind: Server selection timeout: No available servers. Topology: { Type: ReplicaSetNoPrimary, Set Name: atlas-zofrxs-shard-0, Servers: [ { Address: ac-y5uam2e-shard-00-00.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} }, { Address: ac-y5uam2e-shard-00-01.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} }, { Address: ac-y5uam2e-shard-00-02.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} } ] }, labels: {}`
+PrismaClientKnownRequestError: 
+Invalid `prisma.user.findUnique()` invocation in
+C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\repositories\user.repository.ts:14:24
+
+  11 }
+  12 
+  13 async findByGoogleId(googleId: string): Promise<User | null> {
+→ 14   return prisma.user.findUnique(
+Raw query failed. Code: `unknown`. Message: `Kind: Server selection timeout: No available servers. Topology: { Type: ReplicaSetNoPrimary, Set Name: atlas-zofrxs-shard-0, Servers: [ { Address: ac-y5uam2e-shard-00-00.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} }, { Address: ac-y5uam2e-shard-00-01.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} }, { Address: ac-y5uam2e-shard-00-02.tl7lpcw.mongodb.net:27017, Type: Unknown, Error: Kind: I/O error: received fatal alert: InternalError, labels: {} } ] }, labels: {}`
+    at $n.handleRequestError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:7315)
+    at $n.handleAndLogRequestError (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at l (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at GoogleSyncService.syncGoogleUser (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\services\google-sync.service.ts:32:24)
+    at googleCallback (C:\Users\swapn\OneDrive\Desktop\vertigo-ai\src\controllers\auth.controller.ts:502:20)

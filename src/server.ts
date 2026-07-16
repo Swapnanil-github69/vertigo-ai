@@ -8,8 +8,8 @@ const server = app.listen(config.PORT, async () => {
   logger.info(`📡 Port active at: http://localhost:${config.PORT}`);
 
   try {
-    // Quick ping to check PostgreSQL connection
-    await prisma.$queryRaw`SELECT 1`;
+    // Quick ping to check MongoDB connection
+    await prisma.$runCommandRaw({ ping: 1 });
     logger.info('🔑 Database surveillance channel established successfully.');
   } catch (error) {
     logger.error('❌ Failed to establish database connection on startup:', error);
